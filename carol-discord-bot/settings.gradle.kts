@@ -1,0 +1,1 @@
+rootProject.name = "carol-discord-bot"
