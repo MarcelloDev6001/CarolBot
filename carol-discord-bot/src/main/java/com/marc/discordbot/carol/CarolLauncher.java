@@ -7,7 +7,7 @@ import java.io.IOException; // Required for handling potential exceptions
 import java.util.Collections;
 import java.util.EnumSet;
 
-import com.marc.discordbot.carol.listeners.CarolMessageListener;
+import com.marc.discordbot.carol.listeners.*;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -33,7 +33,11 @@ public class CarolLauncher {
         );
 
         JDA jda = JDABuilder.createLight(carolProperties.getToken(), intents)
+                .addEventListeners(new CarolGuildMemberJoinListener())
+                .addEventListeners(new CarolGuildMemberRemoveListener())
                 .addEventListeners(new CarolMessageListener())
+                .addEventListeners(new CarolMessageReactionAddListener())
+                .addEventListeners(new CarolSlashCommandInteractionListener())
                 .build();
     }
 }
