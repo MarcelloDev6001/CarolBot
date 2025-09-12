@@ -1,5 +1,9 @@
 package com.marc.discordbot.carol;
 
+import com.marc.discordbot.carol.commands.CarolBaseCommand;
+import com.marc.discordbot.carol.commands.CarolBaseCommandOption;
+import com.marc.discordbot.carol.commands.CarolCommands;
+import com.marc.discordbot.carol.commands.test.CarolTestCommand;
 import com.marc.discordbot.carol.file.JsonUtils;
 
 import java.io.File;
@@ -15,7 +19,10 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.interactions.commands.build.Commands;
+import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData;
 import net.dv8tion.jda.api.requests.GatewayIntent;
+import net.dv8tion.jda.api.requests.restaction.CommandListUpdateAction;
 import org.jetbrains.annotations.Nullable;
 
 public class CarolLauncher {
@@ -44,6 +51,34 @@ public class CarolLauncher {
         {
             jda.addEventListener(listener);
         }
+
+        CommandListUpdateAction commands = jda.updateCommands();
+
+        for (CarolBaseCommand command : CarolCommands.commands)
+        {
+            SlashCommandData slashCommand = Commands.slash(command.getName(), command.getDescription());
+            // WHY THIS IS DEPRECATED???? 😭😭😭😭😭
+            // slashCommand.setGuildOnly(command.getGuildOnly());
+
+            if (command.getOptions() != null)
+            {
+                for (CarolBaseCommandOption optionOnCommand : command.getOptions())
+                {
+                    slashCommand.addOption(
+                            optionOnCommand.getOptionType(),
+                            optionOnCommand.getName(),
+                            optionOnCommand.getDescription(),
+                            optionOnCommand.getRequired()
+                    );
+                }
+            }
+
+            commands.addCommands(slashCommand);
+        }
+
+        initializeCommands();
+
+        commands.queue();
     }
 
     public static List<ListenerAdapter> getAllListeners()
@@ -55,5 +90,10 @@ public class CarolLauncher {
         listeners.add(new CarolMessageReactionAddListener());
         listeners.add(new CarolSlashCommandInteractionListener());
         return listeners;
+    }
+
+    public static void initializeCommands()
+    {
+        CarolTestCommand carolTestCommand = new CarolTestCommand();
     }
 }
