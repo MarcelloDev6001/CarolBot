@@ -4,14 +4,19 @@ import com.marc.discordbot.carol.file.JsonUtils;
 
 import java.io.File;
 import java.io.IOException; // Required for handling potential exceptions
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumSet;
+import java.util.List;
 
 import com.marc.discordbot.carol.listeners.*;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
+import org.jetbrains.annotations.Nullable;
 
 public class CarolLauncher {
     public static void main(String[] args) {
@@ -32,12 +37,23 @@ public class CarolLauncher {
                 GatewayIntent.DIRECT_MESSAGE_REACTIONS
         );
 
-        JDA jda = JDABuilder.createLight(carolProperties.getToken(), intents)
-                .addEventListeners(new CarolGuildMemberJoinListener())
-                .addEventListeners(new CarolGuildMemberRemoveListener())
-                .addEventListeners(new CarolMessageListener())
-                .addEventListeners(new CarolMessageReactionAddListener())
-                .addEventListeners(new CarolSlashCommandInteractionListener())
-                .build();
+        assert carolProperties != null;
+        JDA jda = JDABuilder.createLight(carolProperties.getToken(), intents).build();
+
+        for (ListenerAdapter listener : getAllListeners())
+        {
+            jda.addEventListener(listener);
+        }
+    }
+
+    public static List<ListenerAdapter> getAllListeners()
+    {
+        List<ListenerAdapter> listeners = new ArrayList<>();
+        listeners.add(new CarolGuildMemberJoinListener());
+        listeners.add(new CarolGuildMemberRemoveListener());
+        listeners.add(new CarolMessageListener());
+        listeners.add(new CarolMessageReactionAddListener());
+        listeners.add(new CarolSlashCommandInteractionListener());
+        return listeners;
     }
 }
