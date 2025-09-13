@@ -2,6 +2,7 @@ package com.marc.discordbot.carol;
 
 import com.marc.discordbot.carol.commands.CarolBaseCommandOption;
 import com.marc.discordbot.carol.commands.CarolCommand;
+import com.marc.discordbot.carol.commands.CarolCommandInitializer;
 import com.marc.discordbot.carol.commands.test.CarolTestCommand;
 import com.marc.discordbot.carol.commands.utility.CarolIMCCommand;
 import com.marc.discordbot.carol.file.JsonUtils;
@@ -48,7 +49,7 @@ public class CarolLauncher {
 
         CommandListUpdateAction commands = jda.updateCommands();
 
-        initializeCommands();
+        CarolCommandInitializer.initializeCommands();
 
         for (CarolCommand command : CarolCommand.allCommands)
         {
@@ -85,11 +86,5 @@ public class CarolLauncher {
         listeners.add(new CarolMessageReactionAddListener());
         listeners.add(new CarolSlashCommandInteractionListener());
         return listeners;
-    }
-
-    public static void initializeCommands()
-    {
-        CarolTestCommand carolTestCommand = new CarolTestCommand();
-        CarolIMCCommand carolIMCCommand = new CarolIMCCommand();
     }
 }
