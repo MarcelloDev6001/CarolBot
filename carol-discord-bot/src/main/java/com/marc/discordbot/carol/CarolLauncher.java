@@ -78,6 +78,7 @@ public class CarolLauncher {
     public static List<ListenerAdapter> getAllListeners()
     {
         List<ListenerAdapter> listeners = new ArrayList<>();
+        listeners.add(new CarolButtonInteractionListener());
         listeners.add(new CarolGuildMemberJoinListener());
         listeners.add(new CarolGuildMemberRemoveListener());
         listeners.add(new CarolMessageListener());

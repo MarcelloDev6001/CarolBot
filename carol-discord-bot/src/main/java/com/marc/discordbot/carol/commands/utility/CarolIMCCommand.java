@@ -2,11 +2,15 @@ package com.marc.discordbot.carol.commands.utility;
 
 import com.marc.discordbot.carol.commands.CarolBaseCommandOption;
 import com.marc.discordbot.carol.commands.CarolCommand;
-import net.dv8tion.jda.api.interactions.commands.OptionMapping;
+import com.marc.discordbot.carol.messages.components.CarolBaseMessageButton;
+import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.SlashCommandInteraction;
+import net.dv8tion.jda.api.interactions.components.buttons.ButtonInteraction;
+import net.dv8tion.jda.api.interactions.components.buttons.ButtonStyle;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import net.dv8tion.jda.api.interactions.components.buttons.Button;
 
 import java.text.DecimalFormat;
 
@@ -38,8 +42,15 @@ public class CarolIMCCommand extends CarolCommand {
         }
 
         String finalContent = getIMCFinalMessage(weight, height);
+        Button imcTableButton = new CarolBaseMessageButton(
+                ButtonStyle.PRIMARY,
+                "imc_table_" + interaction.getId(),
+                "Ver tabela de IMC",
+                this::onIMCTableButtonClicked,
+                null
+        ).toComponentButton();
 
-        interaction.reply(finalContent).setEphemeral(true).queue();
+        interaction.reply(finalContent).addActionRow(imcTableButton).setEphemeral(true).queue();
     }
 
     @NotNull
@@ -62,5 +73,20 @@ public class CarolIMCCommand extends CarolCommand {
             finalContent += "\n\nClassificação: Obesidade grau III.";
         }
         return finalContent;
+    }
+
+    public void onIMCTableButtonClicked(ButtonInteraction interaction)
+    {
+        String imcTableString = "Classificações:" +
+                "\n" +
+                "\nMenor que 18.5: Abaixo do peso." +
+                "\nEntre 18.5 e 25: Peso normal." +
+                "\nEntre 25 e 30: Sobrepeso." +
+                "\nEntre 30 e 35: Obesidade grau I." +
+                "\nEntre 35 e 40: Obesidade grau II." +
+                "\nMaior que 40: Obesidade grau III.";
+
+        interaction.deferReply(true).queue();
+        interaction.getHook().sendMessage(imcTableString).setEphemeral(true).queue();
     }
 }
