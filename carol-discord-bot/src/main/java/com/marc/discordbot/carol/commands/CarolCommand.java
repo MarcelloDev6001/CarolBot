@@ -15,7 +15,7 @@ public abstract class CarolCommand {
     public @Nullable CarolBaseCommandOption[] options;
     public boolean guildOnly;
 
-    private static final List<CarolCommand> allCommands = new ArrayList<>();
+    public static final List<CarolCommand> allCommands = new ArrayList<>();
     private static SlashCommandInteraction interaction;
 
     public CarolCommand(@NotNull String name, String description, @Nullable CarolBaseCommandOption[] options, boolean guildOnly) {
@@ -28,7 +28,7 @@ public abstract class CarolCommand {
     }
 
     public static void dispatchInteraction(SlashCommandInteraction interaction) {
-        System.out.println(allCommands.size());
+        // System.out.println(allCommands.size());
         for (CarolCommand cmd : allCommands) {
             if (cmd.getName().equals(interaction.getName())) {
                 cmd.setInteraction(interaction);
@@ -48,7 +48,7 @@ public abstract class CarolCommand {
     }
 
     public String getName() { return name; }
-    public String description() { return description; }
+    public String getDescription() { return description; }
     @Nullable public CarolBaseCommandOption[] getOptions() { return options; }
     public boolean getGuildOnly() { return guildOnly; }
 }

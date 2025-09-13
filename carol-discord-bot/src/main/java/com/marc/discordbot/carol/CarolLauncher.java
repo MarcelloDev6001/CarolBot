@@ -1,29 +1,23 @@
 package com.marc.discordbot.carol;
 
-import com.marc.discordbot.carol.commands.CarolBaseCommand;
 import com.marc.discordbot.carol.commands.CarolBaseCommandOption;
-import com.marc.discordbot.carol.commands.CarolCommands;
+import com.marc.discordbot.carol.commands.CarolCommand;
 import com.marc.discordbot.carol.commands.test.CarolTestCommand;
+import com.marc.discordbot.carol.commands.utility.CarolIMCCommand;
 import com.marc.discordbot.carol.file.JsonUtils;
 
-import java.io.File;
-import java.io.IOException; // Required for handling potential exceptions
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
 
 import com.marc.discordbot.carol.listeners.*;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
-import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.requests.restaction.CommandListUpdateAction;
-import org.jetbrains.annotations.Nullable;
 
 public class CarolLauncher {
     public static void main(String[] args) {
@@ -54,7 +48,9 @@ public class CarolLauncher {
 
         CommandListUpdateAction commands = jda.updateCommands();
 
-        for (CarolBaseCommand command : CarolCommands.commands)
+        initializeCommands();
+
+        for (CarolCommand command : CarolCommand.allCommands)
         {
             SlashCommandData slashCommand = Commands.slash(command.getName(), command.getDescription());
             // WHY THIS IS DEPRECATED???? 😭😭😭😭😭
@@ -76,8 +72,6 @@ public class CarolLauncher {
             commands.addCommands(slashCommand);
         }
 
-        initializeCommands();
-
         commands.queue();
     }
 
@@ -95,5 +89,6 @@ public class CarolLauncher {
     public static void initializeCommands()
     {
         CarolTestCommand carolTestCommand = new CarolTestCommand();
+        CarolIMCCommand carolIMCCommand = new CarolIMCCommand();
     }
 }
