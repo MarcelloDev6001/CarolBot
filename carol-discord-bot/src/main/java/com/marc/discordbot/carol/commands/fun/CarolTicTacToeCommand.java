@@ -168,18 +168,20 @@ public class CarolTicTacToeCommand extends CarolCommand {
                         if (!(comp instanceof Button btn)) continue;
 
                         if (btn.getId().equals(buttonId)) {
-                            if (whoPlaysNow[0].getIdLong() == interaction.getJDA().getSelfUser().getIdLong())
-                            {
-                                btnInteraction.reply("Esse jogo já acabou!").setEphemeral(true).queue();
+                            if (whoPlaysNow[0].getIdLong() == interaction.getJDA().getSelfUser().getIdLong()) {
+                                btnInteraction.deferReply(true).queue();
+                                btnInteraction.getHook().sendMessage("Esse jogo já acabou!").setEphemeral(true).queue();
                             }
 
                             if (!btn.getLabel().equals("⬜")) {
-                                btnInteraction.reply("Esse botão já foi usado!").setEphemeral(true).queue();
+                                btnInteraction.deferReply(true).queue();
+                                btnInteraction.getHook().sendMessage("Esse botão já foi usado!").setEphemeral(true).queue();
                                 return;
                             }
 
                             if (whoPlaysNow[0].getIdLong() != user.getIdLong()) {
-                                btnInteraction.reply("Não é a sua vez de jogar!").setEphemeral(true).queue();
+                                btnInteraction.deferReply(true).queue();
+                                btnInteraction.getHook().sendMessage("Não é a sua vez de jogar!").setEphemeral(true).queue();
                                 return;
                             }
 
