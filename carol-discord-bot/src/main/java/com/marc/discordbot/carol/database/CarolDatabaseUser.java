@@ -8,16 +8,15 @@ public class CarolDatabaseUser {
     private int money = 0;
     private Map<String, Integer> xp_in_guilds = new HashMap<String, Integer>();
 
-    public CarolDatabaseUser(long id, int money, Map<String, Integer> xp_in_guilds)
-    {
-        this.id = id;
-        this.money = money;
-        this.xp_in_guilds = xp_in_guilds;
-    }
+    public CarolDatabaseUser() {}
 
     public static CarolDatabaseUser getDefault(long id)
     {
-        return new CarolDatabaseUser(id, 0, new HashMap<String, Integer>());
+        CarolDatabaseUser carolDatabaseUser = new CarolDatabaseUser();
+        carolDatabaseUser.setId(id);
+        carolDatabaseUser.setMoney(0);
+        carolDatabaseUser.setXp_in_guilds(new HashMap<String, Integer>());
+        return carolDatabaseUser;
     }
 
     public long getId() {

@@ -1,7 +1,6 @@
 package com.marc.discordbot.carol.database;
 
 import com.marc.discordbot.carol.file.JsonUtils;
-import kotlinx.serialization.json.Json;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
@@ -65,7 +64,7 @@ public class CarolDatabaseManager {
         return CarolDatabaseUser.getDefault(user.getId());
     }
 
-    public static CarolDatabaseUser getOrCreateUser(long id) throws IOException, InterruptedException {
+    public static CarolDatabaseUser getOrCreateUser(long id) {
         String url = databaseURL + "/rest/v1/" + CarolDatabaseTables.USERS_TABLE + "?id=eq." + id + "&select=*";
 
         HttpClient client = HttpClient.newHttpClient();
@@ -77,13 +76,47 @@ public class CarolDatabaseManager {
                 .header("Accept", "application/json")
                 .build();
 
-        HttpResponse<String> getResponse = client.send(getRequest, HttpResponse.BodyHandlers.ofString());
-        String json = getResponse.body();
+        try {
+            HttpResponse<String> getResponse = client.send(getRequest, HttpResponse.BodyHandlers.ofString());
+            String json = getResponse.body();
 
-        if (json.equals("[]")) {
-            return addUserToDatabase(new CarolDatabaseUser(id, 0, new HashMap<String, Integer>()));
+            if (json.equals("[]")) {
+                try {
+                    return addUserToDatabase(CarolDatabaseUser.getDefault(id));
+                } catch (Exception e) {
+                    System.out.println("Error on fetch user " + id + ": " + e);
+                }
+            }
+
+            return JsonUtils.decodeFromString(CarolDatabaseUser.class, json.substring(1, json.length() - 1));
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+            return null;
+        }
+    }
+
+    public static void updateUser(long id, CarolDatabaseUser user) throws IOException, InterruptedException {
+        String newUserJson = "";
+        try {
+            newUserJson = JsonUtils.encodeFromObject(user);
+        } catch (Exception e) {
+            System.out.println("Failed to convert user to json: " + e);
+            return;
         }
 
-        return JsonUtils.decodeFromString(CarolDatabaseUser.class, json.substring(1, json.length() - 1));
+        String url = databaseURL + "/rest/v1/" + CarolDatabaseTables.USERS_TABLE + "?id=eq." + id;
+
+        HttpClient client = HttpClient.newHttpClient();
+
+        HttpRequest updateRequest = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .header("apikey", anonKey)
+                .header("Authorization", "Bearer " + anonKey)
+                .header("Content-Type", "application/json")
+                .method("PATCH", HttpRequest.BodyPublishers.ofString(newUserJson))
+                .build();
+
+        HttpResponse<String> response = client.send(updateRequest, HttpResponse.BodyHandlers.ofString());
+
     }
 }
