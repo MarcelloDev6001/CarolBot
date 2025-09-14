@@ -8,115 +8,135 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.HashMap;
 
+// i admit, this was made by me but i used ChatGPT to optimize this a LOT
 public class CarolDatabaseManager {
     public static String databaseURL = "";
     public static String anonKey = "";
 
-    @Nullable
-    public static CarolDatabaseUser getUserFromDatabase(long id) throws IOException, InterruptedException {
-        String url = databaseURL + "/rest/v1/" + CarolDatabaseTables.USERS_TABLE + "?id=eq." + id + "&select=*";
-        String apiKey = anonKey;
+    private static final HttpClient CLIENT = HttpClient.newHttpClient();
 
-        HttpClient client = HttpClient.newHttpClient();
-
-        HttpRequest request = HttpRequest.newBuilder()
+    private static HttpRequest.Builder baseRequest(String url) {
+        return HttpRequest.newBuilder()
                 .uri(URI.create(url))
-                .header("apikey", apiKey)
-                .header("Authorization", "Bearer " + apiKey)
-                .build();
+                .header("apikey", anonKey)
+                .header("Authorization", "Bearer " + anonKey);
+    }
 
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
+    private static <T> @Nullable T decodeSingle(Class<T> clazz, String body) {
         try {
-            System.out.println(response.body());
-            return JsonUtils.decodeFromString(CarolDatabaseUser.class, response.body().substring(1, response.body().length() - 1));
+            if (body == null || body.equals("[]")) return null;
+            return JsonUtils.decodeFromString(clazz, body.substring(1, body.length() - 1));
         } catch (Exception e) {
-            System.out.println("Error on decode user from database: " + e);
+            System.out.println("Error decoding JSON: " + e);
             return null;
         }
     }
 
-    public static CarolDatabaseUser addUserToDatabase(CarolDatabaseUser user) throws IOException, InterruptedException {
-        HttpClient client = HttpClient.newHttpClient();
-
-        String insertUrl = databaseURL + "/rest/v1/" + CarolDatabaseTables.USERS_TABLE;
-
-        String newUserJson = "";
+    private static <T> String encode(T obj) {
         try {
-            newUserJson = JsonUtils.encodeFromObject(CarolDatabaseUser.getDefault(user.getId()));
+            return JsonUtils.encodeFromObject(obj);
         } catch (Exception e) {
-            System.out.println("Failed to convert user to json: " + e);
-            return user;
+            System.out.println("Failed to encode object: " + e);
+            return null;
         }
-
-        HttpRequest postRequest = HttpRequest.newBuilder()
-                .uri(URI.create(insertUrl))
-                .header("apikey", anonKey)
-                .header("Authorization", "Bearer " + anonKey)
-                .header("Content-Type", "application/json")
-                .POST(HttpRequest.BodyPublishers.ofString(newUserJson))
-                .build();
-
-        HttpResponse<String> postResponse = client.send(postRequest, HttpResponse.BodyHandlers.ofString());
-        System.out.println(postResponse.body());
-        return CarolDatabaseUser.getDefault(user.getId());
     }
 
-    public static CarolDatabaseUser getOrCreateUser(long id) {
-        String url = databaseURL + "/rest/v1/" + CarolDatabaseTables.USERS_TABLE + "?id=eq." + id + "&select=*";
+    private static String tableUrl(String table, long id, boolean select) {
+        return databaseURL + "/rest/v1/" + table + "?id=eq." + id + (select ? "&select=*" : "");
+    }
 
-        HttpClient client = HttpClient.newHttpClient();
+    // ---------- Generic Methods ----------
+    public static <T> @Nullable T getEntity(String table, long id, Class<T> clazz) {
+        String url = tableUrl(table, id, true);
 
-        HttpRequest getRequest = HttpRequest.newBuilder()
-                .uri(URI.create(url))
-                .header("apikey", anonKey)
-                .header("Authorization", "Bearer " + anonKey)
+        HttpRequest request = baseRequest(url)
                 .header("Accept", "application/json")
                 .build();
 
         try {
-            HttpResponse<String> getResponse = client.send(getRequest, HttpResponse.BodyHandlers.ofString());
-            String json = getResponse.body();
-
-            if (json.equals("[]")) {
-                try {
-                    return addUserToDatabase(CarolDatabaseUser.getDefault(id));
-                } catch (Exception e) {
-                    System.out.println("Error on fetch user " + id + ": " + e);
-                }
-            }
-
-            return JsonUtils.decodeFromString(CarolDatabaseUser.class, json.substring(1, json.length() - 1));
+            HttpResponse<String> response = CLIENT.send(request, HttpResponse.BodyHandlers.ofString());
+            return decodeSingle(clazz, response.body());
         } catch (Exception e) {
-            System.out.println("Error: " + e);
+            System.out.println("Error fetching entity: " + e);
             return null;
         }
     }
 
-    public static void updateUser(long id, CarolDatabaseUser user) throws IOException, InterruptedException {
-        String newUserJson = "";
-        try {
-            newUserJson = JsonUtils.encodeFromObject(user);
-        } catch (Exception e) {
-            System.out.println("Failed to convert user to json: " + e);
-            return;
-        }
+    public static <T> T addEntity(String table, T entity, T defaultEntity) throws IOException, InterruptedException {
+        String insertUrl = databaseURL + "/rest/v1/" + table;
 
-        String url = databaseURL + "/rest/v1/" + CarolDatabaseTables.USERS_TABLE + "?id=eq." + id;
+        String json = encode(defaultEntity);
+        if (json == null) return entity;
 
-        HttpClient client = HttpClient.newHttpClient();
-
-        HttpRequest updateRequest = HttpRequest.newBuilder()
-                .uri(URI.create(url))
-                .header("apikey", anonKey)
-                .header("Authorization", "Bearer " + anonKey)
+        HttpRequest request = baseRequest(insertUrl)
                 .header("Content-Type", "application/json")
-                .method("PATCH", HttpRequest.BodyPublishers.ofString(newUserJson))
+                .POST(HttpRequest.BodyPublishers.ofString(json))
                 .build();
 
-        HttpResponse<String> response = client.send(updateRequest, HttpResponse.BodyHandlers.ofString());
+        HttpResponse<String> response = CLIENT.send(request, HttpResponse.BodyHandlers.ofString());
+        System.out.println(response.body());
 
+        return defaultEntity;
+    }
+
+    public static <T> T getOrCreateEntity(String table, long id, Class<T> clazz, T defaultEntity) {
+        T entity = getEntity(table, id, clazz);
+        if (entity == null) {
+            try {
+                return addEntity(table, defaultEntity, defaultEntity);
+            } catch (Exception e) {
+                System.out.println("Error creating entity: " + e);
+            }
+        }
+        return entity;
+    }
+
+    public static <T> void updateEntity(String table, long id, T entity) throws IOException, InterruptedException {
+        String json = encode(entity);
+        if (json == null) return;
+
+        String url = tableUrl(table, id, false);
+
+        HttpRequest request = baseRequest(url)
+                .header("Content-Type", "application/json")
+                .method("PATCH", HttpRequest.BodyPublishers.ofString(json))
+                .build();
+
+        CLIENT.send(request, HttpResponse.BodyHandlers.ofString());
+    }
+
+    // ---------- User wrappers ----------
+    public static CarolDatabaseUser getUserFromDatabase(long id) {
+        return getEntity(CarolDatabaseTables.USERS_TABLE, id, CarolDatabaseUser.class);
+    }
+
+    public static CarolDatabaseUser addUserToDatabase(CarolDatabaseUser user) throws IOException, InterruptedException {
+        return addEntity(CarolDatabaseTables.USERS_TABLE, user, CarolDatabaseUser.getDefault(user.getId()));
+    }
+
+    public static CarolDatabaseUser getOrCreateUser(long id) {
+        return getOrCreateEntity(CarolDatabaseTables.USERS_TABLE, id, CarolDatabaseUser.class, CarolDatabaseUser.getDefault(id));
+    }
+
+    public static void updateUser(long id, CarolDatabaseUser user) throws IOException, InterruptedException {
+        updateEntity(CarolDatabaseTables.USERS_TABLE, id, user);
+    }
+
+    // ---------- Guild wrappers ----------
+    public static CarolDatabaseGuild getGuildFromDatabase(long id) {
+        return getEntity(CarolDatabaseTables.GUILDS_TABLE, id, CarolDatabaseGuild.class);
+    }
+
+    public static CarolDatabaseGuild addGuildToDatabase(CarolDatabaseGuild guild) throws IOException, InterruptedException {
+        return addEntity(CarolDatabaseTables.GUILDS_TABLE, guild, CarolDatabaseGuild.getDefault(guild.getId()));
+    }
+
+    public static CarolDatabaseGuild getOrCreateGuild(long id) {
+        return getOrCreateEntity(CarolDatabaseTables.GUILDS_TABLE, id, CarolDatabaseGuild.class, CarolDatabaseGuild.getDefault(id));
+    }
+
+    public static void updateGuild(long id, CarolDatabaseGuild guild) throws IOException, InterruptedException {
+        updateEntity(CarolDatabaseTables.GUILDS_TABLE, id, guild);
     }
 }
