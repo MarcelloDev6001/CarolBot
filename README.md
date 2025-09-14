@@ -11,7 +11,7 @@ Carol is currently in beta and it's subject to have a lot of changes on the futu
 ![Imagem](https://github.com/MarcelloDev6001/CarolBot/blob/main/hades-avatar.png)
 
 (Draw by: [Moon'Flower](https://www.youtube.com/@themoonflowy))
-## Marcello, Aka "Hades (não aquele deus)" on Discord
+## Marc, Aka "Ades (não aquele deus)" on Discord
 Name's Marcello (or Marc, just to call a shortly way), 15 years old, im interesting on being a good Programmer on future.
 Im using Java for this project because i hate myself (just kidding),
 im actually using because a lot of companies have this programming language as it's main programming language of Backend and it's look like a good language.
