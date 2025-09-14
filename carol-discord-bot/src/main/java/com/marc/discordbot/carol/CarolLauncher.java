@@ -69,12 +69,13 @@ public class CarolLauncher {
                             optionOnCommand.getOptionType(),
                             optionOnCommand.getName(),
                             optionOnCommand.getDescription(),
-                            optionOnCommand.getRequired()
+                            optionOnCommand.getRequired(),
+                            optionOnCommand.getAutoComplete() != null && !optionOnCommand.getAutoComplete().isEmpty()
                     );
                 }
             }
 
-            commands.addCommands(slashCommand);
+            commands.addCommands(slashCommand).queue();
         }
 
         commands.queue();
@@ -84,6 +85,7 @@ public class CarolLauncher {
     {
         List<ListenerAdapter> listeners = new ArrayList<>();
         listeners.add(new CarolButtonInteractionListener());
+        listeners.add(new CarolCommandAutoCompleteInteractionListener());
         listeners.add(new CarolGuildMemberJoinListener());
         listeners.add(new CarolGuildMemberRemoveListener());
         listeners.add(new CarolMessageListener());

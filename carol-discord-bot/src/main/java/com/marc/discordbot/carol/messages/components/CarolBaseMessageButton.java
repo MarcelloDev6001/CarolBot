@@ -14,7 +14,7 @@ public class CarolBaseMessageButton
     public final ButtonStyle style;
     public final String uniqueId;
     public final String label;
-    public final CarolBaseMessageButtonOnClickEvent onClicked;
+    @Nullable public final CarolBaseMessageButtonOnClickEvent onClicked;
     public @Nullable String link;
 
     public Button toComponentButton() {

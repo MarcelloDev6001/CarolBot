@@ -11,9 +11,9 @@ public class CarolButtonInteractionListener extends ListenerAdapter {
     {
         for (CarolBaseMessageButton messageButton : CarolMessageComponentsManager.cachedButtons)
         {
-            if (messageButton.uniqueId.equals(event.getComponentId()))
+            if (messageButton.uniqueId.equals(event.getComponentId()) && messageButton.onClicked != null)
             {
-                messageButton.onClicked.run(event.getInteraction());
+                messageButton.onClicked.run(event.getInteraction(), event.getUser());
                 return;
             }
         }

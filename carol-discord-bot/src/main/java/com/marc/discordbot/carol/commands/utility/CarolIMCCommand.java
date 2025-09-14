@@ -4,6 +4,7 @@ import com.marc.discordbot.carol.commands.CarolBaseCommandOption;
 import com.marc.discordbot.carol.commands.CarolCommand;
 import com.marc.discordbot.carol.messages.components.CarolBaseMessageButton;
 import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.SlashCommandInteraction;
 import net.dv8tion.jda.api.interactions.components.buttons.ButtonInteraction;
@@ -17,8 +18,8 @@ import java.text.DecimalFormat;
 public class CarolIMCCommand extends CarolCommand {
     public CarolIMCCommand() {
         super("calculadora-de-imc", "Veja o seu IMC e confira se vc está abaixo, igual ou acima do peso!", new CarolBaseCommandOption[]{
-                new CarolBaseCommandOption("peso", "O seu peso (em KG)", OptionType.NUMBER, true, false),
-                new CarolBaseCommandOption("altura", "A sua altura (em CM)", OptionType.NUMBER, true, false)
+                new CarolBaseCommandOption("peso", "O seu peso (em KG)", OptionType.NUMBER, true, null),
+                new CarolBaseCommandOption("altura", "A sua altura (em CM)", OptionType.NUMBER, true, null)
         }, false);
     }
 
@@ -53,6 +54,20 @@ public class CarolIMCCommand extends CarolCommand {
         interaction.reply(finalContent).addActionRow(imcTableButton).setEphemeral(true).queue();
     }
 
+    private void onIMCTableButtonClicked(ButtonInteraction interaction, User user) {
+        String imcTableString = "Classificações:" +
+                "\n" +
+                "\nMenor que 18.5: Abaixo do peso." +
+                "\nEntre 18.5 e 25: Peso normal." +
+                "\nEntre 25 e 30: Sobrepeso." +
+                "\nEntre 30 e 35: Obesidade grau I." +
+                "\nEntre 35 e 40: Obesidade grau II." +
+                "\nMaior que 40: Obesidade grau III.";
+
+        interaction.deferReply(true).queue();
+        interaction.getHook().sendMessage(imcTableString).setEphemeral(true).queue();
+    }
+
     @NotNull
     private static String getIMCFinalMessage(double weight, double height) {
         double IMC = weight / (height * height);
@@ -73,20 +88,5 @@ public class CarolIMCCommand extends CarolCommand {
             finalContent += "\n\nClassificação: Obesidade grau III.";
         }
         return finalContent;
-    }
-
-    public void onIMCTableButtonClicked(ButtonInteraction interaction)
-    {
-        String imcTableString = "Classificações:" +
-                "\n" +
-                "\nMenor que 18.5: Abaixo do peso." +
-                "\nEntre 18.5 e 25: Peso normal." +
-                "\nEntre 25 e 30: Sobrepeso." +
-                "\nEntre 30 e 35: Obesidade grau I." +
-                "\nEntre 35 e 40: Obesidade grau II." +
-                "\nMaior que 40: Obesidade grau III.";
-
-        interaction.deferReply(true).queue();
-        interaction.getHook().sendMessage(imcTableString).setEphemeral(true).queue();
     }
 }
