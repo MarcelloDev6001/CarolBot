@@ -25,7 +25,11 @@ Firstly, open `carol-discord-bot` folder, create a file called `carol.properties
 {
     "token": "YOUR_DISCORD_BOT_TOKEN",
     "applicationId": "YOUR_DISCORD_BOT_APPLICATION_ID",
-    "prefix": "YOUR_DISCORD_BOT_PREFIX"
+    "prefix": "YOUR_DISCORD_BOT_PREFIX",
+    "databaseURL": "",
+    "databaseUsername": "",
+    "databasePassword": "",
+    "databaseAnonKey": ""
 }
 ```
 

@@ -18,4 +18,21 @@ public class JsonUtils {
             return null;
         }
     }
+
+    public static <T> T decodeFromString(Class<T> tClass, String jsonString)
+    {
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            // Map JSON string to a custom Java object
+            return objectMapper.readValue(jsonString, tClass);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static String encodeFromObject(Object obj) throws Exception {
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.writeValueAsString(obj);
+    }
 }
