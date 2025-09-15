@@ -17,10 +17,11 @@ import java.text.DecimalFormat;
 
 public class CarolIMCCommand extends CarolCommand {
     public CarolIMCCommand() {
-        super("calculadora-de-imc", "Veja o seu IMC e confira se vc está abaixo, igual ou acima do peso!", new CarolBaseCommandOption[]{
-                new CarolBaseCommandOption("peso", "O seu peso (em KG)", OptionType.NUMBER, true, null),
-                new CarolBaseCommandOption("altura", "A sua altura (em CM)", OptionType.NUMBER, true, null)
-        }, false);
+        super("calculadora-de-imc", "Veja o seu IMC e confira se vc está abaixo, igual ou acima do peso!");
+        setGuildOnly(false);
+
+        addOption(OptionType.NUMBER,"peso", "O seu peso (em KG)", true, null);
+        addOption(OptionType.NUMBER,"altura", "A sua altura (em CM)", true, null);
     }
 
     @Override

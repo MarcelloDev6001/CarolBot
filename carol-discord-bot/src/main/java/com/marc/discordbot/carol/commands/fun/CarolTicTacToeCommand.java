@@ -22,18 +22,11 @@ public class CarolTicTacToeCommand extends CarolCommand {
     private final Map<String, Message> games = new HashMap<>();
 
     public CarolTicTacToeCommand() {
-        super("tic-tac-toe",
-                "Jogue jogo da idosa com seus amigos! (idosa pq eu tenho respeito e não chamo de velha)",
-                new CarolBaseCommandOption[]{
-                        new CarolBaseCommandOption("oponente", "O seu oponente", OptionType.USER, true, null),
-                        new CarolBaseCommandOption(
-                                "modo-de-jogo",
-                                "O modo se vai ser 3x3, 4x4 ou 5x5",
-                                OptionType.STRING,
-                                true,
-                                List.of("3x3", "4x4", "5x5"))
-                },
-                true);
+        super("tic-tac-toe", "Jogue jogo da idosa com seus amigos! (idosa pq eu tenho respeito e não chamo de velha)");
+        setGuildOnly(true);
+
+        addOption(OptionType.USER, "oponente", "A pessoa que você vai desafiar!", true, null);
+        addOption(OptionType.STRING, "modo-de-jogo", "O modo se vai ser 3x3, 4x4 ou 5x5", true, List.of("3x3", "4x4", "5x5"));
     }
 
     @Override
@@ -44,6 +37,7 @@ public class CarolTicTacToeCommand extends CarolCommand {
         if (opponent.getIdLong() == interaction.getJDA().getSelfUser().getIdLong())
         {
             interaction.reply("Huh... Acha que pode me vencer, é?\nPois saiba que eu não jogo com humanos.").setEphemeral(true).queue();
+            return;
         }
 
         switch (mode) {
@@ -171,6 +165,7 @@ public class CarolTicTacToeCommand extends CarolCommand {
                             if (whoPlaysNow[0].getIdLong() == interaction.getJDA().getSelfUser().getIdLong()) {
                                 btnInteraction.deferReply(true).queue();
                                 btnInteraction.getHook().sendMessage("Esse jogo já acabou!").setEphemeral(true).queue();
+                                return;
                             }
 
                             if (!btn.getLabel().equals("⬜")) {

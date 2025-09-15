@@ -6,7 +6,8 @@ import net.dv8tion.jda.api.interactions.commands.SlashCommandInteraction;
 public class CarolTestCommand extends CarolCommand {
     public CarolTestCommand()
     {
-        super("teste", "Apenas um comando de teste", null, false);
+        super("teste", "Apenas um comando de teste");
+        setGuildOnly(false);
     }
 
     @Override
