@@ -4,6 +4,7 @@ import com.marc.discordbot.carol.CarolSettings;
 import com.marc.discordbot.carol.database.CarolDatabaseManager;
 import com.marc.discordbot.carol.utils.CarolDiscordUtils;
 import com.marc.discordbot.carol.utils.CarolNoTextChannelAvalaibleOnGuild;
+import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -29,8 +30,10 @@ public class CarolGuildJoinListener extends ListenerAdapter {
             return;
         }
 
+        Member guildOwner = event.getGuild().getOwner();
         availableChannelToTalk.sendMessage(
-                CarolSettings.DEFAULT_MESSAGE_ON_ADDED_TO_A_NEW_GUILD.replace("${owner}", event.getGuild().getOwner().getAsMention())
+                (guildOwner != null) ? CarolSettings.DEFAULT_MESSAGE_ON_ADDED_TO_A_NEW_GUILD :
+                        CarolSettings.DEFAULT_MESSAGE_ON_ADDED_TO_A_NEW_GUILD_WITHOUT_OWNER_MENTION
         ).queue();
     }
 }
