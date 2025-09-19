@@ -1,12 +1,9 @@
 package com.marc.discordbot.carol.database;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class CarolDatabaseGuild {
     private long id = 0L;
-    private long new_member_warn_channel_id = 0L;
-    private long member_left_warn_channel_id = 0L;
+    private long memberJoinedChannelWarnID = 0L;
+    private long memberLeftChannelWarnID = 0L;
 
     public CarolDatabaseGuild() {}
 
@@ -14,8 +11,8 @@ public class CarolDatabaseGuild {
     {
         CarolDatabaseGuild carolDatabaseGuild = new CarolDatabaseGuild();
         carolDatabaseGuild.setId(id);
-        carolDatabaseGuild.setNew_member_warn_channel_id(0);
-        carolDatabaseGuild.setMember_left_warn_channel_id(0);
+        carolDatabaseGuild.setMemberJoinedChannelWarnID(0);
+        carolDatabaseGuild.setMemberLeftChannelWarnID(0);
         return carolDatabaseGuild;
     }
 
@@ -27,19 +24,19 @@ public class CarolDatabaseGuild {
         this.id = id;
     }
 
-    public long getNew_member_warn_channel_id() {
-        return new_member_warn_channel_id;
+    public long getMemberJoinedChannelWarnID() {
+        return memberJoinedChannelWarnID;
     }
 
-    public void setNew_member_warn_channel_id(long new_member_warn_channel_id) {
-        this.new_member_warn_channel_id = new_member_warn_channel_id;
+    public void setMemberJoinedChannelWarnID(long memberJoinedChannelWarnID) {
+        this.memberJoinedChannelWarnID = memberJoinedChannelWarnID;
     }
 
-    public long getMember_left_warn_channel_id() {
-        return member_left_warn_channel_id;
+    public long getMemberLeftChannelWarnID() {
+        return memberLeftChannelWarnID;
     }
 
-    public void setMember_left_warn_channel_id(long member_left_warn_channel_id) {
-        this.member_left_warn_channel_id = member_left_warn_channel_id;
+    public void setMemberLeftChannelWarnID(long memberLeftChannelWarnID) {
+        this.memberLeftChannelWarnID = memberLeftChannelWarnID;
     }
 }

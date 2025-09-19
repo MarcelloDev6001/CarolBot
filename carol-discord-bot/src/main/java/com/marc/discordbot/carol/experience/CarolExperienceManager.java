@@ -12,11 +12,11 @@ public class CarolExperienceManager {
     public static void updateUserXPFromGuild(User user, Guild guild) throws IOException, InterruptedException {
         CarolDatabaseUser dbUser = CarolDatabaseManager.getOrCreateUser(user.getIdLong());
         if (dbUser == null) { dbUser = CarolDatabaseUser.getDefault(user.getIdLong()); }
-        Map<String, Integer> guildsXPs = dbUser.getXp_in_guilds();
+        Map<String, Integer> guildsXPs = dbUser.getXpInGuilds();
 
         guildsXPs.putIfAbsent(guild.getId(), 0);
         guildsXPs.put(guild.getId(), guildsXPs.get(guild.getId()) + 1);
-        dbUser.setXp_in_guilds(guildsXPs);
+        dbUser.setXpInGuilds(guildsXPs);
 
         CarolDatabaseManager.updateUser(user.getIdLong(), dbUser);
     }

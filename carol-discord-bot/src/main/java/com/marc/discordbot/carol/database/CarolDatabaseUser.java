@@ -6,7 +6,7 @@ import java.util.Map;
 public class CarolDatabaseUser {
     private long id = 0L;
     private int money = 0;
-    private Map<String, Integer> xp_in_guilds = new HashMap<String, Integer>();
+    private Map<String, Integer> xpInGuilds = new HashMap<String, Integer>();
 
     public CarolDatabaseUser() {}
 
@@ -15,7 +15,7 @@ public class CarolDatabaseUser {
         CarolDatabaseUser carolDatabaseUser = new CarolDatabaseUser();
         carolDatabaseUser.setId(id);
         carolDatabaseUser.setMoney(0);
-        carolDatabaseUser.setXp_in_guilds(new HashMap<String, Integer>());
+        carolDatabaseUser.setXpInGuilds(new HashMap<String, Integer>());
         return carolDatabaseUser;
     }
 
@@ -35,11 +35,11 @@ public class CarolDatabaseUser {
         this.money = money;
     }
 
-    public Map<String, Integer> getXp_in_guilds() {
-        return xp_in_guilds;
+    public Map<String, Integer> getXpInGuilds() {
+        return xpInGuilds;
     }
 
-    public void setXp_in_guilds(Map<String, Integer> xp_in_guilds) {
-        this.xp_in_guilds = xp_in_guilds;
+    public void setXpInGuilds(Map<String, Integer> xpInGuilds) {
+        this.xpInGuilds = xpInGuilds;
     }
 }
