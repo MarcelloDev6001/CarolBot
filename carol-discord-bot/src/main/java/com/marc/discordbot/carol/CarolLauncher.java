@@ -41,9 +41,6 @@ public class CarolLauncher {
         );
 
         assert carolProperties != null;
-        CarolDatabaseManager.databaseURL = carolProperties.getDatabaseURL();
-        CarolDatabaseManager.anonKey = carolProperties.getDatabaseAnonKey();
-
         JDA jda = JDABuilder.createLight(carolProperties.getToken(), intents).build();
 
         for (ListenerAdapter listener : getAllListeners())
@@ -54,6 +51,12 @@ public class CarolLauncher {
         CommandListUpdateAction commands = jda.updateCommands();
 
         CarolCommandInitializer.initializeCommands();
+        try {
+            CarolDatabaseManager.initialize();
+        } catch (Exception e) {
+            System.out.println("Failed to initialize database: " + e);
+        }
+
 
         for (CarolCommand command : CarolCommand.allCommands)
         {

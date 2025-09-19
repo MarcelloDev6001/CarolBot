@@ -26,12 +26,12 @@ Firstly, open `carol-discord-bot` folder, create a file called `carol.properties
     "token": "YOUR_DISCORD_BOT_TOKEN",
     "applicationId": "YOUR_DISCORD_BOT_APPLICATION_ID",
     "prefix": "YOUR_DISCORD_BOT_PREFIX",
-    "databaseURL": "",
-    "databaseUsername": "",
-    "databasePassword": "",
-    "databaseAnonKey": ""
 }
 ```
+
+Secondly, open `carol-discord-bot/src/main/resources` and insert you Firebase key json file inside this folder with the name `firebase-key.json`. (you can download it quickly searching any tutorial on internet.)
+
+**ALTERNATIVE:** Put you `firebase-key.json` in any folder and just change the `CarolSettings.FIREBASE_KEY_PATH` to the correct folder of the Firebase Key Json File.
 
 ## Invite
 

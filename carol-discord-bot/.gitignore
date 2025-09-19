@@ -43,3 +43,4 @@ bin/
 
 ### Extras ###
 src/main/carol.properties.json
+src/main/resources/firebase-key.json

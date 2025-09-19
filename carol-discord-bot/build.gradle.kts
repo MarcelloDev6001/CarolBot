@@ -18,6 +18,7 @@ dependencies {
 
     //database
     implementation("io.ktor:ktor-client-cio:latest.release")
+    implementation("com.google.firebase:firebase-admin:9.2.0")
 
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")

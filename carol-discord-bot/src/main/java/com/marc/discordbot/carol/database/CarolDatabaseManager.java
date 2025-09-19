@@ -1,142 +1,101 @@
 package com.marc.discordbot.carol.database;
 
-import com.marc.discordbot.carol.file.JsonUtils;
+import com.google.api.core.ApiFuture;
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.cloud.firestore.*;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
+import com.google.firebase.cloud.FirestoreClient;
+import com.marc.discordbot.carol.CarolSettings;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
+import java.util.concurrent.ExecutionException;
 
 // i admit, this was made by me but i used ChatGPT to optimize this a LOT
+// Originally this project would use Supabase as main database, but this database is a little confuse for me ;-;
 public class CarolDatabaseManager {
-    public static String databaseURL = "";
-    public static String anonKey = "";
+    private static Firestore db;
 
-    private static final HttpClient CLIENT = HttpClient.newHttpClient();
+    public static void initialize() throws IOException {
+        FileInputStream serviceAccount = new FileInputStream(CarolSettings.FIREBASE_KEY_PATH);
 
-    private static HttpRequest.Builder baseRequest(String url) {
-        return HttpRequest.newBuilder()
-                .uri(URI.create(url))
-                .header("apikey", anonKey)
-                .header("Authorization", "Bearer " + anonKey);
-    }
+        FirebaseOptions options = FirebaseOptions.builder()
+                .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+                .build();
 
-    private static <T> @Nullable T decodeSingle(Class<T> clazz, String body) {
-        try {
-            if (body == null || body.equals("[]")) return null;
-            return JsonUtils.decodeFromString(clazz, body.substring(1, body.length() - 1));
-        } catch (Exception e) {
-            System.out.println("Error decoding JSON: " + e);
-            return null;
-        }
-    }
-
-    private static <T> String encode(T obj) {
-        try {
-            return JsonUtils.encodeFromObject(obj);
-        } catch (Exception e) {
-            System.out.println("Failed to encode object: " + e);
-            return null;
-        }
-    }
-
-    private static String tableUrl(String table, long id, boolean select) {
-        return databaseURL + "/rest/v1/" + table + "?id=eq." + id + (select ? "&select=*" : "");
+        FirebaseApp.initializeApp(options);
+        db = FirestoreClient.getFirestore();
     }
 
     // ---------- Generic Methods ----------
-    public static <T> @Nullable T getEntity(String table, long id, Class<T> clazz) {
-        String url = tableUrl(table, id, true);
-
-        HttpRequest request = baseRequest(url)
-                .header("Accept", "application/json")
-                .build();
-
+    private static <T> @Nullable T getEntity(String collection, String id, Class<T> clazz) {
         try {
-            HttpResponse<String> response = CLIENT.send(request, HttpResponse.BodyHandlers.ofString());
-            return decodeSingle(clazz, response.body());
+            DocumentReference docRef = db.collection(collection).document(id);
+            ApiFuture<DocumentSnapshot> future = docRef.get();
+            DocumentSnapshot document = future.get();
+            if (document.exists()) {
+                return document.toObject(clazz);
+            }
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private static <T> void addOrUpdateEntity(String collection, String id, T entity) {
+        try {
+            DocumentReference docRef = db.collection(collection).document(id);
+            ApiFuture<WriteResult> future = docRef.set(entity);
+            //System.out.println("Updated at: " + future.get().getUpdateTime());
         } catch (Exception e) {
-            System.out.println("Error fetching entity: " + e);
-            return null;
+            e.printStackTrace();
         }
     }
 
-    public static <T> T addEntity(String table, T entity, T defaultEntity) throws IOException, InterruptedException {
-        String insertUrl = databaseURL + "/rest/v1/" + table;
-
-        String json = encode(defaultEntity);
-        if (json == null) return entity;
-
-        HttpRequest request = baseRequest(insertUrl)
-                .header("Content-Type", "application/json")
-                .POST(HttpRequest.BodyPublishers.ofString(json))
-                .build();
-
-        HttpResponse<String> response = CLIENT.send(request, HttpResponse.BodyHandlers.ofString());
-        System.out.println(response.body());
-
-        return defaultEntity;
-    }
-
-    public static <T> T getOrCreateEntity(String table, long id, Class<T> clazz, T defaultEntity) {
-        T entity = getEntity(table, id, clazz);
+    private static <T> T getOrCreateEntity(String collection, String id, Class<T> clazz, T defaultEntity) {
+        T entity = getEntity(collection, id, clazz);
         if (entity == null) {
-            try {
-                return addEntity(table, defaultEntity, defaultEntity);
-            } catch (Exception e) {
-                System.out.println("Error creating entity: " + e);
-            }
+            addOrUpdateEntity(collection, id, defaultEntity);
+            return defaultEntity;
         }
         return entity;
     }
 
-    public static <T> void updateEntity(String table, long id, T entity) throws IOException, InterruptedException {
-        String json = encode(entity);
-        if (json == null) return;
-
-        String url = tableUrl(table, id, false);
-
-        HttpRequest request = baseRequest(url)
-                .header("Content-Type", "application/json")
-                .method("PATCH", HttpRequest.BodyPublishers.ofString(json))
-                .build();
-
-        CLIENT.send(request, HttpResponse.BodyHandlers.ofString());
-    }
-
     // ---------- User wrappers ----------
     public static CarolDatabaseUser getUserFromDatabase(long id) {
-        return getEntity(CarolDatabaseTables.USERS_TABLE, id, CarolDatabaseUser.class);
+        return getEntity(CarolDatabaseTables.USERS_TABLE, String.valueOf(id), CarolDatabaseUser.class);
     }
 
-    public static CarolDatabaseUser addUserToDatabase(CarolDatabaseUser user) throws IOException, InterruptedException {
-        return addEntity(CarolDatabaseTables.USERS_TABLE, user, CarolDatabaseUser.getDefault(user.getId()));
+    public static void addUserToDatabase(CarolDatabaseUser user) {
+        addOrUpdateEntity(CarolDatabaseTables.USERS_TABLE, String.valueOf(user.getId()), user);
     }
 
     public static CarolDatabaseUser getOrCreateUser(long id) {
-        return getOrCreateEntity(CarolDatabaseTables.USERS_TABLE, id, CarolDatabaseUser.class, CarolDatabaseUser.getDefault(id));
+        return getOrCreateEntity(CarolDatabaseTables.USERS_TABLE, String.valueOf(id), CarolDatabaseUser.class,
+                CarolDatabaseUser.getDefault(id));
     }
 
-    public static void updateUser(long id, CarolDatabaseUser user) throws IOException, InterruptedException {
-        updateEntity(CarolDatabaseTables.USERS_TABLE, id, user);
+    public static void updateUser(long id, CarolDatabaseUser user) {
+        addOrUpdateEntity(CarolDatabaseTables.USERS_TABLE, String.valueOf(id), user);
     }
 
     // ---------- Guild wrappers ----------
     public static CarolDatabaseGuild getGuildFromDatabase(long id) {
-        return getEntity(CarolDatabaseTables.GUILDS_TABLE, id, CarolDatabaseGuild.class);
+        return getEntity(CarolDatabaseTables.GUILDS_TABLE, String.valueOf(id), CarolDatabaseGuild.class);
     }
 
-    public static CarolDatabaseGuild addGuildToDatabase(CarolDatabaseGuild guild) throws IOException, InterruptedException {
-        return addEntity(CarolDatabaseTables.GUILDS_TABLE, guild, CarolDatabaseGuild.getDefault(guild.getId()));
+    public static void addGuildToDatabase(CarolDatabaseGuild guild) {
+        addOrUpdateEntity(CarolDatabaseTables.GUILDS_TABLE, String.valueOf(guild.getId()), guild);
     }
 
-    public static CarolDatabaseGuild getOrCreateGuild(long id) {
-        return getOrCreateEntity(CarolDatabaseTables.GUILDS_TABLE, id, CarolDatabaseGuild.class, CarolDatabaseGuild.getDefault(id));
+    public static void getOrCreateGuild(long id) {
+        getOrCreateEntity(CarolDatabaseTables.GUILDS_TABLE, String.valueOf(id), CarolDatabaseGuild.class,
+                CarolDatabaseGuild.getDefault(id));
     }
 
-    public static void updateGuild(long id, CarolDatabaseGuild guild) throws IOException, InterruptedException {
-        updateEntity(CarolDatabaseTables.GUILDS_TABLE, id, guild);
+    public static void updateGuild(long id, CarolDatabaseGuild guild) {
+        addOrUpdateEntity(CarolDatabaseTables.GUILDS_TABLE, String.valueOf(id), guild);
     }
 }
