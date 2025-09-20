@@ -15,7 +15,15 @@ Carol is a lot inspired on [Loritta](https://github.com/LorittaBot/Loritta) and 
 
 Carol is currently in beta and it's subject to have a lot of changes on the future.
 
+# Future of Carol
 
+### Personnel plans for Carol:
+
+- Create a Discord server. (just like "Apartamento da Loritta", the Discord server of Loritta)
+
+- Create something special of Carol. (like a Minecraft server or a Youtube channel for it and etc...)
+
+- Create a Website to entirely configure Carol for a specific discord server. (configure commands, roles, channels, etc...)
 
 # About the creator
 
@@ -85,3 +93,5 @@ Open `carol-discord-bot` folder as a Project in IntelliJ, run `CarolLauncher.jav
 ## Invite
 
 Invite Carol to your discord server by clicking [Here](https://discord.com/oauth2/authorize?client_id=1214985204985241600&permissions=8&integration_type=0&scope=bot).
+> Currently, Carol isn't a public bot because it's still in development.
+> Hope you guys have pacience, because Carol probally will take a lot of time to be fully developed!
