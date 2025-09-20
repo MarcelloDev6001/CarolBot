@@ -50,6 +50,7 @@ public class CarolTicTacToeCommand extends CarolCommand {
         if (opponent.getId().equals(interaction.getUser().getId()))
         {
             interaction.reply("Você não pode jogar com si mesmo, bobinho!\nMas... O que aconteceria se vc vencesse de si mesmo?").setEphemeral(true).queue();
+            return;
         }
 
         switch (mode) {
