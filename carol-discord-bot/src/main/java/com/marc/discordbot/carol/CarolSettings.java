@@ -25,4 +25,7 @@ public class CarolSettings {
     public static final OnlineStatus ONLINE_STATUS = OnlineStatus.ONLINE;
     public static final ActivityType ACTIVITY_TYPE = ActivityType.WATCHING;
     public static final String ACTIVITY_INFO = "Loritta Massacre 3000";
+
+    // used on CarolButtonInteractionListener.onButtonInteraction()
+    public static final String MESSAGE_ON_BUTTON_AFTER_UNCACHE = "Parece que os dados de interação dessa mensagem se perderam!\nCrie uma nova interação para usar esses botões novamente";
 }

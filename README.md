@@ -1,37 +1,96 @@
 # Carol
 
+  
+
+<p  align="center">
+
+<img  src="https://raw.githubusercontent.com/github/explore/main/topics/github/github.png"  width="150">
+
+</p>
+
+  
+
+<p  align="center">
+
+<b>AIO (All In One)!</b>
+
+</p>
+
+  
+
 ![Imagem](https://github.com/MarcelloDev6001/CarolBot/blob/main/avatar.png)
+
 ### Carol is a simple discord bot with multi purpose (like administration, diversion, utility, etc...)
 
+  
+
 Carol is a lot inspired on [Loritta](https://github.com/LorittaBot/Loritta) and Carol extremely █████ she!
+
 Carol is currently in beta and it's subject to have a lot of changes on the future.
+
+  
 
 # About the creator
 
+  
+
 ![Imagem](https://github.com/MarcelloDev6001/CarolBot/blob/main/marc-avatar.png)
 
+  
+
 (Draw by: [Moon'Flower](https://www.youtube.com/@themoonflowy))
+
 ### Marc, the most creative coder of all time :D
+
 Name's Marcello (or Marc, just to call a shortly way), 15 years old, im interesting on being a good Programmer on future.
+
 Im using Java for this project because i hate myself (just kidding),
+
 im actually using because a lot of companies have this programming language as it's main programming language of Backend and it's look like a good language.
+
 (Sorry for my bad english, im not too much good at english)
+
+  
 
 # How to self-host Carol
 
-Firstly, open `carol-discord-bot` folder, create a file called `carol.properties.json` and put this inside your file:
+  
+
+- Note: *`CarolSettings.java` (where is a lot of important configurations in Carol) is located at `src/main/java/com/marc/discordbot/carol/CarolSettings.java`*
+
+  
+
+- Firstly:
+open `carol-discord-bot` folder, create a file called `carol.properties.json` and put this inside your file:
 
 ```json
 {
-    "token": "YOUR_DISCORD_BOT_TOKEN",
-    "applicationId": "YOUR_DISCORD_BOT_APPLICATION_ID", // as a number value
-    "prefix": "YOUR_DISCORD_BOT_PREFIX",
+"token": "YOUR_DISCORD_BOT_TOKEN",
+"applicationId": "YOUR_DISCORD_BOT_APPLICATION_ID", // as a number value
+"prefix": "YOUR_DISCORD_BOT_PREFIX",
 }
 ```
 
-Secondly, open `carol-discord-bot/src/main/resources` and insert you Firebase key json file inside this folder with the name `firebase-key.json`. (you can download it quickly searching any tutorial on internet.)
+  
 
-**ALTERNATIVE:** Put you `firebase-key.json` in any folder and just change the `CarolSettings.FIREBASE_KEY_PATH` to the correct folder of the Firebase Key Json File.
+- Secondly:
+open `carol-discord-bot/src/main/resources` and insert you Firebase key json file inside this folder with the name `firebase-key.json`. (you can download it quickly searching any tutorial on internet.)
+  > **ALTERNATIVE:** Put you `firebase-key.json` in any folder and just change the `CarolSettings.FIREBASE_KEY_PATH` to the correct folder of the Firebase Key Json File.
+
+- Thirdly:
+  > Configure essencial stuffs of the Discord bot on `CarolSettings.java`, like:
+
+| VARIABLE                                         | What the variable do                                                                                       | Can modify       |
+|--------------------------------------------------|-------------------------------------------------------------------------------------------------------------|------------------|
+| **JDA_BUILDER_TYPE**                             | `how the JDA will construct your bot`                                                                       | ✅ true          |
+| **MAX_CACHE_TIME_FOR_MESSAGE_BUTTONS**           | Change the max time a button will be clickable until appears the `MESSAGE_ON_BUTTON_AFTER_UNCACHE` message  | ✅ true          |
+| **DEFAULT_MESSAGE_ON_ADDED_TO_A_NEW_GUILD**      | What your bot will say when your bot is added on a new guild                                                 | ✅ true          |
+| **DEFAULT_MESSAGE_ON_ADDED_TO_A_NEW_GUILD WITHOUT_OWNER_MENTION** | Same as above, but without owner mention                                                    | ✅ true          |
+| **FIREBASE_KEY_PATH**                            | Where your `FirebaseKey.json` is located                                                                     | ⚠️ not recommended |
+| **ONLINE_STATUS**                                | Status of your bot (Online, Do Not Disturb, Idle or Offline)                                                 | ✅ true          |
+| **ACTIVITY_TYPE**                                | Activity of your bot (Listening, Playing, Watching, etc)                                                     | ✅ true          |
+| **ACTIVITY_INFO**                                | What message will be displayed on your bot Activity                                                          | ✅ true          |
+| **MESSAGE_ON_BUTTON_AFTER_UNCACHE**              | What message will be displayed when a user click on a button that was uncached                               | ✅ true          |
 
 ## Invite
 

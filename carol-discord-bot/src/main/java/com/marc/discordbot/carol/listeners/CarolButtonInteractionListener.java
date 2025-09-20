@@ -1,5 +1,6 @@
 package com.marc.discordbot.carol.listeners;
 
+import com.marc.discordbot.carol.CarolSettings;
 import com.marc.discordbot.carol.messages.components.CarolBaseMessageButton;
 import com.marc.discordbot.carol.messages.components.CarolMessageComponentsManager;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
@@ -18,8 +19,6 @@ public class CarolButtonInteractionListener extends ListenerAdapter {
             }
         }
 
-        event.reply(
-                "Parece que os dados de interação dessa mensagem se perderam!\nCrie uma nova interação para usar esses botões novamente"
-        ).setEphemeral(true).queue();
+        event.reply(CarolSettings.MESSAGE_ON_BUTTON_AFTER_UNCACHE).setEphemeral(true).queue();
     }
 }
