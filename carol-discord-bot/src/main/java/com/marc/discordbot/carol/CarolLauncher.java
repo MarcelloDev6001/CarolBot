@@ -43,7 +43,7 @@ public class CarolLauncher {
         );
 
         assert discordProperties != null;
-        JDA jda = JDABuilder.createLight(discordProperties.getToken(), intents).build();
+        JDA jda = buildJDA(discordProperties.getToken(), intents);
 
         for (ListenerAdapter listener : getAllListeners())
         {
@@ -114,6 +114,16 @@ public class CarolLauncher {
         initDiscordActivity(jda);
 
         System.out.println("Carol initialized successfully!");
+    }
+
+    public static JDA buildJDA(String token, EnumSet<GatewayIntent> intents)
+    {
+        switch (CarolSettings.JDA_BUILDER_TYPE)
+        {
+            case 0 -> { return JDABuilder.createDefault(token, intents).build(); }
+            case 2 -> { return JDABuilder.create(token, intents).build(); }
+            default -> { return JDABuilder.createLight(token, intents).build(); } // default = light.
+        }
     }
 
     public static void initDiscordActivity(JDA jda)

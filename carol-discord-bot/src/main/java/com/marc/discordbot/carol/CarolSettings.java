@@ -4,6 +4,13 @@ import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity.ActivityType;
 
 public class CarolSettings {
+    // used on CarolLauncher.buildJDA()
+    // this is for manage how JDA will be builded.
+    // 0 = createDefault (Enables cache for users who are active in voice channels and all cache flags)
+    // 1 = createLight (Disables all user cache and cache flags)
+    // 2 = create (Enables member chunking, caches all users, and enables all cache flags)
+    public static final byte JDA_BUILDER_TYPE = 1;
+
     // this is used for CarolBaseMessageButton.uncacheWithDelay()
     public static final long MAX_CACHE_TIME_FOR_MESSAGE_BUTTONS = 300;
 
