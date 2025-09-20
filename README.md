@@ -24,7 +24,7 @@ Firstly, open `carol-discord-bot` folder, create a file called `carol.properties
 ```json
 {
     "token": "YOUR_DISCORD_BOT_TOKEN",
-    "applicationId": "YOUR_DISCORD_BOT_APPLICATION_ID",
+    "applicationId": YOUR_DISCORD_BOT_APPLICATION_ID, // as a number value
     "prefix": "YOUR_DISCORD_BOT_PREFIX",
 }
 ```
