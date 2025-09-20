@@ -21,7 +21,7 @@ import net.dv8tion.jda.api.requests.restaction.CommandListUpdateAction;
 
 public class CarolLauncher {
     public static void main(String[] args) {
-        System.out.println("Initing Commands...");
+        System.out.println("Initializing Carol...");
 
         CarolProperties carolProperties = JsonUtils.getFromFile(CarolProperties.class, "carol.properties.json");
 
@@ -80,6 +80,7 @@ public class CarolLauncher {
         }
 
         commands.queue();
+        System.out.println("Carol initialized successfully!");
     }
 
     public static List<ListenerAdapter> getAllListeners()
