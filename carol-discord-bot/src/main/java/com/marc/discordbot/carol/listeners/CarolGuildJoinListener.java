@@ -32,7 +32,7 @@ public class CarolGuildJoinListener extends ListenerAdapter {
 
         Member guildOwner = event.getGuild().getOwner();
         availableChannelToTalk.sendMessage(
-                (guildOwner != null) ? CarolSettings.DEFAULT_MESSAGE_ON_ADDED_TO_A_NEW_GUILD :
+                (guildOwner != null) ? CarolSettings.DEFAULT_MESSAGE_ON_ADDED_TO_A_NEW_GUILD.replace("${owner}", guildOwner.getAsMention()) :
                         CarolSettings.DEFAULT_MESSAGE_ON_ADDED_TO_A_NEW_GUILD_WITHOUT_OWNER_MENTION
         ).queue();
     }
