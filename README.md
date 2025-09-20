@@ -1,30 +1,30 @@
 # Carol
 
-<div style="text-align: center;">
-  <img align="center" src="https://github.com/MarcelloDev6001/CarolBot/blob/main/avatar.png" 
+<p align="center">
+  <img src="https://github.com/MarcelloDev6001/CarolBot/blob/main/avatar.png" 
        alt="logo"
        style="border-radius: 15px; border: 3px solid #ffffffff;"
        width="350" />
-  
-  <p>AAIO (Almost All In One)!</p>
-</div>
+</p>
 
 ### Carol is a simple discord bot with multi purpose (like administration, diversion, utility, etc...)
-  
+
+AAIO (Almost All In One)!
+
 Carol is a lot inspired on [Loritta](https://github.com/LorittaBot/Loritta) and Carol extremely █████ she!
 
 Carol is currently in beta and it's subject to have a lot of changes on the future.
 
+
+
 # About the creator
 
-<div style="text-align: center;">
-  <img align="center" src="https://github.com/MarcelloDev6001/CarolBot/blob/main/marc-avatar.png" 
+<p align="center">
+  <img src="https://github.com/MarcelloDev6001/CarolBot/blob/main/marc-avatar.png" 
        alt="logo"
        style="border-radius: 15px; border: 3px solid #ff3939ff;"
        width="350" />
-
-  <p>Marc, the most creative coder of all time :D</p>
-</div>
+</p>
 
 (Draw by: [Moon'Flower](https://www.youtube.com/@themoonflowy))
 
