@@ -4,7 +4,6 @@ import com.marc.discordbot.carol.commands.CarolBaseCommandOption;
 import com.marc.discordbot.carol.commands.CarolCommand;
 import com.marc.discordbot.carol.commands.CarolCommandInitializer;
 import com.marc.discordbot.carol.database.CarolDatabaseManager;
-import com.marc.discordbot.carol.database.CarolDatabaseUser;
 import com.marc.discordbot.carol.file.JsonUtils;
 
 import java.util.ArrayList;
@@ -19,7 +18,6 @@ import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.requests.restaction.CommandListUpdateAction;
-import org.jetbrains.annotations.Nullable;
 
 public class CarolLauncher {
     public static void main(String[] args) {

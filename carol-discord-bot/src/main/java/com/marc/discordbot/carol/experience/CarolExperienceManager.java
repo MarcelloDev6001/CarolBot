@@ -1,7 +1,7 @@
 package com.marc.discordbot.carol.experience;
 
 import com.marc.discordbot.carol.database.CarolDatabaseManager;
-import com.marc.discordbot.carol.database.CarolDatabaseUser;
+import com.marc.discordbot.carol.database.entities.CarolDatabaseUser;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.User;
 

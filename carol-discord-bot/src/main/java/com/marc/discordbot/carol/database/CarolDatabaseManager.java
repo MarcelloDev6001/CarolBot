@@ -7,6 +7,8 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
 import com.marc.discordbot.carol.CarolSettings;
+import com.marc.discordbot.carol.database.entities.CarolDatabaseGuild;
+import com.marc.discordbot.carol.database.entities.CarolDatabaseUser;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.FileInputStream;
