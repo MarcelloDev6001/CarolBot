@@ -5,6 +5,7 @@ import com.marc.discordbot.carol.commands.CarolCommand;
 import com.marc.discordbot.carol.messages.components.CarolBaseMessageButton;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.interactions.DiscordLocale;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.SlashCommandInteraction;
 import net.dv8tion.jda.api.interactions.components.ActionRow;
@@ -44,6 +45,11 @@ public class CarolTicTacToeCommand extends CarolCommand {
         {
             interaction.reply("Você não consegue jogar contra um robô, bobinho!").setEphemeral(true).queue();
             return;
+        }
+
+        if (opponent.getId().equals(interaction.getUser().getId()))
+        {
+            interaction.reply("Você não pode jogar com si mesmo, bobinho!\nMas... O que aconteceria se vc vencesse de si mesmo?").setEphemeral(true).queue();
         }
 
         switch (mode) {
