@@ -36,7 +36,7 @@ Carol is currently in beta and it's subject to have a lot of changes on the futu
   background: linear-gradient(135deg, pink, darkred);
   color: white;
 ">
-  <img src="https://github.com/MarcelloDev6001/CarolBot/blob/main/marc-avatar.png" alt="Marc" style="border-radius: 10px; margin-right: 15px;" />
+  <img align="center" src="https://github.com/MarcelloDev6001/CarolBot/blob/main/marc-avatar.png" alt="Marc" style="border-radius: 10px; margin-right: 15px;" />
   <div>
     <h3 style="margin: 0;">Marcello (or Marc)</h3>
     <h4 style="margin: 0;">The most creative coder of all time :D</h4>
