@@ -1,18 +1,15 @@
 # Carol
 
-  
-
-<p  align="center">
-
-<img  src="https://raw.githubusercontent.com/github/explore/main/topics/github/github.png"  width="150">
-
+<p align="center">
+  <img src="https://github.com/MarcelloDev6001/CarolBot/blob/main/avatar.png" 
+       alt="logo"
+       style="border-radius: 15px; border: 3px solid #ffffffff;"
+       width="350" />
 </p>
 
-  
-
 <p  align="center">
 
-<b>AIO (All In One)!</b>
+<b>AAIO (Almost All In One)!</b>
 
 </p>
 
@@ -21,7 +18,6 @@
 ![Imagem](https://github.com/MarcelloDev6001/CarolBot/blob/main/avatar.png)
 
 ### Carol is a simple discord bot with multi purpose (like administration, diversion, utility, etc...)
-
   
 
 Carol is a lot inspired on [Loritta](https://github.com/LorittaBot/Loritta) and Carol extremely █████ she!
@@ -32,11 +28,38 @@ Carol is currently in beta and it's subject to have a lot of changes on the futu
 
 # About the creator
 
-  
+<div style="
+  border-radius: 15px; 
+  padding: 15px; 
+  display: flex; 
+  align-items: center; 
+  background: linear-gradient(135deg, pink, darkred);
+  color: white;
+">
+  <img src="https://github.com/MarcelloDev6001/CarolBot/blob/main/marc-avatar.png" alt="Marc" style="border-radius: 10px; margin-right: 15px;" />
+  <div>
+    <h3 style="margin: 0;">Marcello (or Marc)</h3>
+    <h4 style="margin: 0;">The most creative coder of all time :D</h4>
+    <p style="margin: 5px 0 0;">Name's Marcello (or Marc, just to call a shortly way), 15 years old, im interesting on being a good Programmer on future.</p>
+    <p style="margin: 5px 0 0;">Im using Java for this project because i hate myself (just kidding),</p>
+    <p style="margin: 5px 0 0;">im actually using because a lot of companies have this programming language as it's main programming language of Backend and it's look like a good language.</p>
+    <p style="margin: 5px 0 0;">(Sorry for my bad english, im not too much good at english)</p>
+  </div>
+</div>
 
-![Imagem](https://github.com/MarcelloDev6001/CarolBot/blob/main/marc-avatar.png)
 
-  
+<p align="center">
+  <img src="https://github.com/MarcelloDev6001/CarolBot/blob/main/marc-avatar.png" 
+       alt="logo"
+       style="border-radius: 15px; border: 3px solid #ff3939ff;"
+       width="350" />
+</p>
+
+<p  align="center">
+
+<b>Marc, the most creative coder of all time :D</b>
+
+</p>  
 
 (Draw by: [Moon'Flower](https://www.youtube.com/@themoonflowy))
 
@@ -59,8 +82,9 @@ im actually using because a lot of companies have this programming language as i
 - IntelliJ Idea. (You can use both Community version or Ultimate version)
 - Pacience and Determination.
 
-- Note: *`CarolSettings.java` (where is a lot of important configurations in Carol) is located at `src/main/java/com/marc/discordbot/carol/CarolSettings.java`*
- 
+### NOTES:
+- *`CarolSettings.java` (where is a lot of important configurations in Carol) is located at `src/main/java/com/marc/discordbot/carol/CarolSettings.java`*
+
 ### HOSTING:
 - Firstly:
 open `carol-discord-bot` folder, create a file called `carol.properties.json` and put this inside your file:
