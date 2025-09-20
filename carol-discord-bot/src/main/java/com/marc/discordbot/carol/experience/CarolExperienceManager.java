@@ -20,4 +20,13 @@ public class CarolExperienceManager {
 
         CarolDatabaseManager.updateUser(user.getIdLong(), dbUser);
     }
+
+    public static int getUserXPFromGuild(User user, Guild guild)
+    {
+        CarolDatabaseUser dbUser = CarolDatabaseManager.getOrCreateUser(user.getIdLong());
+        if (dbUser == null) { dbUser = CarolDatabaseUser.getDefault(user.getIdLong()); }
+        Map<String, Integer> guildsXPs = dbUser.getXpInGuilds();
+
+        return guildsXPs.getOrDefault(guild.getId(),0);
+    }
 }

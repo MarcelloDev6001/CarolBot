@@ -102,7 +102,8 @@ public class CarolLauncher {
                 }
             }
 
-            commands.addCommands(slashCommand).queue();
+            commands.addCommands(slashCommand);
+            System.out.println("Command Loaded to Discord: " + slashCommand.getName());
         }
 
         commands.queue();
