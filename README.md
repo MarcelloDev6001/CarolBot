@@ -38,7 +38,7 @@ Carol is currently in beta and it's subject to have a lot of changes on the futu
 
 ### Marc, the most creative coder of all time :D
 
-Name's Marcello (or Marc, just to call a shortly way), 15 years old, im interesting on being a good Programmer on future.
+Name's Marc (Shortly way to call my real name), 15 years old, im interesting on being a good Programmer on future.
 
 Im using Java for this project because i hate myself (just kidding),
 
