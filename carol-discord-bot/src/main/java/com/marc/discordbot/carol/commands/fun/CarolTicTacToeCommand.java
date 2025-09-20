@@ -238,13 +238,12 @@ public class CarolTicTacToeCommand extends CarolCommand {
 
                     interaction.getHook().editOriginalComponents(updatedRows).queue();
 
-                    if (winner.equals("X"))
-                    {
-                        interaction.getHook().sendMessage(player.getAsMention() + " Ganhou o jogo!").setEphemeral(false).queue();
-                    } else if (winner.equals("O")) {
-                        interaction.getHook().sendMessage(opponent.getAsMention() + " Ganhou o jogo!").setEphemeral(false).queue();
-                    } else if (winner.equals("draw")) {
-                        interaction.getHook().sendMessage("Empate!").setEphemeral(false).queue();
+                    switch (winner) {
+                        case "X" ->
+                                interaction.getHook().sendMessage(player.getAsMention() + " Ganhou o jogo!").setEphemeral(false).queue();
+                        case "O" ->
+                                interaction.getHook().sendMessage(opponent.getAsMention() + " Ganhou o jogo!").setEphemeral(false).queue();
+                        case "draw" -> interaction.getHook().sendMessage("Empate!").setEphemeral(false).queue();
                     }
                 }
             };
