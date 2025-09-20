@@ -40,6 +40,12 @@ public class CarolTicTacToeCommand extends CarolCommand {
             return;
         }
 
+        if (opponent.isBot())
+        {
+            interaction.reply("Você não consegue jogar contra um robô, bobinho!").setEphemeral(true).queue();
+            return;
+        }
+
         switch (mode) {
             case "3x3" -> makeTicTacToe(interaction, interaction.getUser(), opponent, 3, 3);
             case "4x4" -> makeTicTacToe(interaction, interaction.getUser(), opponent, 4, 4);
