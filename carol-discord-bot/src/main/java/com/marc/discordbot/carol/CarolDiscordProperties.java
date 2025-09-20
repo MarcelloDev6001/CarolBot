@@ -1,6 +1,6 @@
 package com.marc.discordbot.carol;
 
-public class CarolProperties {
+public class CarolDiscordProperties {
     private String token = "";
     private long applicationId = 0L;
     private String prefix = "";

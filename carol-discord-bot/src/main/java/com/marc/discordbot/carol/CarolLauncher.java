@@ -27,7 +27,7 @@ public class CarolLauncher {
     public static void main(String[] args) {
         System.out.println("Initializing Carol...");
 
-        CarolProperties carolProperties = JsonUtils.getFromFile(CarolProperties.class, "carol.properties.json");
+        CarolDiscordProperties discordProperties = JsonUtils.getFromFile(CarolDiscordProperties.class, "carol.properties.json");
 
         EnumSet<GatewayIntent> intents = EnumSet.of(
                 // Enables MessageReceivedEvent for guild (also known as servers)
@@ -42,8 +42,8 @@ public class CarolLauncher {
                 GatewayIntent.DIRECT_MESSAGE_REACTIONS
         );
 
-        assert carolProperties != null;
-        JDA jda = JDABuilder.createLight(carolProperties.getToken(), intents).build();
+        assert discordProperties != null;
+        JDA jda = JDABuilder.createLight(discordProperties.getToken(), intents).build();
 
         for (ListenerAdapter listener : getAllListeners())
         {
