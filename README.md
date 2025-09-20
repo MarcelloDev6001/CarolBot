@@ -8,16 +8,16 @@ Carol is currently in beta and it's subject to have a lot of changes on the futu
 
 # About the creator
 
-![Imagem](https://github.com/MarcelloDev6001/CarolBot/blob/main/hades-avatar.png)
+![Imagem](https://github.com/MarcelloDev6001/CarolBot/blob/main/marc-avatar.png)
 
 (Draw by: [Moon'Flower](https://www.youtube.com/@themoonflowy))
-## Marc, the most creative coder of all time :D
+### Marc, the most creative coder of all time :D
 Name's Marcello (or Marc, just to call a shortly way), 15 years old, im interesting on being a good Programmer on future.
 Im using Java for this project because i hate myself (just kidding),
 im actually using because a lot of companies have this programming language as it's main programming language of Backend and it's look like a good language.
 (Sorry for my bad english, im not too much good at english)
 
-## How to self-host Carol
+# How to self-host Carol
 
 Firstly, open `carol-discord-bot` folder, create a file called `carol.properties.json` and put this inside your file:
 
