@@ -14,10 +14,12 @@ import java.util.Map;
 import com.marc.discordbot.carol.listeners.*;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.DiscordLocale;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData;
+import net.dv8tion.jda.api.managers.Presence;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.requests.restaction.CommandListUpdateAction;
 
@@ -107,7 +109,29 @@ public class CarolLauncher {
         }
 
         commands.queue();
+
+        // TBA: System to change Loritta status every 24 hours.
+        initDiscordActivity(jda);
+
         System.out.println("Carol initialized successfully!");
+    }
+
+    public static void initDiscordActivity(JDA jda)
+    {
+        Presence jdaPresences = jda.getPresence();
+
+        Activity activity;
+        switch (CarolSettings.ACTIVITY_TYPE)
+        {
+            case PLAYING -> activity = Activity.playing(CarolSettings.ACTIVITY_INFO);
+            case LISTENING -> activity = Activity.listening(CarolSettings.ACTIVITY_INFO);
+            case WATCHING -> activity = Activity.watching(CarolSettings.ACTIVITY_INFO);
+            case COMPETING -> activity = Activity.competing(CarolSettings.ACTIVITY_INFO);
+            case STREAMING -> activity = Activity.streaming(CarolSettings.ACTIVITY_INFO, "");
+            default -> activity = Activity.customStatus(CarolSettings.ACTIVITY_INFO); // default = ActivityType.CUSTOM_STATUS
+        }
+
+        jdaPresences.setPresence(CarolSettings.ONLINE_STATUS, activity);
     }
 
     public static List<ListenerAdapter> getAllListeners()
