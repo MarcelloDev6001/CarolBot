@@ -54,12 +54,14 @@ im actually using because a lot of companies have this programming language as i
 
 # How to self-host Carol
 
-  
+### REQUIREMENTS:
+- Java 24 or higher. (I honestly don't know if this bot works with older versions of Java)
+- IntelliJ Idea. (You can use both Community version or Ultimate version)
+- Pacience and Determination.
 
 - Note: *`CarolSettings.java` (where is a lot of important configurations in Carol) is located at `src/main/java/com/marc/discordbot/carol/CarolSettings.java`*
-
-  
-
+ 
+### HOSTING:
 - Firstly:
 open `carol-discord-bot` folder, create a file called `carol.properties.json` and put this inside your file:
 
@@ -71,18 +73,16 @@ open `carol-discord-bot` folder, create a file called `carol.properties.json` an
 }
 ```
 
-  
-
 - Secondly:
 open `carol-discord-bot/src/main/resources` and insert you Firebase key json file inside this folder with the name `firebase-key.json`. (you can download it quickly searching any tutorial on internet.)
   > **ALTERNATIVE:** Put you `firebase-key.json` in any folder and just change the `CarolSettings.FIREBASE_KEY_PATH` to the correct folder of the Firebase Key Json File.
 
 - Thirdly:
-  > Configure essencial stuffs of the Discord bot on `CarolSettings.java`, like:
+Configure essencial stuffs of the Discord bot on `CarolSettings.java`, like:
 
 | VARIABLE                                         | What the variable do                                                                                       | Can modify       |
 |--------------------------------------------------|-------------------------------------------------------------------------------------------------------------|------------------|
-| **JDA_BUILDER_TYPE**                             | `how the JDA will construct your bot`                                                                       | ✅ true          |
+| **JDA_BUILDER_TYPE**                             | how the JDA will construct your bot`                                                                      | ✅ true          |
 | **MAX_CACHE_TIME_FOR_MESSAGE_BUTTONS**           | Change the max time a button will be clickable until appears the `MESSAGE_ON_BUTTON_AFTER_UNCACHE` message  | ✅ true          |
 | **DEFAULT_MESSAGE_ON_ADDED_TO_A_NEW_GUILD**      | What your bot will say when your bot is added on a new guild                                                 | ✅ true          |
 | **DEFAULT_MESSAGE_ON_ADDED_TO_A_NEW_GUILD WITHOUT_OWNER_MENTION** | Same as above, but without owner mention                                                    | ✅ true          |
@@ -91,6 +91,9 @@ open `carol-discord-bot/src/main/resources` and insert you Firebase key json fil
 | **ACTIVITY_TYPE**                                | Activity of your bot (Listening, Playing, Watching, etc)                                                     | ✅ true          |
 | **ACTIVITY_INFO**                                | What message will be displayed on your bot Activity                                                          | ✅ true          |
 | **MESSAGE_ON_BUTTON_AFTER_UNCACHE**              | What message will be displayed when a user click on a button that was uncached                               | ✅ true          |
+
+- Fourth:
+Open `carol-discord-bot` folder as a Project in IntelliJ, run `CarolLauncher.java` (specifically the function `main()`) and now have fun with your bot :D
 
 ## Invite
 
