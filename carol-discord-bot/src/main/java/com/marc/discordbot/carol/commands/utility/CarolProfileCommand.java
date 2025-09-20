@@ -49,6 +49,10 @@ public class CarolProfileCommand extends CarolCommand {
         {
             userProfileEmbed.setThumbnail(userToSeeProfile.getAvatarUrl());
         }
+        if (userProfile.getBanner() != null)
+        {
+            userProfileEmbed.setImage(userProfile.getBanner().getUrl(1024));
+        }
         userProfileEmbed.addField("ID do Discord", userToSeeProfile.getId(), true);
         userProfileEmbed.addField("Tag do Discord", userToSeeProfile.getAsTag(), true);
 
