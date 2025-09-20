@@ -9,11 +9,13 @@ import com.marc.discordbot.carol.file.JsonUtils;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Map;
 
 import com.marc.discordbot.carol.listeners.*;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.interactions.DiscordLocale;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData;
 import net.dv8tion.jda.api.requests.GatewayIntent;
@@ -62,17 +64,41 @@ public class CarolLauncher {
             // WHY THIS IS DEPRECATED???? 😭😭😭😭😭
             // slashCommand.setGuildOnly(command.getGuildOnly());
 
+            for (Map.Entry<DiscordLocale, String> entry : command.getLocaleNameMap().entrySet()) {
+                slashCommand.setNameLocalization(entry.getKey(), entry.getValue());
+            }
+
+            for (Map.Entry<DiscordLocale, String> entry : command.getLocaleDescriptionMap().entrySet()) {
+                slashCommand.setDescriptionLocalization(entry.getKey(), entry.getValue());
+            }
+
             if (command.getOptions() != null)
             {
                 for (CarolBaseCommandOption optionOnCommand : command.getOptions())
                 {
-                    slashCommand.addOption(
+                    SlashCommandData newOption = slashCommand.addOption(
                             optionOnCommand.getOptionType(),
                             optionOnCommand.getName(),
                             optionOnCommand.getDescription(),
                             optionOnCommand.getRequired(),
                             optionOnCommand.getAutoComplete() != null && !optionOnCommand.getAutoComplete().isEmpty()
                     );
+
+                    Map<DiscordLocale, String> optionLocaleNameMap = command.getLocaleOptionsNameMap().getOrDefault(
+                            optionOnCommand.getName(), null);
+                    Map<DiscordLocale, String> optionLocaleDescriptionMap = command.getLocaleOptionsDescriptionMap().getOrDefault(
+                            optionOnCommand.getName(), null);
+
+                    if (optionLocaleNameMap != null)
+                    {
+                        for (Map.Entry<DiscordLocale, String> entry : optionLocaleNameMap.entrySet()) {
+                            slashCommand.setNameLocalization(entry.getKey(), entry.getValue());
+                        }
+
+                        for (Map.Entry<DiscordLocale, String> entry : optionLocaleDescriptionMap.entrySet()) {
+                            slashCommand.setDescriptionLocalization(entry.getKey(), entry.getValue());
+                        }
+                    }
                 }
             }
 

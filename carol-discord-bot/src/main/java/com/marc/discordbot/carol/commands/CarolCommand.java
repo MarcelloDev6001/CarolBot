@@ -1,13 +1,16 @@
 package com.marc.discordbot.carol.commands;
 
 import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.interactions.DiscordLocale;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.SlashCommandInteraction;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 
 public abstract class CarolCommand {
@@ -19,10 +22,20 @@ public abstract class CarolCommand {
     public static final List<CarolCommand> allCommands = new ArrayList<>();
     private static SlashCommandInteraction interaction;
 
+    private Map<DiscordLocale, String> localeNameMap;
+    private Map<DiscordLocale, String> localeDescriptionMap;
+
+    private Map<String, Map<DiscordLocale, String>> localeOptionsNameMap; // map of a map... i think this is rare to occur
+    private Map<String, Map<DiscordLocale, String>> localeOptionsDescriptionMap;
+
     public CarolCommand(@NotNull String name, String description) {
         this.name = name;
         this.description = description;
         options = new ArrayList<>();
+        localeNameMap = new HashMap<>();
+        localeDescriptionMap = new HashMap<>();
+        localeOptionsNameMap = new HashMap<>();
+        localeOptionsDescriptionMap = new HashMap<>();
 
         allCommands.add(this);
     }
@@ -36,6 +49,24 @@ public abstract class CarolCommand {
                 break;
             }
         }
+    }
+
+    public Map<DiscordLocale, String> getLocaleNameMap() { return localeNameMap; }
+    public Map<DiscordLocale, String> getLocaleDescriptionMap() { return localeDescriptionMap; }
+    public Map<String, Map<DiscordLocale, String>> getLocaleOptionsNameMap() { return localeOptionsNameMap; }
+    public Map<String, Map<DiscordLocale, String>> getLocaleOptionsDescriptionMap() { return localeOptionsDescriptionMap; }
+
+    public void addTranslation(DiscordLocale language, String name, String description) {
+        localeNameMap.put(language, name);
+        localeDescriptionMap.put(language, description);
+    }
+
+    public void addTranslationToOption(String optionName, DiscordLocale language, String name, String description) {
+        if (localeOptionsNameMap.getOrDefault(optionName, null) == null) { localeOptionsNameMap.put(optionName, new HashMap<>()); }
+        localeOptionsNameMap.get(optionName).put(language, name);
+
+        if (localeOptionsDescriptionMap.getOrDefault(optionName, null) == null) { localeOptionsDescriptionMap.put(optionName, new HashMap<>()); }
+        localeOptionsDescriptionMap.get(optionName).put(language, description);
     }
 
     public void setInteraction(SlashCommandInteraction newInteraction)
