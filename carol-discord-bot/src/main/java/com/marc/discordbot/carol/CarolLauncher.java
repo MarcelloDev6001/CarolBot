@@ -110,7 +110,7 @@ public class CarolLauncher {
 
         commands.queue();
 
-        // TBA: System to change Loritta status every 24 hours.
+        // TBA: System to change Carol status every 24 hours.
         initDiscordActivity(jda);
 
         System.out.println("Carol initialized successfully!");
