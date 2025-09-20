@@ -73,8 +73,6 @@ im actually using because a lot of companies have this programming language as i
 
 (Sorry for my bad english, im not too much good at english)
 
-  
-
 # How to self-host Carol
 
 ### REQUIREMENTS:
