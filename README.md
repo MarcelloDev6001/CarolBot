@@ -1,4 +1,4 @@
-# Carol
+<h1 align="center">Carol: a simple and funny Discord Bot</h1>
 
 <p align="center">
   <img src="https://github.com/MarcelloDev6001/CarolBot/blob/main/avatar.png" 
@@ -7,15 +7,15 @@
        width="350" />
 </p>
 
-### Carol is a simple discord bot with multi purpose (like administration, diversion, utility, etc...)
+<h3 align="center">Carol is a simple discord bot with multi purpose (like administration, diversion, utility, etc...)</h3>
 
-AAIO (Almost All In One)!
+<p align="center">AAIO (Almost All In One)!</p>
 
-Carol is a lot inspired on [Loritta](https://github.com/LorittaBot/Loritta) and Carol extremely █████ she!
+<p align="center">Carol is a lot inspired on <a href="https://github.com/LorittaBot/Loritta" target="_blank">Loritta</a> and Carol extremely █████ she!</p>
 
-Carol is currently in beta and it's subject to have a lot of changes on the future.
+<p align="center">Carol is currently in beta and it's subject to have a lot of changes on the future.</p>
 
-# Future of Carol
+<h1 align="center">Future of Carol</h1>
 
 ### Personnel plans for Carol:
 
@@ -25,7 +25,7 @@ Carol is currently in beta and it's subject to have a lot of changes on the futu
 
 - Create a Website to entirely configure Carol for a specific discord server. (configure commands, roles, channels, etc...)
 
-# How to self-host Carol
+<h1 align="center">How to self-host Carol</h1>
 
 ### REQUIREMENTS:
 - Java 24 or higher. (I honestly don't know if this bot works with older versions of Java)
@@ -62,7 +62,7 @@ Configure essencial stuffs of the Discord bot on `CarolSettings.java`, like:
 - Fourth:
 Open `carol-discord-bot` folder as a Project in IntelliJ, run `CarolLauncher.java` (specifically the function `main()`) and now have fun with your bot :D
 
-## Invite
+<h1 align="center">Invite</h1>
 
 Invite Carol to your discord server by clicking [Here](https://discord.com/oauth2/authorize?client_id=1214985204985241600&permissions=8&integration_type=0&scope=bot).
 > Currently, Carol isn't a public bot because it's still in development.
