@@ -52,7 +52,7 @@ Configure essencial stuffs of the Discord bot on `CarolSettings.java`, like:
 | **MAX_CACHE_TIME_FOR_MESSAGE_BUTTONS**           | Change the max time a button will be clickable until appears the `MESSAGE_ON_BUTTON_AFTER_UNCACHE` message  | ✅ true          |
 | **DEFAULT_MESSAGE_ON_ADDED_TO_A_NEW_GUILD**      | What your bot will say when your bot is added on a new guild                                                 | ✅ true          |
 | **DEFAULT_MESSAGE_ON_ADDED_TO_A_NEW_GUILD WITHOUT_OWNER_MENTION** | Same as above, but without owner mention                                                    | ✅ true          |
-| **FIREBASE_KEY_PATH**                            | Where your `FirebaseKey.json` is located                                                                     | ⚠️ not recommended |
+| **FIREBASE_KEY_PATH**                            | Where your `FirebaseKey.json` is located. (Leave it null if your content json is at an enviroment variable called FIREBASE_KEY) | ⚠️ not recommended |
 | **ONLINE_STATUS**                                | Status of your bot (Online, Do Not Disturb, Idle or Offline)                                                 | ✅ true          |
 | **ACTIVITY_TYPE**                                | Activity of your bot (Listening, Playing, Watching, etc)                                                     | ✅ true          |
 | **ACTIVITY_INFO**                                | What message will be displayed on your bot Activity                                                          | ✅ true          |

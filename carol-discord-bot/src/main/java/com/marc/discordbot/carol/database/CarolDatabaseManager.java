@@ -11,8 +11,8 @@ import com.marc.discordbot.carol.database.entities.CarolDatabaseGuild;
 import com.marc.discordbot.carol.database.entities.CarolDatabaseUser;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.concurrent.ExecutionException;
 
 // i admit, this was made by me but i used ChatGPT to optimize this a LOT
@@ -20,11 +20,23 @@ import java.util.concurrent.ExecutionException;
 public class CarolDatabaseManager {
     private static Firestore db;
 
-    public static void initialize() throws IOException {
-        FileInputStream serviceAccount = new FileInputStream(CarolSettings.FIREBASE_KEY_PATH);
+    public static InputStream getDatabaseKeyThing()
+    {
+        try { // try to found the file
+            return new FileInputStream(CarolSettings.FIREBASE_KEY_PATH);
+        } catch (FileNotFoundException e) { // if not found, then use an environment variable
+            String firebaseKeyJson = System.getenv("FIREBASE_KEY");
+            if (firebaseKeyJson == null || firebaseKeyJson.isEmpty()) {
+                throw new RuntimeException("FIREBASE_KEY variable not defined!");
+            }
 
+            return new ByteArrayInputStream(firebaseKeyJson.getBytes(StandardCharsets.UTF_8));
+        }
+    }
+
+    public static void initialize() throws IOException {
         FirebaseOptions options = FirebaseOptions.builder()
-                .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+                .setCredentials(GoogleCredentials.fromStream(getDatabaseKeyThing()))
                 .build();
 
         FirebaseApp.initializeApp(options);

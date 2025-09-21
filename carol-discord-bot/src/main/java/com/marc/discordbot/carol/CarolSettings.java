@@ -19,7 +19,8 @@ public class CarolSettings {
     public static final String DEFAULT_MESSAGE_ON_ADDED_TO_A_NEW_GUILD_WITHOUT_OWNER_MENTION = "Howdy!\nMeu nome é Carol, obrigado por me adicionarem nesse servidor!";
 
     // used on CarolDatabaseManager.initialize()
-    public static final String FIREBASE_KEY_PATH = "src/main/resources/firebase-key.json";
+    // leave it null if you want to put your filebase-key.json content as an enviroment variable. (variable name needs to be FIREBASE_KEY)
+    public static final String FIREBASE_KEY_PATH = "";
 
     // those are used on CarolLauncher.initDiscordActivity()
     public static final OnlineStatus ONLINE_STATUS = OnlineStatus.ONLINE;
