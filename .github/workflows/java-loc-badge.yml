@@ -5,7 +5,7 @@ on:
     branches:
       - main
   schedule:
-    - cron: '0 0 * * *' # roda todo dia à meia-noite
+    - cron: '0 0 * * *'
 
 jobs:
   generate-badge:
@@ -20,14 +20,9 @@ jobs:
 
       - name: Count Java lines and generate SVG
         run: |
-          # Conta as linhas de Java
           JAVA_LINES=$(cloc --include-lang=Java --json . | grep '"Java"' | awk -F'"' '{print $6}')
-          echo "Java lines: $JAVA_LINES"
-
-          # Cria a pasta docs se não existir
           mkdir -p docs
-
-          # Cria o badge SVG
+          touch docs/.nojekyll
           cat <<EOF > docs/java-loc.svg
 <svg xmlns="http://www.w3.org/2000/svg" width="120" height="20">
   <linearGradient id="b" x2="0" y2="100%">
@@ -53,6 +48,6 @@ EOF
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add docs/java-loc.svg
+          git add docs/.nojekyll docs/java-loc.svg
           git commit -m "Update Java LOC badge" || echo "No changes to commit"
           git push
