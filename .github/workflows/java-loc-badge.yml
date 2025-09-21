@@ -23,7 +23,7 @@ jobs:
           JAVA_LINES=$(cloc --include-lang=Java --json . | grep '"Java"' | awk -F'"' '{print $6}')
           mkdir -p docs
           touch docs/.nojekyll
-          cat <<EOF > docs/java-loc.svg
+          cat <<'EOF' > docs/java-loc.svg
 <svg xmlns="http://www.w3.org/2000/svg" width="120" height="20">
   <linearGradient id="b" x2="0" y2="100%">
     <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>
