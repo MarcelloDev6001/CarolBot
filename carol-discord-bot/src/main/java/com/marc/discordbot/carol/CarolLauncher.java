@@ -27,8 +27,6 @@ public class CarolLauncher {
     public static void main(String[] args) {
         System.out.println("Initializing Carol...");
 
-        CarolDiscordProperties discordProperties = JsonUtils.getFromFile(CarolDiscordProperties.class, "carol.properties.json");
-
         EnumSet<GatewayIntent> intents = EnumSet.of(
                 // Enables MessageReceivedEvent for guild (also known as servers)
                 GatewayIntent.GUILD_MESSAGES,
@@ -42,8 +40,14 @@ public class CarolLauncher {
                 GatewayIntent.DIRECT_MESSAGE_REACTIONS
         );
 
-        assert discordProperties != null;
-        JDA jda = buildJDA(discordProperties.getToken(), intents);
+        String token;
+        try {
+            token = System.getenv("CAROL_DISCORD_TOKEN");
+        } catch (Exception e) {
+            System.out.println("Token not found or not provided!");
+            throw new RuntimeException(e);
+        }
+        JDA jda = buildJDA(token, intents);
 
         for (ListenerAdapter listener : getAllListeners())
         {

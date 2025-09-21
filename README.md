@@ -37,15 +37,7 @@ Carol is currently in beta and it's subject to have a lot of changes on the futu
 
 ### HOSTING:
 - Firstly:
-open `carol-discord-bot` folder, create a file called `carol.properties.json` and put this inside your file:
-
-```json
-{
-"token": "YOUR_DISCORD_BOT_TOKEN",
-"applicationId": "YOUR_DISCORD_BOT_APPLICATION_ID", // as a number value
-"prefix": "YOUR_DISCORD_BOT_PREFIX",
-}
-```
+create an environment variable called `CAROL_DISCORD_TOKEN` and pass the value for this variable as your Discord Bot Token.
 
 - Secondly:
 open `carol-discord-bot/src/main/resources` and insert you Firebase key json file inside this folder with the name `firebase-key.json`. (you can download it quickly searching any tutorial on internet.)
