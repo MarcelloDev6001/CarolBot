@@ -25,27 +25,6 @@ Carol is currently in beta and it's subject to have a lot of changes on the futu
 
 - Create a Website to entirely configure Carol for a specific discord server. (configure commands, roles, channels, etc...)
 
-# About the creator
-
-<p align="center">
-  <img src="https://github.com/MarcelloDev6001/CarolBot/blob/main/marc-avatar.png" 
-       alt="logo"
-       style="border-radius: 15px; border: 3px solid #ff3939ff;"
-       width="350" />
-</p>
-
-(Draw by: [Moon'Flower](https://www.youtube.com/@themoonflowy))
-
-### Marc, the most creative coder of all time :D
-
-Name's Marc (Shortly way to call my real name), 15 years old, im interesting on being a good Programmer on future.
-
-Im using Java for this project because i hate myself (just kidding),
-
-im actually using because a lot of companies have this programming language as it's main programming language of Backend and it's look like a good language.
-
-(Sorry for my bad english, im not too much good at english)
-
 # How to self-host Carol
 
 ### REQUIREMENTS:
