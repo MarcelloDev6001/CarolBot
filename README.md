@@ -43,6 +43,7 @@ create an environment variable called `CAROL_DISCORD_TOKEN` and pass the value f
 open `carol-discord-bot/src/main/resources` and insert you Firebase key json file inside this folder with the name `firebase-key.json`. (you can download it quickly searching any tutorial on internet.)
   > **ALTERNATIVE:** Put you `firebase-key.json` in any folder and just change the `CarolSettings.FIREBASE_KEY_PATH` to the correct folder of the Firebase Key Json File.
 
+  > **ALTERNATIVE2:** Leave `CarolSettings.FIREBASE_KEY_PATH` empty and then create an enviroment variable called `FIREBASE_KEY` and pass the value of this variable aas the content of your `firebase-key.json` file.
 - Thirdly:
 Configure essencial stuffs of the Discord bot on `CarolSettings.java`, like:
 
