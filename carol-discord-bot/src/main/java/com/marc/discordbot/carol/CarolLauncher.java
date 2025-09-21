@@ -158,6 +158,7 @@ public class CarolLauncher {
         listeners.add(new CarolGuildMemberRemoveListener());
         listeners.add(new CarolMessageListener());
         listeners.add(new CarolMessageReactionAddListener());
+        listeners.add(new CarolOnStringSelectInteractionListener());
         listeners.add(new CarolSlashCommandInteractionListener());
         return listeners;
     }

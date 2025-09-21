@@ -1,9 +1,7 @@
 package com.marc.discordbot.carol.commands.utility;
 
-import com.marc.discordbot.carol.commands.CarolBaseCommandOption;
 import com.marc.discordbot.carol.commands.CarolCommand;
-import com.marc.discordbot.carol.messages.components.CarolBaseMessageButton;
-import net.dv8tion.jda.api.entities.Message;
+import com.marc.discordbot.carol.messages.components.button.CarolBaseMessageButton;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.SlashCommandInteraction;

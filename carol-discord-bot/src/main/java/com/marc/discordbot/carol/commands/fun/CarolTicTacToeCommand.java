@@ -1,11 +1,9 @@
 package com.marc.discordbot.carol.commands.fun;
 
-import com.marc.discordbot.carol.commands.CarolBaseCommandOption;
 import com.marc.discordbot.carol.commands.CarolCommand;
-import com.marc.discordbot.carol.messages.components.CarolBaseMessageButton;
+import com.marc.discordbot.carol.messages.components.button.CarolBaseMessageButton;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.User;
-import net.dv8tion.jda.api.interactions.DiscordLocale;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.SlashCommandInteraction;
 import net.dv8tion.jda.api.interactions.components.ActionRow;
@@ -13,11 +11,9 @@ import net.dv8tion.jda.api.interactions.components.ItemComponent;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import net.dv8tion.jda.api.interactions.components.buttons.ButtonInteraction;
 import net.dv8tion.jda.api.interactions.components.buttons.ButtonStyle;
-import net.dv8tion.jda.api.requests.restaction.WebhookMessageCreateAction;
 
 import java.util.*;
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 
 public class CarolTicTacToeCommand extends CarolCommand {
     private final Map<String, Message> games = new HashMap<>();

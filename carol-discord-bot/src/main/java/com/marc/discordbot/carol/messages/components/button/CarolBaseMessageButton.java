@@ -1,6 +1,7 @@
-package com.marc.discordbot.carol.messages.components;
+package com.marc.discordbot.carol.messages.components.button;
 
 import com.marc.discordbot.carol.CarolSettings;
+import com.marc.discordbot.carol.messages.components.CarolMessageComponentsManager;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import net.dv8tion.jda.api.interactions.components.buttons.ButtonStyle;
 import org.jetbrains.annotations.Nullable;
@@ -42,7 +43,7 @@ public class CarolBaseMessageButton
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
         scheduler.schedule(() -> {
-            CarolMessageComponentsManager.cachedButtons.remove(this);
+            CarolMessageComponentsManager.cachedMessageButtons.remove(this);
         }, CarolSettings.MAX_CACHE_TIME_FOR_MESSAGE_BUTTONS, TimeUnit.SECONDS);
 
         scheduler.schedule(scheduler::shutdown, 0, TimeUnit.SECONDS);
@@ -55,7 +56,7 @@ public class CarolBaseMessageButton
         this.onClicked = onClicked;
         this.link = link;
 
-        CarolMessageComponentsManager.cachedButtons.add(this);
+        CarolMessageComponentsManager.cachedMessageButtons.add(this);
         uncacheWithDelay();
     }
 }

@@ -1,8 +1,6 @@
-package com.marc.discordbot.carol.messages.components;
+package com.marc.discordbot.carol.messages.components.button;
 
-import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.User;
-import net.dv8tion.jda.api.interactions.commands.SlashCommandInteraction;
 import net.dv8tion.jda.api.interactions.components.buttons.ButtonInteraction;
 
 @FunctionalInterface
