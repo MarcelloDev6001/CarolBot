@@ -10,12 +10,14 @@ version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
+    maven { url = uri("https://jitpack.io") }
 }
 
 dependencies {
     // JDA stuffs
     implementation("net.dv8tion:JDA:5.6.1")
     implementation("ch.qos.logback:logback-classic:1.5.6")
+    implementation("com.github.walkyst:lavaplayer-fork:1.4.3") // to play audio on a voice channel
 
     // other stuffs
     implementation("com.fasterxml.jackson.core:jackson-databind:2.15.2")

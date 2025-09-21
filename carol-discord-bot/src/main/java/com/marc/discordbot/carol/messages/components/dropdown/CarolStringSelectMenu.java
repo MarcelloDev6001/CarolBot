@@ -11,13 +11,12 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class CarolStringSelectMenu {
-    private final StringSelectMenu menu;
+    private final StringSelectMenu.Builder builder;
     private final List<CarolBaseDropdownMenuOption> options;
 
-    // why using byte instead of int on minValue and maxValue? simply, just to economize memory
-    public CarolStringSelectMenu(String id, String placeholder, @NotNull List<CarolBaseDropdownMenuOption> options, byte minValue, byte maxValue)
+    public CarolStringSelectMenu(String id, String placeholder, @NotNull List<CarolBaseDropdownMenuOption> options, int minValue, int maxValue)
     {
-        StringSelectMenu.Builder builder = StringSelectMenu.create(id)
+        builder = StringSelectMenu.create(id)
                 .setPlaceholder(placeholder)
                 .setMinValues(minValue)
                 .setMaxValues(maxValue);
@@ -27,7 +26,6 @@ public class CarolStringSelectMenu {
             builder.addOption(option.label(), option.value(), option.description());
         }
         this.options = options;
-        menu = builder.build();
 
         CarolMessageComponentsManager.cachedStringMenus.add(this);
         uncacheWithDelay();
@@ -35,7 +33,7 @@ public class CarolStringSelectMenu {
 
     public StringSelectMenu toSelectMenu()
     {
-        return menu;
+        return builder.build();
     }
 
     public List<CarolBaseDropdownMenuOption> getOptions()

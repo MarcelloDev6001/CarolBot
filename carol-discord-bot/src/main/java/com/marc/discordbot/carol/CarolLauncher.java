@@ -22,22 +22,19 @@ import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData;
 import net.dv8tion.jda.api.managers.Presence;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.requests.restaction.CommandListUpdateAction;
+import net.dv8tion.jda.api.utils.cache.CacheFlag;
 
 public class CarolLauncher {
     public static void main(String[] args) {
         System.out.println("Initializing Carol...");
 
         EnumSet<GatewayIntent> intents = EnumSet.of(
-                // Enables MessageReceivedEvent for guild (also known as servers)
                 GatewayIntent.GUILD_MESSAGES,
-                // Enables the event for private channels (also known as direct messages)
                 GatewayIntent.DIRECT_MESSAGES,
-                // Enables access to message.getContentRaw()
                 GatewayIntent.MESSAGE_CONTENT,
-                // Enables MessageReactionAddEvent for guild
                 GatewayIntent.GUILD_MESSAGE_REACTIONS,
-                // Enables MessageReactionAddEvent for private channels
-                GatewayIntent.DIRECT_MESSAGE_REACTIONS
+                GatewayIntent.DIRECT_MESSAGE_REACTIONS,
+                GatewayIntent.GUILD_VOICE_STATES
         );
 
         String token;
@@ -122,12 +119,16 @@ public class CarolLauncher {
 
     public static JDA buildJDA(String token, EnumSet<GatewayIntent> intents)
     {
+        JDABuilder jdaBuilder;
         switch (CarolSettings.JDA_BUILDER_TYPE)
         {
-            case 0 -> { return JDABuilder.createDefault(token, intents).build(); }
-            case 2 -> { return JDABuilder.create(token, intents).build(); }
-            default -> { return JDABuilder.createLight(token, intents).build(); } // default = light.
+            case 0 -> { jdaBuilder = JDABuilder.createDefault(token, intents); }
+            case 2 -> { jdaBuilder = JDABuilder.create(token, intents); }
+            default -> { jdaBuilder = JDABuilder.createLight(token, intents); } // default = light.
         }
+
+        jdaBuilder.enableCache(CacheFlag.VOICE_STATE);
+        return jdaBuilder.build();
     }
 
     public static void initDiscordActivity(JDA jda)
