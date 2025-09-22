@@ -54,8 +54,8 @@ Configure essencial stuffs of the Discord bot on `CarolSettings.java`, like:
 | **DEFAULT_MESSAGE_ON_ADDED_TO_A_NEW_GUILD**      | What your bot will say when your bot is added on a new guild                                                 | `String`          |
 | **DEFAULT_MESSAGE_ON_ADDED_TO_A_NEW_GUILD WITHOUT_OWNER_MENTION** | Same as above, but without owner mention                                                    | `String`          |
 | **FIREBASE_KEY_PATH**                            | Where your `FirebaseKey.json` is located. (Leave it null if your content json is at an enviroment variable called FIREBASE_KEY) | `String` |
-| **ONLINE_STATUS**                                | Status of your bot (Online, Do Not Disturb, Idle or Offline)                                                 | `net.dv8tion.jda.api.OnlineStatus`          |
-| **ACTIVITY_TYPE**                                | Activity of your bot (Listening, Playing, Watching, etc)                                                 | `net.dv8tion.jda.api.entities.Activity.ActivityType` |
+| **ONLINE_STATUS**                                | Status of your bot (Online, Do Not Disturb, Idle or Offline)                                                 | `OnlineStatus`          |
+| **ACTIVITY_TYPE**                                | Activity of your bot (Listening, Playing, Watching, etc)                                                 | `ActivityType` |
 | **ACTIVITY_INFO**                                | What message will be displayed on your bot Activity                                                          | `String`          |
 | **CHANGE_ACTIVITY_EVERY_DAY**                                | If your bot will change the activity every 12 am                                                 | `boolean`          |
 | **MESSAGE_ON_BUTTON_AFTER_UNCACHE**              | What message will be displayed when a user click on a button that was uncached                               | `String`          |
