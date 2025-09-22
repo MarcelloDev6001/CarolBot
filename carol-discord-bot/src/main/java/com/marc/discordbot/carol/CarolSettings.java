@@ -22,10 +22,11 @@ public class CarolSettings {
     // leave it null if you want to put your filebase-key.json content as an enviroment variable. (variable name needs to be FIREBASE_KEY)
     public static final String FIREBASE_KEY_PATH = "";
 
-    // those are used on CarolLauncher.initDiscordActivity()
+    // those are used on CarolActivitiesManager.initDiscordActivity()
     public static final OnlineStatus ONLINE_STATUS = OnlineStatus.ONLINE;
-    public static final ActivityType ACTIVITY_TYPE = ActivityType.WATCHING;
-    public static final String ACTIVITY_INFO = "Loritta Massacre 3000";
+    public static final ActivityType ACTIVITY_TYPE = null; // leave this and ACTIVITY_INFO null and "" if you wan't to have a random activity when you start the bot.
+    public static final String ACTIVITY_INFO = "";
+    public static final boolean CHANGE_ACTIVITY_EVERY_DAY = true;
 
     // used on CarolButtonInteractionListener.onButtonInteraction()
     public static final String MESSAGE_ON_BUTTON_AFTER_UNCACHE = "Parece que os dados de interação dessa mensagem se perderam!\nCrie uma nova interação para usar esses botões/menus novamente";

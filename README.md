@@ -47,17 +47,18 @@ open `carol-discord-bot/src/main/resources` and insert you Firebase key json fil
 - Thirdly:
 Configure essencial stuffs of the Discord bot on `CarolSettings.java`, like:
 
-| VARIABLE                                         | What the variable do                                                                                       | Can modify       |
+| VARIABLE                                         | What the variable do                                                                                       | Type       |
 |--------------------------------------------------|-------------------------------------------------------------------------------------------------------------|------------------|
-| **JDA_BUILDER_TYPE**                             | how the JDA will construct your bot`                                                                      | ✅ true          |
-| **MAX_CACHE_TIME_FOR_MESSAGE_BUTTONS**           | Change the max time a button will be clickable until appears the `MESSAGE_ON_BUTTON_AFTER_UNCACHE` message  | ✅ true          |
-| **DEFAULT_MESSAGE_ON_ADDED_TO_A_NEW_GUILD**      | What your bot will say when your bot is added on a new guild                                                 | ✅ true          |
-| **DEFAULT_MESSAGE_ON_ADDED_TO_A_NEW_GUILD WITHOUT_OWNER_MENTION** | Same as above, but without owner mention                                                    | ✅ true          |
-| **FIREBASE_KEY_PATH**                            | Where your `FirebaseKey.json` is located. (Leave it null if your content json is at an enviroment variable called FIREBASE_KEY) | ⚠️ not recommended |
-| **ONLINE_STATUS**                                | Status of your bot (Online, Do Not Disturb, Idle or Offline)                                                 | ✅ true          |
-| **ACTIVITY_TYPE**                                | Activity of your bot (Listening, Playing, Watching, etc)                                                     | ✅ true          |
-| **ACTIVITY_INFO**                                | What message will be displayed on your bot Activity                                                          | ✅ true          |
-| **MESSAGE_ON_BUTTON_AFTER_UNCACHE**              | What message will be displayed when a user click on a button that was uncached                               | ✅ true          |
+| **JDA_BUILDER_TYPE**                             | how the JDA will construct your bot`                                                                      | `byte (0, 1 or 2)`   |
+| **MAX_CACHE_TIME_FOR_MESSAGE_BUTTONS**           | Change the max time a button will be clickable until appears the `MESSAGE_ON_BUTTON_AFTER_UNCACHE` message (in Seconds)  | `long`          |
+| **DEFAULT_MESSAGE_ON_ADDED_TO_A_NEW_GUILD**      | What your bot will say when your bot is added on a new guild                                                 | `String`          |
+| **DEFAULT_MESSAGE_ON_ADDED_TO_A_NEW_GUILD WITHOUT_OWNER_MENTION** | Same as above, but without owner mention                                                    | `String`          |
+| **FIREBASE_KEY_PATH**                            | Where your `FirebaseKey.json` is located. (Leave it null if your content json is at an enviroment variable called FIREBASE_KEY) | `String` |
+| **ONLINE_STATUS**                                | Status of your bot (Online, Do Not Disturb, Idle or Offline)                                                 | `net.dv8tion.jda.api.OnlineStatus`          |
+| **ACTIVITY_TYPE**                                | Activity of your bot (Listening, Playing, Watching, etc)                                                 | `net.dv8tion.jda.api.entities.Activity.ActivityType` |
+| **ACTIVITY_INFO**                                | What message will be displayed on your bot Activity                                                          | `String`          |
+| **CHANGE_ACTIVITY_EVERY_DAY**                                | If your bot will change the activity every 12 am                                                 | `boolean`          |
+| **MESSAGE_ON_BUTTON_AFTER_UNCACHE**              | What message will be displayed when a user click on a button that was uncached                               | `String`          |
 
 - Fourth:
 Open `carol-discord-bot` folder as a Project in IntelliJ, run `CarolLauncher.java` (specifically the function `main()`) and now have fun with your bot :D

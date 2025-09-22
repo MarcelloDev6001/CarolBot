@@ -1,5 +1,6 @@
 package com.marc.discordbot.carol;
 
+import com.marc.discordbot.carol.activity.CarolActivitiesManager;
 import com.marc.discordbot.carol.commands.CarolBaseCommandOption;
 import com.marc.discordbot.carol.commands.CarolCommand;
 import com.marc.discordbot.carol.commands.CarolCommandInitializer;
@@ -111,8 +112,7 @@ public class CarolLauncher {
 
         commands.queue();
 
-        // TBA: System to change Carol status every 24 hours.
-        initDiscordActivity(jda);
+        CarolActivitiesManager.initDiscordActivity(jda);
 
         System.out.println("Carol initialized successfully!");
     }
@@ -129,24 +129,6 @@ public class CarolLauncher {
 
         jdaBuilder.enableCache(CacheFlag.VOICE_STATE);
         return jdaBuilder.build();
-    }
-
-    public static void initDiscordActivity(JDA jda)
-    {
-        Presence jdaPresences = jda.getPresence();
-
-        Activity activity;
-        switch (CarolSettings.ACTIVITY_TYPE)
-        {
-            case PLAYING -> activity = Activity.playing(CarolSettings.ACTIVITY_INFO);
-            case LISTENING -> activity = Activity.listening(CarolSettings.ACTIVITY_INFO);
-            case WATCHING -> activity = Activity.watching(CarolSettings.ACTIVITY_INFO);
-            case COMPETING -> activity = Activity.competing(CarolSettings.ACTIVITY_INFO);
-            case STREAMING -> activity = Activity.streaming(CarolSettings.ACTIVITY_INFO, "");
-            default -> activity = Activity.customStatus(CarolSettings.ACTIVITY_INFO); // default = ActivityType.CUSTOM_STATUS
-        }
-
-        jdaPresences.setPresence(CarolSettings.ONLINE_STATUS, activity);
     }
 
     public static List<ListenerAdapter> getAllListeners()
