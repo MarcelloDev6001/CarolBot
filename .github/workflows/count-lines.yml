@@ -1,0 +1,48 @@
+name: Update LOC in README
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  update-loc:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: true
+          fetch-depth: 0
+
+      - name: Install cloc and jq
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cloc jq
+
+      - name: Run cloc and save JSON
+        run: |
+          cloc --json . > cloc.json
+
+      - name: Extract total lines
+        id: cloc
+        run: |
+          TOTAL=$(jq '.SUM.code' cloc.json)
+          echo "total_lines=$TOTAL" >> $GITHUB_OUTPUT
+
+      - name: Update README placeholder
+        run: |
+          if grep -q "<!--LOC-->" README.md; then
+            sed -i "s|<!--LOC-->|Total lines of code: ${{ steps.cloc.outputs.total_lines }}|g" README.md
+          else
+            echo "Placeholder <!--LOC--> not found in README.md — skipping update."
+          fi
+
+      - name: Commit and push README change
+        uses: EndBug/add-and-commit@v9
+        with:
+          author_name: github-actions[bot]
+          author_email: github-actions[bot]@users.noreply.github.com
+          message: "chore: update LOC in README"
+          add: "README.md"
