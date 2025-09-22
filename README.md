@@ -7,6 +7,8 @@
        width="350" />
 </p>
 
+<p align="center"><!--LOC--></p>
+
 ## What is Carol?
 
 Carol is a simple discord bot with multi purpose (like administration, diversion, utility, etc...)
