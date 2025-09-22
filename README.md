@@ -1,23 +1,35 @@
 <h1 align="center">Carol: a simple and funny Discord Bot</h1>
 
 <p align="center">
-  <img src="https://github.com/MarcelloDev6001/CarolBot/blob/main/avatar.png" 
+  <img src="/avatar.png" 
        alt="logo"
        style="border-radius: 15px; border: 3px solid #ffffffff;"
        width="350" />
 </p>
 
-<h3 align="center">Carol is a simple discord bot with multi purpose (like administration, diversion, utility, etc...)</h3>
+## What is Carol?
 
-<p align="center">AAIO (Almost All In One)!</p>
+Carol is a simple discord bot with multi purpose (like administration, diversion, utility, etc...)
 
-<p align="center">Carol is a lot inspired on <a href="https://github.com/LorittaBot/Loritta" target="_blank">Loritta</a> and Carol extremely █████ she!</p>
+AAIO (Almost All In One)!
 
-<p align="center">Carol is currently in beta and it's subject to have a lot of changes on the future.</p>
+Carol is a lot inspired on [Loritta](https://github.com/LorittaBot/Loritta) and Carol extremely █████ she!
 
-<h1 align="center">Future of Carol</h1>
+Carol wants to make the world a more cool place to live.
 
-### Personnel plans for Carol:
+> Carol is currently in beta and it's subject to have a lot of changes on the future.
+
+## What Carol can do:
+
+- Automoderation.
+- Timeout those "underatted" peoples who Span.
+- Divert others.
+- Create funny interactions with members.
+- And much more!
+
+## Future of Carol:
+
+My personnel plans for Carol:
 
 - Create a Discord server. (just like "Apartamento da Loritta", the Discord server of Loritta)
 
@@ -25,7 +37,7 @@
 
 - Create a Website to entirely configure Carol for a specific discord server. (configure commands, roles, channels, etc...)
 
-<h1 align="center">How to self-host Carol</h1>
+## How to self-host Carol
 
 ### REQUIREMENTS:
 - Java 24 or higher. (I honestly don't know if this bot works with older versions of Java)
@@ -63,7 +75,7 @@ Configure essencial stuffs of the Discord bot on `CarolSettings.java`, like:
 - Fourth:
 Open `carol-discord-bot` folder as a Project in IntelliJ, run `CarolLauncher.java` (specifically the function `main()`) and now have fun with your bot :D
 
-<h1 align="center">Invite</h1>
+## Invite
 
 Invite Carol to your discord server by clicking [Here](https://discord.com/oauth2/authorize?client_id=1214985204985241600&permissions=8&integration_type=0&scope=bot).
 > Currently, Carol isn't a public bot because it's still in development.
