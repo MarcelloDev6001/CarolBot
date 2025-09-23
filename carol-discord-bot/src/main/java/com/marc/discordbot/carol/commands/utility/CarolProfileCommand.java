@@ -112,7 +112,11 @@ public class CarolProfileCommand extends CarolCommand {
             embeds.add(memberProfileEmbed.build());
         }
 
-        ReplyCallbackAction replyCallbackAction = interaction.reply("").setEphemeral(true);
+        ReplyCallbackAction replyCallbackAction = interaction.reply("");
+        if (userToSeeProfile.getIdLong() == interaction.getUser().getIdLong())
+        {
+            replyCallbackAction.setEphemeral(true);
+        }
         for (MessageEmbed embed : embeds)
         {
             replyCallbackAction.addEmbeds(embed);
