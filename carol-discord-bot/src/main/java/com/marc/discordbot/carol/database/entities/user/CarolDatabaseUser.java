@@ -1,12 +1,15 @@
 package com.marc.discordbot.carol.database.entities.user;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class CarolDatabaseUser {
     private long id = 0L;
     private int money = 0;
     private Map<String, Integer> xpInGuilds = new HashMap<String, Integer>();
+    private List<CarolDatabaseUserAchievement> achievements = new ArrayList<>();
 
     public CarolDatabaseUser() {}
 
@@ -42,4 +45,8 @@ public class CarolDatabaseUser {
     public void setXpInGuilds(Map<String, Integer> xpInGuilds) {
         this.xpInGuilds = xpInGuilds;
     }
+
+    public List<CarolDatabaseUserAchievement> getAchievements() { return achievements; }
+
+    public void setAchievements(List<CarolDatabaseUserAchievement> achievements) { this.achievements = achievements; }
 }

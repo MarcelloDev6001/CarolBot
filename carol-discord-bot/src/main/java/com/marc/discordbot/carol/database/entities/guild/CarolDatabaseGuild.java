@@ -7,6 +7,7 @@ public class CarolDatabaseGuild {
     private List<CarolDatabaseGuildChannelSettings> channelsSettings = List.of();
     private List<CarolDatabaseGuildRoleSettings> rolesSettings = List.of();
     private List<CarolDatabaseGuildCommandSettings> commandsSettings = List.of();
+    private boolean achievementsAllowed = true;
 
     public CarolDatabaseGuild() {}
 
@@ -50,5 +51,13 @@ public class CarolDatabaseGuild {
 
     public void setCommandsSettings(List<CarolDatabaseGuildCommandSettings> commandsSettings) {
         this.commandsSettings = commandsSettings;
+    }
+
+    public boolean isAchievementsAllowed() {
+        return achievementsAllowed;
+    }
+
+    public void setAchievementsAllowed(boolean achievementsAllowed) {
+        this.achievementsAllowed = achievementsAllowed;
     }
 }
