@@ -1,4 +1,4 @@
-package com.marc.discordbot.carol.database.entities;
+package com.marc.discordbot.carol.database.entities.guild;
 
 public class CarolDatabaseGuildCommandSettings {
     private String name = "";

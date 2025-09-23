@@ -1,6 +1,6 @@
-package com.marc.discordbot.carol.database.entities;
+package com.marc.discordbot.carol.database.entities.guild;
 
-public class CarolDatabaseGuildRoleSettings {
+public class CarolDatabaseGuildChannelSettings {
     private long id = 0L;
 
     public long getId() {

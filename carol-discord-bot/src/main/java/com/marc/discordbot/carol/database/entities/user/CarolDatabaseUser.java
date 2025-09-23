@@ -1,4 +1,4 @@
-package com.marc.discordbot.carol.database.entities;
+package com.marc.discordbot.carol.database.entities.user;
 
 import java.util.HashMap;
 import java.util.Map;
