@@ -1,6 +1,8 @@
 package com.marc.discordbot.carol.commands.utility;
 
 import com.marc.discordbot.carol.commands.CarolCommand;
+import com.marc.discordbot.carol.database.CarolDatabaseManager;
+import com.marc.discordbot.carol.database.entities.user.CarolDatabaseUser;
 import com.marc.discordbot.carol.economy.CarolEconomyManager;
 import com.marc.discordbot.carol.experience.CarolExperienceManager;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -8,6 +10,7 @@ import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.entities.channel.ChannelType;
+import net.dv8tion.jda.api.interactions.DiscordLocale;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.SlashCommandInteraction;
 import net.dv8tion.jda.api.requests.restaction.interactions.ReplyCallbackAction;
@@ -19,6 +22,7 @@ import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.Timestamp;
+import java.util.Map;
 
 public class CarolProfileCommand extends CarolCommand {
     public CarolProfileCommand() {
@@ -26,6 +30,19 @@ public class CarolProfileCommand extends CarolCommand {
         setGuildOnly(false);
 
         addOption(OptionType.USER, "pessoa", "A pessoa que você vai ver o perfil dela!", false, null);
+    }
+
+    public int getGlobalXPOfUser(User user)
+    {
+        CarolDatabaseUser dbUser = CarolDatabaseManager.getOrCreateUser(user.getIdLong());
+        if (dbUser == null) { dbUser = CarolDatabaseUser.getDefault(user.getIdLong()); }
+        Map<String, Integer> guildsXPs = dbUser.getXpInGuilds();
+
+        int globalXP = 0;
+        for (Map.Entry<String, Integer> entry : guildsXPs.entrySet()) {
+            globalXP += entry.getValue();
+        }
+        return globalXP;
     }
 
     @Override
@@ -61,6 +78,7 @@ public class CarolProfileCommand extends CarolCommand {
         userProfileEmbed.addField("Data de Criação da Conta",
                 "<t:" + userTimeCreatedTimestamp + ":f> (<t:" + userTimeCreatedTimestamp + ":R>)", false);
         userProfileEmbed.addField("Moedas", Integer.toString(CarolEconomyManager.getUserMoney(userToSeeProfile)), false);
+        userProfileEmbed.addField("XP Global", Integer.toString(getGlobalXPOfUser(userToSeeProfile)), false);
         if (userProfile.getAccentColor() != null) {
             userProfileEmbed.setColor(userProfile.getAccentColor());
         } else {
