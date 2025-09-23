@@ -1,4 +1,4 @@
-<h1 align="center">Carol: a simple and funny Discord Bot</h1>
+<h1 align="center">Carol: a simple and funny Java Discord Bot</h1>
 
 <p align="center">
   <img src="/avatar.png" 

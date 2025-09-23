@@ -1,0 +1,41 @@
+name: Generate Java LOC Badge
+
+on:
+  push:
+    branches: [ main ]
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  cloc:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Install cloc and jq
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cloc jq
+
+      - name: Count Java LOC
+        id: cloc
+        run: |
+          cloc --include-lang=Java --json . > cloc.json
+          TOTAL=$(jq '.Java.code' cloc.json)
+          echo "total_lines=$TOTAL" >> $GITHUB_OUTPUT
+
+      - name: Create shields.io JSON
+        run: |
+          mkdir -p public
+          echo '{ "schemaVersion": 1, "label": "Java LOC", "message": "'${{ steps.cloc.outputs.total_lines }}'", "color": "blue" }' > public/loc.json
+
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
