@@ -1,4 +1,4 @@
-package com.marc.discordbot.carol.commands.fun;
+package com.marc.discordbot.carol.commands.call;
 
 import com.marc.discordbot.carol.audio.CarolPlayerManager;
 import com.marc.discordbot.carol.commands.CarolCommand;
@@ -53,19 +53,23 @@ public class CarolVoicePlayer3000Command extends CarolCommand {
         assert voiceChannel != null;
 
         // Check if the bot already has an audio connection in this guild
-        if (!audioManager.isConnected())
+        if (!audioManager.isConnected()) // not in a voice channel
         {
             audioManager.openAudioConnection(voiceChannel);
         }
+        else
+        {
+            interaction.reply("Já estou em alguma call, não posso tocar nada nessa call agora!").setEphemeral(true).queue();
+            return;
+        }
 
         if (!Objects.equals(audioManager.getConnectedChannel(), voiceChannel)) { // not in the voice channel
-            audioManager.openAudioConnection(voiceChannel);
-            interaction.reply("Tocando " + soundName.toLowerCase() + " !").queue();
+            interaction.reply("Tocando `" + soundName.toLowerCase() + ".ogg` !").queue();
 
             CarolPlayerManager.get().loadAndPlay(interaction.getGuild(), "src/main/resources/sounds/memes/" + soundName + ".ogg");
         } else {
             // Already in the voice channel
-            interaction.reply("Já estou tocando um som!").setEphemeral(true).queue();
+            interaction.reply("Já estou tocando algo nessa call som!").setEphemeral(true).queue();
         }
     }
 
