@@ -7,7 +7,9 @@
        width="350" />
 </p>
 
-<p align="center">Total lines of code: 1916</p>
+<p align="center">
+  <img src="https://img.shields.io/endpoint?url=https://MarcelloDev6001.github.io/CarolBot/loc.json" alt="Java LOC">
+</p>
 
 ## What is Carol?
 
