@@ -7,7 +7,7 @@
        width="350" />
 </p>
 
-<p align="center"><!--LOC--></p>
+<p align="center">Total lines of code: 1916</p>
 
 ## What is Carol?
 
