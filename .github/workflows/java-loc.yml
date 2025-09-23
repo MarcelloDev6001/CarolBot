@@ -32,7 +32,7 @@ jobs:
       - name: Create shields.io JSON
         run: |
           mkdir -p public
-          echo '{ "schemaVersion": 1, "label": "Java LOC", "message": "'${{ steps.cloc.outputs.total_lines }}'", "color": "blue" }' > public/loc.json
+          echo '{ "schemaVersion": 1, "label": "Total Lines of Java Code", "message": "'${{ steps.cloc.outputs.total_lines }}'", "color": "blue" }' > public/loc.json
 
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3
