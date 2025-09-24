@@ -22,6 +22,7 @@ dependencies {
     // other stuffs
     implementation("com.fasterxml.jackson.core:jackson-databind:2.15.2")
     implementation("org.reflections:reflections:0.10.2")
+    implementation("com.github.oshi:oshi-core:6.6.5")
 
     // database
     implementation("com.google.firebase:firebase-admin:9.2.0")

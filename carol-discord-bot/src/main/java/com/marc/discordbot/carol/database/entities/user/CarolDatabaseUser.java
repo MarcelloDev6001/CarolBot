@@ -11,6 +11,10 @@ public class CarolDatabaseUser {
     private Map<String, Integer> xpInGuilds = new HashMap<String, Integer>();
     private List<CarolDatabaseUserAchievement> achievements = new ArrayList<>();
 
+    // heh... a marriage system just like Loritta :3
+    // why does "Cônjuge" (PT-BR) is translated to "Spouse" in EN-US? this doesn't make sense for me ;-;
+    private Long spouseID = 0L;
+
     public CarolDatabaseUser() {}
 
     public static CarolDatabaseUser getDefault(long id)
@@ -49,4 +53,12 @@ public class CarolDatabaseUser {
     public List<CarolDatabaseUserAchievement> getAchievements() { return achievements; }
 
     public void setAchievements(List<CarolDatabaseUserAchievement> achievements) { this.achievements = achievements; }
+
+    public Long getSpouseID() {
+        return spouseID;
+    }
+
+    public void setSpouseID(Long spouseID) {
+        this.spouseID = spouseID;
+    }
 }

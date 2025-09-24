@@ -1,12 +1,15 @@
 package com.marc.discordbot.carol.database.entities.guild;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CarolDatabaseGuild {
     private long id = 0L;
     private List<CarolDatabaseGuildChannelSettings> channelsSettings = List.of();
     private List<CarolDatabaseGuildRoleSettings> rolesSettings = List.of();
     private List<CarolDatabaseGuildCommandSettings> commandsSettings = List.of();
+    private Map<Long, Integer> xpMultipliersOfRoles = new HashMap<>(); // Long = ID of the Role; Integer = the xp modifier
     private boolean achievementsAllowed = true;
 
     public CarolDatabaseGuild() {}
@@ -59,5 +62,13 @@ public class CarolDatabaseGuild {
 
     public void setAchievementsAllowed(boolean achievementsAllowed) {
         this.achievementsAllowed = achievementsAllowed;
+    }
+
+    public Map<Long, Integer> getXpMultipliersOfRoles() {
+        return xpMultipliersOfRoles;
+    }
+
+    public void setXpMultipliersOfRoles(Map<Long, Integer> xpMultipliersOfRoles) {
+        this.xpMultipliersOfRoles = xpMultipliersOfRoles;
     }
 }
