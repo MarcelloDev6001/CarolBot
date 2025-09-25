@@ -27,12 +27,15 @@ jobs:
         run: |
           cloc --include-lang=Java --json . > cloc.json
           TOTAL=$(jq '.Java.code' cloc.json)
+          FILES=$(jq '.Java.nFiles' cloc.json)
           echo "total_lines=$TOTAL" >> $GITHUB_OUTPUT
+          echo "total_files=$FILES" >> $GITHUB_OUTPUT
 
-      - name: Create shields.io JSON
+      - name: Create shields.io JSONs
         run: |
           mkdir -p public
-          echo '{ "schemaVersion": 1, "label": "Total Lines of Java Code", "message": "'${{ steps.cloc.outputs.total_lines }}'", "color": "blue" }' > public/loc.json
+          echo '{ "schemaVersion": 1, "label": "Total Lines of Java Code", "message": "${{ steps.cloc.outputs.total_lines }}", "color": "red" }' > public/loc.json
+          echo '{ "schemaVersion": 1, "label": "Total Files of Java Code", "message": "${{ steps.cloc.outputs.total_files }}", "color": "blue" }' > public/files.json
 
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3
