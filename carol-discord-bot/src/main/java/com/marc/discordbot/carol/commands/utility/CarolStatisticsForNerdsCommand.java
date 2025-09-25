@@ -1,14 +1,11 @@
-package com.marc.discordbot.carol.commands.others;
+package com.marc.discordbot.carol.commands.utility;
 
 import com.marc.discordbot.carol.commands.CarolCommand;
 import net.dv8tion.jda.api.interactions.commands.SlashCommandInteraction;
-import org.jetbrains.annotations.NotNull;
 
 import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;
 import oshi.hardware.GlobalMemory;
-
-import com.sun.management.OperatingSystemMXBean;
 
 import java.text.DecimalFormat;
 
