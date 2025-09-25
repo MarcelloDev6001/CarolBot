@@ -13,7 +13,7 @@ public class CarolDatabaseUser {
 
     // heh... a marriage system just like Loritta :3
     // why does "Cônjuge" (PT-BR) is translated to "Spouse" in EN-US? this doesn't make sense for me ;-;
-    private Long spouseID = 0L;
+    private String spouseID = "0";
 
     public CarolDatabaseUser() {}
 
@@ -54,11 +54,11 @@ public class CarolDatabaseUser {
 
     public void setAchievements(List<CarolDatabaseUserAchievement> achievements) { this.achievements = achievements; }
 
-    public Long getSpouseID() {
+    public String getSpouseID() {
         return spouseID;
     }
 
-    public void setSpouseID(Long spouseID) {
+    public void setSpouseID(String spouseID) {
         this.spouseID = spouseID;
     }
 }

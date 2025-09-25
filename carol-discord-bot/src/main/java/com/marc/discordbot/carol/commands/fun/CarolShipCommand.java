@@ -1,6 +1,7 @@
 package com.marc.discordbot.carol.commands.fun;
 
 import com.marc.discordbot.carol.commands.CarolCommand;
+import com.marc.discordbot.carol.database.CarolDatabaseManager;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
@@ -9,6 +10,7 @@ import net.dv8tion.jda.api.interactions.commands.SlashCommandInteraction;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 public class CarolShipCommand extends CarolCommand {
@@ -46,6 +48,7 @@ public class CarolShipCommand extends CarolCommand {
     @Override
     public void onCommandExecuted(SlashCommandInteraction interaction)
     {
+        interaction.deferReply(false).queue();
         User husband;
         try {
             husband = interaction.getOption("user1").getAsUser();
@@ -82,6 +85,9 @@ public class CarolShipCommand extends CarolCommand {
         namesCombination += husband.getName().substring(0, husband.getName().length() / 2);
         namesCombination += wife.getName().substring(wife.getName().length() / 2, wife.getName().length());
 
+        String husbandSpouseID = CarolDatabaseManager.getOrCreateUser(husband.getIdLong()).getSpouseID();
+        String wifeSpouseID = CarolDatabaseManager.getOrCreateUser(wife.getIdLong()).getSpouseID();
+
         String shipMessage = "";
         if (wife == interaction.getJDA().getSelfUser()) // shipping yourself with Carol
         {
@@ -94,6 +100,9 @@ public class CarolShipCommand extends CarolCommand {
             shipMessage = shipMessages[10];
         } else if(husband.isBot() || wife.isBot()) { // shipping someone with a bot
             shipMessage = shipMessages[12];
+        } else if(husbandSpouseID.equals(wife.getId()) && wifeSpouseID.equals(husband.getId())) { // married
+            shipPercentage = 100;
+            shipMessage = shipMessages[11];
         } else if (shipPercentage > 97) {
             shipMessage = shipMessages[7];
         } else if (shipPercentage > 90) {
@@ -120,6 +129,6 @@ public class CarolShipCommand extends CarolCommand {
                 .replace("SHIP_PERCENTAGE", Integer.toString(shipPercentage))
                 .replace("SHIP_MESSAGE", shipMessage);
 
-        interaction.reply(messageContent).queue();
+        interaction.getHook().editOriginal(messageContent).queue();
     }
 }
