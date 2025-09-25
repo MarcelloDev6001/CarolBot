@@ -1,5 +1,7 @@
 package com.marc.discordbot.carol.listeners;
 
+import com.marc.discordbot.carol.database.CarolDatabaseManager;
+import com.marc.discordbot.carol.database.entities.guild.CarolDatabaseGuild;
 import com.marc.discordbot.carol.experience.CarolExperienceManager;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.entities.channel.ChannelType;
@@ -10,8 +12,20 @@ public class CarolMessageListener extends ListenerAdapter {
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
         User user = event.getAuthor();
+        CarolDatabaseGuild dbGuild = CarolDatabaseManager.getGuildFromDatabase(event.getGuild().getIdLong());
+        if (user.isBot()) { return; }
 
-        if (!user.isBot() && !event.isFromType(ChannelType.PRIVATE))
+        String messageContent = event.getMessage().getContentRaw().toLowerCase();
+        for (String unauthorizedWord : dbGuild.getUnauthorizedWords())
+        {
+            if (messageContent.contains(unauthorizedWord))
+            {
+                event.getMessage().delete().queue();
+                event.getChannel().sendMessage(user.getAsMention() + " essa palavra não é legal de se falar, sabia?");
+            }
+        }
+
+        if (!event.isFromType(ChannelType.PRIVATE))
         {
             try {
                 CarolExperienceManager.updateUserXPFromGuild(user, event.getGuild());

@@ -9,6 +9,7 @@ public class CarolDatabaseGuild {
     private List<CarolDatabaseGuildChannelSettings> channelsSettings = List.of();
     private List<CarolDatabaseGuildRoleSettings> rolesSettings = List.of();
     private List<CarolDatabaseGuildCommandSettings> commandsSettings = List.of();
+    private List<String> unauthorizedWords = List.of();
     private Map<Long, Integer> xpMultipliersOfRoles = new HashMap<>(); // Long = ID of the Role; Integer = the xp modifier
     private boolean achievementsAllowed = true;
 
@@ -21,6 +22,9 @@ public class CarolDatabaseGuild {
         carolDatabaseGuild.setChannelsSettings(List.of());
         carolDatabaseGuild.setRolesSettings(List.of());
         carolDatabaseGuild.setCommandsSettings(List.of());
+        carolDatabaseGuild.setUnauthorizedWords(List.of());
+        carolDatabaseGuild.setXpMultipliersOfRoles(new HashMap<>());
+        carolDatabaseGuild.setAchievementsAllowed(true);
         return carolDatabaseGuild;
     }
 
@@ -70,5 +74,13 @@ public class CarolDatabaseGuild {
 
     public void setXpMultipliersOfRoles(Map<Long, Integer> xpMultipliersOfRoles) {
         this.xpMultipliersOfRoles = xpMultipliersOfRoles;
+    }
+
+    public List<String> getUnauthorizedWords() {
+        return unauthorizedWords;
+    }
+
+    public void setUnauthorizedWords(List<String> unauthorizedWords) {
+        this.unauthorizedWords = unauthorizedWords;
     }
 }
