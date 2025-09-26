@@ -1,6 +1,7 @@
 package com.marc.discordbot.carol;
 
 import com.marc.discordbot.carol.activity.CarolActivitiesManager;
+import com.marc.discordbot.carol.cache.CarolCacheManager;
 import com.marc.discordbot.carol.commands.CarolBaseCommandOption;
 import com.marc.discordbot.carol.commands.CarolCommand;
 import com.marc.discordbot.carol.commands.CarolCommandInitializer;
@@ -60,6 +61,8 @@ public class CarolLauncher {
         } catch (Exception e) {
             System.out.println("Failed to initialize database: " + e);
         }
+
+        CarolCacheManager.initialize();
 
 
         for (CarolCommand command : CarolCommand.allCommands)

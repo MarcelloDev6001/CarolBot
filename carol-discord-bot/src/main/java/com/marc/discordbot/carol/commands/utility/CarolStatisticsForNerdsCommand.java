@@ -1,5 +1,6 @@
 package com.marc.discordbot.carol.commands.utility;
 
+import com.marc.discordbot.carol.cache.CarolDatabaseCache;
 import com.marc.discordbot.carol.commands.CarolCommand;
 import com.marc.discordbot.carol.messages.components.CarolMessageComponentsManager;
 import net.dv8tion.jda.api.interactions.commands.SlashCommandInteraction;
@@ -48,6 +49,8 @@ public class CarolStatisticsForNerdsCommand extends CarolCommand {
                         "Quantidade de Membros carregados: `" + interaction.getJDA().getUsers().size() + "`.\n" +
                         "Botões de mensagem em Cache: `" + CarolMessageComponentsManager.cachedMessageButtons.size() + "`.\n" +
                         "Menus de String em Cache: `" + CarolMessageComponentsManager.cachedStringMenus.size() + "`.\n" +
+                        "Usuários em Cache: `" + CarolDatabaseCache.dbUsersCached.size() + "`.\n" +
+                        "Servidores (Guilds) em Cache: `" + CarolDatabaseCache.dbGuildsCached.size() + "`.\n" +
                         "Uso da CPU total: " + decimalFormat.format(totalCpu) + "%.\n" +
                         "Memória RAM em uso: " + ramFormat.format((double) usedMem / totalMem * 100) + "% (" + usedMem + "MB/" + totalMem + "MB).\n" +
                         "Memória da JVM: \n- Máxima: " + runtime.maxMemory()/1048576 + "MB.\n" +

@@ -10,7 +10,9 @@ public class CarolDatabaseGuild {
     private List<CarolDatabaseGuildRoleSettings> rolesSettings = List.of();
     private List<CarolDatabaseGuildCommandSettings> commandsSettings = List.of();
     private List<String> unauthorizedWords = List.of();
-    private Map<Long, Integer> xpMultipliersOfRoles = new HashMap<>(); // Long = ID of the Role; Integer = the xp modifier
+    // String = ID of the Role (for some reason firestore don't accept any map that the entryKey isn't a String ;-; )
+    // Integer = the xp modifier
+    private Map<String, Integer> xpMultipliersOfRoles = new HashMap<>();
     private boolean achievementsAllowed = true;
 
     public CarolDatabaseGuild() {}
@@ -68,11 +70,11 @@ public class CarolDatabaseGuild {
         this.achievementsAllowed = achievementsAllowed;
     }
 
-    public Map<Long, Integer> getXpMultipliersOfRoles() {
+    public Map<String, Integer> getXpMultipliersOfRoles() {
         return xpMultipliersOfRoles;
     }
 
-    public void setXpMultipliersOfRoles(Map<Long, Integer> xpMultipliersOfRoles) {
+    public void setXpMultipliersOfRoles(Map<String, Integer> xpMultipliersOfRoles) {
         this.xpMultipliersOfRoles = xpMultipliersOfRoles;
     }
 

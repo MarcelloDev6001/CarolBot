@@ -12,7 +12,7 @@ public class CarolMessageListener extends ListenerAdapter {
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
         User user = event.getAuthor();
-        CarolDatabaseGuild dbGuild = CarolDatabaseManager.getGuildFromDatabase(event.getGuild().getIdLong());
+        CarolDatabaseGuild dbGuild = CarolDatabaseManager.getOrCreateGuild(event.getGuild().getIdLong());
         if (user.isBot()) { return; }
 
         String messageContent = event.getMessage().getContentRaw().toLowerCase();
