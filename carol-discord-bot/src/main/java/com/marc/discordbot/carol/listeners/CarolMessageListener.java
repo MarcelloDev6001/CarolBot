@@ -21,7 +21,7 @@ public class CarolMessageListener extends ListenerAdapter {
             if (messageContent.contains(unauthorizedWord))
             {
                 event.getMessage().delete().queue();
-                event.getChannel().sendMessage(user.getAsMention() + " essa palavra não é legal de se falar, sabia?");
+                event.getChannel().sendMessage(user.getAsMention() + " essa palavra não é legal de se falar, sabia?").queue();
             }
         }
 
