@@ -15,6 +15,8 @@ public class CarolDatabaseUser {
     // why does "Cônjuge" (PT-BR) is translated to "Spouse" in EN-US? this doesn't make sense for me ;-;
     private String spouseID = "0";
 
+    private int amountOfCommandsUsed = 0;
+
     public CarolDatabaseUser() {}
 
     public static CarolDatabaseUser getDefault(long id)
@@ -60,5 +62,13 @@ public class CarolDatabaseUser {
 
     public void setSpouseID(String spouseID) {
         this.spouseID = spouseID;
+    }
+
+    public int getAmountOfCommandsUsed() {
+        return amountOfCommandsUsed;
+    }
+
+    public void setAmountOfCommandsUsed(int amountOfCommandsUsed) {
+        this.amountOfCommandsUsed = amountOfCommandsUsed;
     }
 }

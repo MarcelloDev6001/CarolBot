@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.sql.Timestamp;
 import java.util.Map;
+import java.util.Objects;
 
 public class CarolProfileCommand extends CarolCommand {
     public CarolProfileCommand() {
@@ -51,6 +52,7 @@ public class CarolProfileCommand extends CarolCommand {
         List<MessageEmbed> embeds = new ArrayList<>();
 
         User userToSeeProfile = interaction.getUser();
+        CarolDatabaseUser dbUser = CarolDatabaseManager.getOrCreateUser(userToSeeProfile.getIdLong());
         Member userAsMemberToSeeProfile = interaction.getMember();
         try {
             userToSeeProfile = interaction.getOption("pessoa").getAsUser();
@@ -79,6 +81,17 @@ public class CarolProfileCommand extends CarolCommand {
                 "<t:" + userTimeCreatedTimestamp + ":f> (<t:" + userTimeCreatedTimestamp + ":R>)", false);
         userProfileEmbed.addField("Moedas", Integer.toString(CarolEconomyManager.getUserMoney(userToSeeProfile)), false);
         userProfileEmbed.addField("XP Global", Integer.toString(getGlobalXPOfUser(userToSeeProfile)), false);
+        userProfileEmbed.addField("Quantos comandos usou", Integer.toString(dbUser.getAmountOfCommandsUsed()), false);
+
+        if (!Objects.equals(dbUser.getSpouseID(), "") && !Objects.equals(dbUser.getSpouseID(), "0"))
+        {
+            User spouse = interaction.getJDA().getUserById(dbUser.getSpouseID());
+            if (spouse != null)
+            {
+                userProfileEmbed.addField("Casado com", spouse.getEffectiveName(), false);
+            }
+        }
+
         if (userProfile.getAccentColor() != null) {
             userProfileEmbed.setColor(userProfile.getAccentColor());
         } else {
