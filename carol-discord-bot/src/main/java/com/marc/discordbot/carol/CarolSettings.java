@@ -34,4 +34,7 @@ public class CarolSettings {
     // both used on CarolCacheManager.initialize()
     public static final int PERIOD_OF_UPDATING_DATABASE_USERS = 300; // in seconds
     public static final int PERIOD_OF_UPDATING_DATABASE_GUILDS = 15;
+
+    // used on CarolDashboardCommand.onCommandExecuted()
+    public static final String DASHBOARD_URL = "https://caroldiscordbot.netlify.app";
 }
