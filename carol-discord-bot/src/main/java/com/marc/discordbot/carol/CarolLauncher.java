@@ -32,15 +32,6 @@ public class CarolLauncher {
     public static void main(String[] args) {
         System.out.println("Initializing Carol...");
 
-        EnumSet<GatewayIntent> intents = EnumSet.of(
-                GatewayIntent.GUILD_MESSAGES,
-                GatewayIntent.DIRECT_MESSAGES,
-                GatewayIntent.MESSAGE_CONTENT,
-                GatewayIntent.GUILD_MESSAGE_REACTIONS,
-                GatewayIntent.DIRECT_MESSAGE_REACTIONS,
-                GatewayIntent.GUILD_VOICE_STATES
-        );
-
         String token;
         try {
             token = System.getenv("CAROL_DISCORD_TOKEN");
@@ -48,7 +39,8 @@ public class CarolLauncher {
             System.out.println("Token not found or not provided!");
             throw new RuntimeException(e);
         }
-        JDA jda = buildJDA(token, intents);
+
+        JDA jda = buildJDA(token, EnumSet.allOf(GatewayIntent.class));
 
         CommandListUpdateAction commands = jda.updateCommands();
 
@@ -114,6 +106,12 @@ public class CarolLauncher {
 
         CarolActivitiesManager.initDiscordActivity(jda);
 
+        try {
+            jda.awaitReady();
+        } catch (InterruptedException e) {
+            System.out.println("Error on initialize Carol: " + e);
+            return;
+        }
         System.out.println("Carol initialized successfully!");
     }
 
@@ -127,7 +125,17 @@ public class CarolLauncher {
             default -> { jdaBuilder = JDABuilder.createLight(token, intents); } // default = light.
         }
 
-        jdaBuilder.enableCache(CacheFlag.VOICE_STATE);
+        // probally i'll not use all of those CacheFlags... but yeah, who cares? :3
+        jdaBuilder.enableCache(
+                CacheFlag.ACTIVITY,
+                CacheFlag.CLIENT_STATUS,
+                CacheFlag.EMOJI,
+                CacheFlag.MEMBER_OVERRIDES,
+                CacheFlag.ROLE_TAGS,
+                CacheFlag.VOICE_STATE,
+                CacheFlag.ONLINE_STATUS,
+                CacheFlag.SCHEDULED_EVENTS
+        );
         return jdaBuilder.build();
     }
 }

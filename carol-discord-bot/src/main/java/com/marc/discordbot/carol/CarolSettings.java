@@ -9,7 +9,7 @@ public class CarolSettings {
     // 0 = createDefault (Enables cache for users who are active in voice channels and all cache flags)
     // 1 = createLight (Disables all user cache and cache flags)
     // 2 = create (Enables member chunking, caches all users, and enables all cache flags)
-    public static final byte JDA_BUILDER_TYPE = 1;
+    public static final byte JDA_BUILDER_TYPE = 0;
 
     // this is used for CarolBaseMessageButton.uncacheWithDelay()
     public static final long MAX_CACHE_TIME_FOR_MESSAGE_BUTTONS = 300;
