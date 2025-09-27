@@ -31,6 +31,7 @@ public class CarolSettings {
     // used on CarolButtonInteractionListener.onButtonInteraction()
     public static final String MESSAGE_ON_BUTTON_AFTER_UNCACHE = "Parece que os dados de interação dessa mensagem se perderam!\nCrie uma nova interação para usar esses botões/menus novamente";
 
-    // used on CarolCacheManager.initialize()
-    public static final int PERIOD_OF_UPDATING_DATABASE = 5; // in minutes
+    // both used on CarolCacheManager.initialize()
+    public static final int PERIOD_OF_UPDATING_DATABASE_USERS = 300; // in seconds
+    public static final int PERIOD_OF_UPDATING_DATABASE_GUILDS = 15;
 }

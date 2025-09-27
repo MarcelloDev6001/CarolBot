@@ -19,7 +19,7 @@ public class CarolCacheManager {
     public static void initialize() {
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
-        Runnable task = () -> {
+        Runnable usersTask = () -> {
             try {
                 for (CarolDatabaseUser dbUserCached : CarolDatabaseCache.dbUsersCached) {
                     if (dbUserCached != null) {
@@ -27,20 +27,25 @@ public class CarolCacheManager {
                     }
                 }
                 CarolDatabaseCache.dbUsersCached.clear();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        };
 
+        Runnable guildsTask = () -> {
+            try {
                 for (CarolDatabaseGuild dbGuildCached : CarolDatabaseCache.dbGuildsCached) {
                     if (dbGuildCached != null) {
                         CarolDatabaseManager.updateGuildOnDatabase(dbGuildCached.getId(), dbGuildCached);
                     }
                 }
                 CarolDatabaseCache.dbGuildsCached.clear();
-
-                // System.out.println("Database updated!");
             } catch (Exception e) {
                 e.printStackTrace();
             }
         };
 
-        scheduler.scheduleAtFixedRate(task, CarolSettings.PERIOD_OF_UPDATING_DATABASE, CarolSettings.PERIOD_OF_UPDATING_DATABASE, TimeUnit.MINUTES);
+        scheduler.scheduleAtFixedRate(usersTask, CarolSettings.PERIOD_OF_UPDATING_DATABASE_USERS, CarolSettings.PERIOD_OF_UPDATING_DATABASE_USERS, TimeUnit.SECONDS);
+        scheduler.scheduleAtFixedRate(guildsTask, CarolSettings.PERIOD_OF_UPDATING_DATABASE_GUILDS, CarolSettings.PERIOD_OF_UPDATING_DATABASE_GUILDS, TimeUnit.SECONDS);
     }
 }
