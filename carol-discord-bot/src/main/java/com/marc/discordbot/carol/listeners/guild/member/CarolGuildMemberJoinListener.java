@@ -1,4 +1,4 @@
-package com.marc.discordbot.carol.listeners.guild;
+package com.marc.discordbot.carol.listeners.guild.member;
 
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
