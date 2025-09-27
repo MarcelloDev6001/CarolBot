@@ -34,6 +34,7 @@ Configure essencial stuffs of the Discord bot on `CarolSettings.java`, like:
 | **MESSAGE_ON_BUTTON_AFTER_UNCACHE**              | What message will be displayed when a user click on a button that was uncached                               | `String`          |
 | **PERIOD_OF_UPDATING_DATABASE_USERS**              | Period that Carol will post the cached users to firestore (in Seconds)                               | `int`          |
 | **PERIOD_OF_UPDATING_DATABASE_GUILDS**              | Period that Carol will post the cached guilds to firestore (in Seconds)                               | `int`          |
+| **DASHBOARD_URL**              | URL of your Dashboard website                               | `String`          |
 
 ### Fourth:
 Open `carol-discord-bot` folder as a Project in IntelliJ, run `CarolLauncher.java` (specifically the function `main()`) and now have fun with your bot :D
