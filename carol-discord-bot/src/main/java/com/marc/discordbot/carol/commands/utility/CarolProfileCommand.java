@@ -52,13 +52,13 @@ public class CarolProfileCommand extends CarolCommand {
         List<MessageEmbed> embeds = new ArrayList<>();
 
         User userToSeeProfile = interaction.getUser();
-        CarolDatabaseUser dbUser = CarolDatabaseManager.getOrCreateUser(userToSeeProfile.getIdLong());
         Member userAsMemberToSeeProfile = interaction.getMember();
         try {
             userToSeeProfile = interaction.getOption("pessoa").getAsUser();
             userAsMemberToSeeProfile = interaction.getOption("pessoa").getAsMember();
         } catch (Exception _) {}
         User.Profile userProfile = userToSeeProfile.retrieveProfile().complete();
+        CarolDatabaseUser dbUser = CarolDatabaseManager.getOrCreateUser(userToSeeProfile.getIdLong());
 
         assert userAsMemberToSeeProfile != null;
         EmbedBuilder userProfileEmbed = new EmbedBuilder();
@@ -83,14 +83,10 @@ public class CarolProfileCommand extends CarolCommand {
         userProfileEmbed.addField("XP Global", Integer.toString(getGlobalXPOfUser(userToSeeProfile)), false);
         userProfileEmbed.addField("Quantos comandos usou", Integer.toString(dbUser.getAmountOfCommandsUsed()), false);
 
-        if (!Objects.equals(dbUser.getSpouseID(), "") && !Objects.equals(dbUser.getSpouseID(), "0"))
-        {
+        try {
             User spouse = interaction.getJDA().getUserById(dbUser.getSpouseID());
-            if (spouse != null)
-            {
-                userProfileEmbed.addField("Casado com", spouse.getEffectiveName(), false);
-            }
-        }
+            userProfileEmbed.addField("Casado com", spouse.getEffectiveName(), false);
+        } catch (NullPointerException _) {}
 
         if (userProfile.getAccentColor() != null) {
             userProfileEmbed.setColor(userProfile.getAccentColor());
