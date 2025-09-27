@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api")
 public class CarolDiscordController {
-    @GetMapping("/sendmessage")
-    public ResponseEntity<String> sendmessage(@RequestParam String message) {
+    @PostMapping("/sendmessage")
+    public ResponseEntity<String> sendmessage(@RequestBody String message) {
         if (message == null || message.trim().isEmpty()) {
             return ResponseEntity
                     .status(400)
