@@ -15,6 +15,10 @@ public class CarolDatabaseGuild {
     private Map<String, Integer> xpMultipliersOfRoles = new HashMap<>();
     private boolean achievementsAllowed = true;
 
+    private long logMessageId = 0L;
+    private boolean logEditedMessages = false;
+    private boolean logDeletedMessages = false;
+
     public CarolDatabaseGuild() {}
 
     public static CarolDatabaseGuild getDefault(long id)
@@ -84,5 +88,29 @@ public class CarolDatabaseGuild {
 
     public void setUnauthorizedWords(List<String> unauthorizedWords) {
         this.unauthorizedWords = unauthorizedWords;
+    }
+
+    public long getLogMessageId() {
+        return logMessageId;
+    }
+
+    public void setLogMessageId(long logMessageId) {
+        this.logMessageId = logMessageId;
+    }
+
+    public boolean isLogEditedMessages() {
+        return logEditedMessages;
+    }
+
+    public void setLogEditedMessages(boolean logEditedMessages) {
+        this.logEditedMessages = logEditedMessages;
+    }
+
+    public boolean isLogDeletedMessages() {
+        return logDeletedMessages;
+    }
+
+    public void setLogDeletedMessages(boolean logDeletedMessages) {
+        this.logDeletedMessages = logDeletedMessages;
     }
 }
