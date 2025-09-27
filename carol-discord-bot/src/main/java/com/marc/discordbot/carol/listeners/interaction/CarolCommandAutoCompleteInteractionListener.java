@@ -1,4 +1,4 @@
-package com.marc.discordbot.carol.listeners;
+package com.marc.discordbot.carol.listeners.interaction;
 
 import com.marc.discordbot.carol.commands.CarolBaseCommandOption;
 import com.marc.discordbot.carol.commands.CarolCommand;

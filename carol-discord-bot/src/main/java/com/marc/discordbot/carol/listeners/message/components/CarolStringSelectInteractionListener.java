@@ -1,4 +1,4 @@
-package com.marc.discordbot.carol.listeners;
+package com.marc.discordbot.carol.listeners.message.components;
 
 import com.marc.discordbot.carol.CarolSettings;
 import com.marc.discordbot.carol.messages.components.CarolMessageComponentsManager;
@@ -7,7 +7,7 @@ import com.marc.discordbot.carol.messages.components.dropdown.CarolStringSelectM
 import net.dv8tion.jda.api.events.interaction.component.StringSelectInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
-public class CarolOnStringSelectInteractionListener extends ListenerAdapter {
+public class CarolStringSelectInteractionListener extends ListenerAdapter {
     @Override
     public void onStringSelectInteraction(StringSelectInteractionEvent event) {
         for (CarolStringSelectMenu selectMenu : CarolMessageComponentsManager.cachedStringMenus)

@@ -6,22 +6,23 @@ import com.marc.discordbot.carol.commands.CarolBaseCommandOption;
 import com.marc.discordbot.carol.commands.CarolCommand;
 import com.marc.discordbot.carol.commands.CarolCommandInitializer;
 import com.marc.discordbot.carol.database.CarolDatabaseManager;
-import com.marc.discordbot.carol.file.JsonUtils;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 
-import com.marc.discordbot.carol.listeners.*;
+import com.marc.discordbot.carol.listeners.guild.*;
+import com.marc.discordbot.carol.listeners.interaction.*;
+import com.marc.discordbot.carol.listeners.message.*;
+import com.marc.discordbot.carol.listeners.message.components.*;
+
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
-import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.DiscordLocale;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData;
-import net.dv8tion.jda.api.managers.Presence;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.requests.restaction.CommandListUpdateAction;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
@@ -144,7 +145,7 @@ public class CarolLauncher {
         listeners.add(new CarolGuildMemberRemoveListener());
         listeners.add(new CarolMessageListener());
         listeners.add(new CarolMessageReactionAddListener());
-        listeners.add(new CarolOnStringSelectInteractionListener());
+        listeners.add(new CarolStringSelectInteractionListener());
         listeners.add(new CarolSlashCommandInteractionListener());
         return listeners;
     }

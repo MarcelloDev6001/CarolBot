@@ -1,4 +1,4 @@
-package com.marc.discordbot.carol.listeners;
+package com.marc.discordbot.carol.listeners.guild;
 
 import com.marc.discordbot.carol.CarolSettings;
 import com.marc.discordbot.carol.database.CarolDatabaseManager;
