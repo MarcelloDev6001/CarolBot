@@ -26,6 +26,10 @@ dependencies {
 
     implementation("org.springframework.boot:spring-boot-starter-web")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+    // JDA stuffs
+    implementation("net.dv8tion:JDA:5.6.1")
+    implementation("ch.qos.logback:logback-classic:1.5.6")
 }
 
 tasks.test {
