@@ -12,6 +12,7 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 
+import com.marc.discordbot.carol.listeners.CarolListenersLoader;
 import com.marc.discordbot.carol.listeners.guild.*;
 import com.marc.discordbot.carol.listeners.interaction.*;
 import com.marc.discordbot.carol.listeners.message.*;
@@ -49,11 +50,6 @@ public class CarolLauncher {
         }
         JDA jda = buildJDA(token, intents);
 
-        for (ListenerAdapter listener : getAllListeners())
-        {
-            jda.addEventListener(listener);
-        }
-
         CommandListUpdateAction commands = jda.updateCommands();
 
         CarolCommandInitializer.initializeCommands();
@@ -64,7 +60,7 @@ public class CarolLauncher {
         }
 
         CarolCacheManager.initialize();
-
+        CarolListenersLoader.initListeners(jda);
 
         for (CarolCommand command : CarolCommand.allCommands)
         {
@@ -133,20 +129,5 @@ public class CarolLauncher {
 
         jdaBuilder.enableCache(CacheFlag.VOICE_STATE);
         return jdaBuilder.build();
-    }
-
-    public static List<ListenerAdapter> getAllListeners()
-    {
-        List<ListenerAdapter> listeners = new ArrayList<>();
-        listeners.add(new CarolButtonInteractionListener());
-        listeners.add(new CarolCommandAutoCompleteInteractionListener());
-        listeners.add(new CarolGuildJoinListener());
-        listeners.add(new CarolGuildMemberJoinListener());
-        listeners.add(new CarolGuildMemberRemoveListener());
-        listeners.add(new CarolMessageListener());
-        listeners.add(new CarolMessageReactionAddListener());
-        listeners.add(new CarolStringSelectInteractionListener());
-        listeners.add(new CarolSlashCommandInteractionListener());
-        return listeners;
     }
 }
