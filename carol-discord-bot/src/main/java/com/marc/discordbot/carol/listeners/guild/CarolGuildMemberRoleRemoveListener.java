@@ -16,10 +16,10 @@ public class CarolGuildMemberRoleRemoveListener extends ListenerAdapter {
     public void onGuildMemberRoleRemove(GuildMemberRoleRemoveEvent event)
     {
         CarolDatabaseGuild dbGuild = CarolDatabaseManager.getOrCreateGuild(event.getGuild().getIdLong());
-        if (!dbGuild.getLogMessageId().isEmpty())
+        if (!dbGuild.getLogChannelId().isEmpty())
         {
-            TextChannel logChannel = event.getGuild().getChannelById(TextChannel.class, dbGuild.getLogMessageId());
-            if (logChannel != null)
+            TextChannel logChannel = event.getGuild().getChannelById(TextChannel.class, dbGuild.getLogChannelId());
+            if (logChannel != null && dbGuild.isLogRoleRemovedToUser())
             {
                 EmbedBuilder roleRemovedEmbed = getEmbedBuilder(event);
                 logChannel.sendMessage("").setEmbeds(roleRemovedEmbed.build()).queue();

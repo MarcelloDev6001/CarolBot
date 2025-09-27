@@ -15,9 +15,9 @@ public class CarolDatabaseGuild {
     private Map<String, Integer> xpMultipliersOfRoles = new HashMap<>();
     private boolean achievementsAllowed = true;
 
-    private String logMessageId = "";
-    private boolean logEditedMessages = false;
-    private boolean logDeletedMessages = false;
+    private String logChannelId = "";
+    private boolean logRoleAddedToUser = false;
+    private boolean logRoleRemovedToUser = false;
 
     public CarolDatabaseGuild() {}
 
@@ -90,27 +90,27 @@ public class CarolDatabaseGuild {
         this.unauthorizedWords = unauthorizedWords;
     }
 
-    public String getLogMessageId() {
-        return logMessageId;
+    public String getLogChannelId() {
+        return logChannelId;
     }
 
-    public void setLogMessageId(String logMessageId) {
-        this.logMessageId = logMessageId;
+    public void setLogChannelId(String logChannelId) {
+        this.logChannelId = logChannelId;
     }
 
-    public boolean isLogEditedMessages() {
-        return logEditedMessages;
+    public boolean isLogRoleAddedToUser() {
+        return logRoleAddedToUser;
     }
 
-    public void setLogEditedMessages(boolean logEditedMessages) {
-        this.logEditedMessages = logEditedMessages;
+    public void setLogRoleAddedToUser(boolean logRoleAddedToUser) {
+        this.logRoleAddedToUser = logRoleAddedToUser;
     }
 
-    public boolean isLogDeletedMessages() {
-        return logDeletedMessages;
+    public boolean isLogRoleRemovedToUser() {
+        return logRoleRemovedToUser;
     }
 
-    public void setLogDeletedMessages(boolean logDeletedMessages) {
-        this.logDeletedMessages = logDeletedMessages;
+    public void setLogRoleRemovedToUser(boolean logRoleRemovedToUser) {
+        this.logRoleRemovedToUser = logRoleRemovedToUser;
     }
 }
