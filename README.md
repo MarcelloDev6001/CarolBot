@@ -1,4 +1,5 @@
-<h1 align="center">Carol: a simple and funny Java Discord Bot</h1>
+<h1 align="center">🌟⭐Carol⭐🌟</h1>
+<h2 align="center">A simple and funny Java Discord Bot</h2>
 
 <p align="center">
   <img src="/avatar.png" 
