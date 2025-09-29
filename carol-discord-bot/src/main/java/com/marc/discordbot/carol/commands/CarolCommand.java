@@ -91,6 +91,13 @@ public abstract class CarolCommand {
         options.add(new CarolBaseCommandOption(name, description, optionType, required, autoComplete));
     }
 
+    // for OptionType.STRING
+    public void addOption(OptionType optionType, String name, String description, boolean required, List<String> autoComplete, int minLength, int maxLength)
+    {
+        assert options != null;
+        options.add(new CarolBaseCommandOption(name, description, optionType, required, autoComplete));
+    }
+
     public void addOption(CarolBaseCommandOption option)
     {
         assert options != null;
