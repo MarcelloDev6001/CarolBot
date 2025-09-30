@@ -19,6 +19,11 @@ public class CarolDatabaseGuild {
     private boolean logRoleAddedToUser = false;
     private boolean logRoleRemovedToUser = false;
 
+    // spam settings
+    private int spamMaxMessagesPerSecond = 0;
+    private int spamTimeoutTime = 10;
+    private int spamMaxSecondsToVerify = 5;
+
     public CarolDatabaseGuild() {}
 
     public static CarolDatabaseGuild getDefault(long id)
@@ -31,6 +36,9 @@ public class CarolDatabaseGuild {
         carolDatabaseGuild.setUnauthorizedWords(List.of());
         carolDatabaseGuild.setXpMultipliersOfRoles(new HashMap<>());
         carolDatabaseGuild.setAchievementsAllowed(true);
+        carolDatabaseGuild.setSpamMaxMessagesPerSecond(0);
+        carolDatabaseGuild.setSpamTimeoutTime(10);
+        carolDatabaseGuild.setSpamMaxSecondsToVerify(5);
         return carolDatabaseGuild;
     }
 
@@ -112,5 +120,29 @@ public class CarolDatabaseGuild {
 
     public void setLogRoleRemovedToUser(boolean logRoleRemovedToUser) {
         this.logRoleRemovedToUser = logRoleRemovedToUser;
+    }
+
+    public int getSpamMaxMessagesPerSecond() {
+        return spamMaxMessagesPerSecond;
+    }
+
+    public void setSpamMaxMessagesPerSecond(int spamMaxMessagesPerSecond) {
+        this.spamMaxMessagesPerSecond = spamMaxMessagesPerSecond;
+    }
+
+    public int getSpamTimeoutTime() {
+        return spamTimeoutTime;
+    }
+
+    public void setSpamTimeoutTime(int spamTimeoutTime) {
+        this.spamTimeoutTime = spamTimeoutTime;
+    }
+
+    public int getSpamMaxSecondsToVerify() {
+        return spamMaxSecondsToVerify;
+    }
+
+    public void setSpamMaxSecondsToVerify(int spamMaxSecondsToVerify) {
+        this.spamMaxSecondsToVerify = spamMaxSecondsToVerify;
     }
 }
