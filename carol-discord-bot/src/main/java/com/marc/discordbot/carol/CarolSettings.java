@@ -5,7 +5,7 @@ import net.dv8tion.jda.api.entities.Activity.ActivityType;
 
 public class CarolSettings {
     // used on CarolLauncher.buildJDA()
-    // this is for manage how JDA will be builded.
+    // this is for manage how JDA will be built.
     // 0 = createDefault (Enables cache for users who are active in voice channels and all cache flags)
     // 1 = createLight (Disables all user cache and cache flags)
     // 2 = create (Enables member chunking, caches all users, and enables all cache flags)
@@ -19,12 +19,12 @@ public class CarolSettings {
     public static final String DEFAULT_MESSAGE_ON_ADDED_TO_A_NEW_GUILD_WITHOUT_OWNER_MENTION = "Howdy!\nMeu nome é Carol, obrigado por me adicionarem nesse servidor!";
 
     // used on CarolDatabaseManager.initialize()
-    // leave it null if you want to put your filebase-key.json content as an enviroment variable. (variable name needs to be FIREBASE_KEY)
+    // leave it null if you want to put your Firebase-key.json content as an environment variable. (variable name needs to be FIREBASE_KEY)
     public static final String FIREBASE_KEY_PATH = "";
 
     // those are used on CarolActivitiesManager.initDiscordActivity()
     public static final OnlineStatus ONLINE_STATUS = OnlineStatus.ONLINE;
-    public static final ActivityType ACTIVITY_TYPE = null; // leave this and ACTIVITY_INFO null and "" if you wan't to have a random activity when you start the bot.
+    public static final ActivityType ACTIVITY_TYPE = null; // leave this and ACTIVITY_INFO null and "" if you want to have a random activity when you start the bot.
     public static final String ACTIVITY_INFO = "";
     public static final boolean CHANGE_ACTIVITY_EVERY_DAY = true;
 
