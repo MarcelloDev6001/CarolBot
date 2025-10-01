@@ -125,7 +125,7 @@ public class CarolLauncher {
             default -> { jdaBuilder = JDABuilder.createLight(token, intents); } // default = light.
         }
 
-        // probally i'll not use all of those CacheFlags... but yeah, who cares? :3
+        // probably i'll not use all of those CacheFlags... but yeah, who cares? :3
         jdaBuilder.enableCache(
                 CacheFlag.ACTIVITY,
                 CacheFlag.CLIENT_STATUS,
