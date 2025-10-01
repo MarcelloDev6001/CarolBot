@@ -18,7 +18,11 @@ public class CarolMessageReceivedListener extends ListenerAdapter {
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
         User user = event.getAuthor();
-        CarolDatabaseGuild dbGuild = CarolDatabaseManager.getOrCreateGuild(event.getGuild().getIdLong());
+        CarolDatabaseGuild dbGuild = null;
+        try {
+            dbGuild = CarolDatabaseManager.getOrCreateGuild(event.getGuild().getIdLong());
+        } catch (IllegalStateException _) { return;} // in most cases, this exception will occur when you send a message to the bot on his DM
+
         if (user.isBot()) { return; }
 
         String messageContent = event.getMessage().getContentRaw().toLowerCase();
@@ -40,6 +44,10 @@ public class CarolMessageReceivedListener extends ListenerAdapter {
             }
         }
 
+        listenForSpam(event, dbGuild);
+    }
+
+    private static void listenForSpam(MessageReceivedEvent event, CarolDatabaseGuild dbGuild) {
         CarolSpamMessageManager.startListenerForMessage(event.getMessage(), dbGuild.getSpamMaxSecondsToVerify());
 
         if (dbGuild.getSpamTimeoutTime() > 0 &&

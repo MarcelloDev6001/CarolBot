@@ -10,6 +10,8 @@ public class CarolTestCommand extends CarolCommand {
     {
         super("teste", "Apenas um comando de teste");
         setGuildOnly(false);
+
+        addSubcommand(new CarolTestSubcommand());
     }
 
     @Override

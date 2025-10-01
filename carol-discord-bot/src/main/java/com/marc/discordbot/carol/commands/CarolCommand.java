@@ -28,6 +28,46 @@ public abstract class CarolCommand {
     private Map<String, Map<DiscordLocale, String>> localeOptionsNameMap; // map of a map... i think this is rare to occur
     private Map<String, Map<DiscordLocale, String>> localeOptionsDescriptionMap;
 
+    private List<CarolSubcommand> subcommands;
+
+    @NotNull
+    public static CarolCommand getCommandByName(String name) throws NullPointerException
+    {
+        for (CarolCommand command : allCommands)
+        {
+            if (command.getName().equals(name))
+            {
+                return command;
+            }
+        }
+        throw new NullPointerException("Command " + name + " not found!");
+    }
+
+    @NotNull
+    public static CarolSubcommand getSubcommandByName(String name, String subcommandName) throws NullPointerException
+    {
+        for (CarolCommand command : allCommands)
+        {
+            if (command.getName().equals(name))
+            {
+                for (CarolSubcommand subcommand : command.getSubcommands())
+                {
+                    if (subcommand.subcommandName.equals(subcommandName))
+                    {
+                        return subcommand;
+                    }
+                }
+            }
+        }
+        throw new NullPointerException("Subcommand " + subcommandName + " not found!");
+    }
+
+    public void addSubcommand(CarolSubcommand subcommand)
+    {
+        subcommand.setParent(this);
+        subcommands.add(subcommand);
+    }
+
     public CarolCommand(@NotNull String name, String description) {
         this.name = name;
         this.description = description;
@@ -36,8 +76,24 @@ public abstract class CarolCommand {
         localeDescriptionMap = new HashMap<>();
         localeOptionsNameMap = new HashMap<>();
         localeOptionsDescriptionMap = new HashMap<>();
+        subcommands = new ArrayList<>();
 
         allCommands.add(this);
+    }
+
+    public CarolCommand(@NotNull String name, String description, boolean isSubCommand) {
+        this.name = name;
+        this.description = description;
+        options = new ArrayList<>();
+        localeNameMap = new HashMap<>();
+        localeDescriptionMap = new HashMap<>();
+        localeOptionsNameMap = new HashMap<>();
+        localeOptionsDescriptionMap = new HashMap<>();
+        subcommands = new ArrayList<>();
+
+        if (!isSubCommand) {
+            allCommands.add(this);
+        }
     }
 
     public static void dispatchInteraction(SlashCommandInteraction interaction) {
@@ -102,5 +158,13 @@ public abstract class CarolCommand {
     {
         assert options != null;
         options.add(option);
+    }
+
+    public List<CarolSubcommand> getSubcommands() {
+        return subcommands;
+    }
+
+    public void setSubcommands(List<CarolSubcommand> subcommands) {
+        this.subcommands = subcommands;
     }
 }

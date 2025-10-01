@@ -11,8 +11,11 @@ public class CarolCommandInitializer {
 
         for (Class<? extends CarolCommand> clazz : classes) {
             try {
-                clazz.getDeclaredConstructor().newInstance();
-                System.out.println("Command initialized: " + clazz.getName());
+                System.out.println(clazz.getName());
+                if (!clazz.getName().endsWith("Subcommand")) {
+                    clazz.getDeclaredConstructor().newInstance();
+                    System.out.println("Command initialized: " + clazz.getName());
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
