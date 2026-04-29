@@ -17,7 +17,7 @@ dependencies {
     // JDA stuffs
     implementation("net.dv8tion:JDA:5.6.1")
     implementation("ch.qos.logback:logback-classic:1.5.6")
-    implementation("com.github.walkyst:lavaplayer-fork:1.4.3") // to play audio on a voice channel
+    implementation("com.github.walkyst:lavaplayer-fork:1.4.3")
 
     // other stuffs
     implementation("com.fasterxml.jackson.core:jackson-databind:2.15.2")
@@ -27,7 +27,6 @@ dependencies {
     // database
     implementation("com.google.firebase:firebase-admin:9.2.0")
 
-    // added by default from IntelliJ IDEA
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")

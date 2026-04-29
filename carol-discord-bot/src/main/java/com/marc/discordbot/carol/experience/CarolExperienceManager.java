@@ -11,11 +11,17 @@ import java.util.Map;
 public class CarolExperienceManager {
     public static void updateUserXPFromGuild(User user, Guild guild) throws IOException, InterruptedException {
         CarolDatabaseUser dbUser = CarolDatabaseManager.getOrCreateUser(user.getIdLong());
-        if (dbUser == null) { dbUser = CarolDatabaseUser.getDefault(user.getIdLong()); }
+
+        if (dbUser == null)
+        {
+            dbUser = CarolDatabaseUser.getDefault(user.getIdLong());
+        }
         Map<String, Integer> guildsXPs = dbUser.getXpInGuilds();
 
-        guildsXPs.putIfAbsent(guild.getId(), 0);
-        guildsXPs.put(guild.getId(), guildsXPs.get(guild.getId()) + 1);
+        String guildId = guild.getId();
+
+        guildsXPs.putIfAbsent(guildId, 0);
+        guildsXPs.put(guildId, guildsXPs.get(guildId) + 1);
         dbUser.setXpInGuilds(guildsXPs);
 
         CarolDatabaseManager.updateUser(user.getIdLong(), dbUser);
