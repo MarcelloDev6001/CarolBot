@@ -1,6 +1,6 @@
-package com.marc.discordbot.carol.spam;
+package com.marc.discordbot.carol.moderation;
 
-import com.marc.discordbot.carol.spam.entities.CarolSpamUserEntity;
+import com.marc.discordbot.carol.moderation.entities.CarolSpamUserEntity;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Message;
 
@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 //  users.messages[users.messages.size() - 1].getTimeCreated().toInstant().toEpochMilli() - users.messages[0].getTimeCreated().toInstant().toEpochMilli()
 // )
 // if greater
-public class CarolSpamMessageManager {
+public class CarolAntiSpamSystemManager {
     public static List<CarolSpamUserEntity> users = new ArrayList<>();
 
     public static void startListenerForMessage(Message message, int maxSecondsToVerify)

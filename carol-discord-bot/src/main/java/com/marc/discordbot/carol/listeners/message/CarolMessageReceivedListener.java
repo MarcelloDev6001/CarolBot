@@ -3,15 +3,12 @@ package com.marc.discordbot.carol.listeners.message;
 import com.marc.discordbot.carol.database.CarolDatabaseManager;
 import com.marc.discordbot.carol.database.entities.guild.CarolDatabaseGuild;
 import com.marc.discordbot.carol.experience.CarolExperienceManager;
-import com.marc.discordbot.carol.spam.CarolSpamMessageManager;
+import com.marc.discordbot.carol.moderation.CarolAntiSpamSystemManager;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.entities.channel.ChannelType;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import net.dv8tion.jda.api.exceptions.InsufficientPermissionException;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
-import java.time.Duration;
-import java.time.temporal.TemporalUnit;
 import java.util.concurrent.TimeUnit;
 
 public class CarolMessageReceivedListener extends ListenerAdapter {
@@ -48,10 +45,10 @@ public class CarolMessageReceivedListener extends ListenerAdapter {
     }
 
     private static void listenForSpam(MessageReceivedEvent event, CarolDatabaseGuild dbGuild) {
-        CarolSpamMessageManager.startListenerForMessage(event.getMessage(), dbGuild.getSpamMaxSecondsToVerify());
+        CarolAntiSpamSystemManager.startListenerForMessage(event.getMessage(), dbGuild.getSpamMaxSecondsToVerify());
 
         if (dbGuild.getSpamTimeoutTime() > 0 &&
-                CarolSpamMessageManager.isUserSpamming(event.getMember(), dbGuild.getSpamMaxMessagesPerSecond()))
+                CarolAntiSpamSystemManager.isUserSpamming(event.getMember(), dbGuild.getSpamMaxMessagesPerSecond()))
         {
             try {
                 event.getMember().timeoutFor(dbGuild.getSpamTimeoutTime(), TimeUnit.SECONDS).queue();

@@ -1,4 +1,4 @@
-package com.marc.discordbot.carol.spam.entities;
+package com.marc.discordbot.carol.moderation.entities;
 
 import net.dv8tion.jda.api.entities.Message;
 
