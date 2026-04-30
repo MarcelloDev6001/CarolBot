@@ -1,5 +1,7 @@
 package com.marc.discordbot.carol.database.entities.guild;
 
+import com.marc.discordbot.carol.database.CarolDatabaseManager;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,6 +44,11 @@ public class CarolDatabaseGuild {
         return carolDatabaseGuild;
     }
 
+    private void updateToFirestore()
+    {
+        CarolDatabaseManager.updateGuild(getId(), this);
+    }
+
     public long getId() {
         return id;
     }
@@ -56,10 +63,12 @@ public class CarolDatabaseGuild {
 
     public void setChannelsSettings(List<CarolDatabaseGuildChannelSettings> channelsSettings) {
         this.channelsSettings = channelsSettings;
+        updateToFirestore();
     }
 
     public void addSpecificChannelSetting(CarolDatabaseGuildChannelSettings settings) {
         channelsSettings.add(settings);
+        updateToFirestore();
     }
 
     public CarolDatabaseGuildChannelSettings getSpecificChannelSettingFromId(long id) throws NullPointerException
@@ -81,6 +90,7 @@ public class CarolDatabaseGuild {
 
     public void setRolesSettings(List<CarolDatabaseGuildRoleSettings> rolesSettings) {
         this.rolesSettings = rolesSettings;
+        updateToFirestore();
     }
 
     public List<CarolDatabaseGuildCommandSettings> getCommandsSettings() {
@@ -89,6 +99,7 @@ public class CarolDatabaseGuild {
 
     public void setCommandsSettings(List<CarolDatabaseGuildCommandSettings> commandsSettings) {
         this.commandsSettings = commandsSettings;
+        updateToFirestore();
     }
 
     public boolean isAchievementsAllowed() {
@@ -97,6 +108,7 @@ public class CarolDatabaseGuild {
 
     public void setAchievementsAllowed(boolean achievementsAllowed) {
         this.achievementsAllowed = achievementsAllowed;
+        updateToFirestore();
     }
 
     public Map<String, Integer> getXpMultipliersOfRoles() {
@@ -105,6 +117,7 @@ public class CarolDatabaseGuild {
 
     public void setXpMultipliersOfRoles(Map<String, Integer> xpMultipliersOfRoles) {
         this.xpMultipliersOfRoles = xpMultipliersOfRoles;
+        updateToFirestore();
     }
 
     public List<String> getUnauthorizedWords() {
@@ -113,6 +126,7 @@ public class CarolDatabaseGuild {
 
     public void setUnauthorizedWords(List<String> unauthorizedWords) {
         this.unauthorizedWords = unauthorizedWords;
+        updateToFirestore();
     }
 
     public String getLogChannelId() {
@@ -121,6 +135,7 @@ public class CarolDatabaseGuild {
 
     public void setLogChannelId(String logChannelId) {
         this.logChannelId = logChannelId;
+        updateToFirestore();
     }
 
     public boolean isLogRoleAddedToUser() {
@@ -129,6 +144,7 @@ public class CarolDatabaseGuild {
 
     public void setLogRoleAddedToUser(boolean logRoleAddedToUser) {
         this.logRoleAddedToUser = logRoleAddedToUser;
+        updateToFirestore();
     }
 
     public boolean isLogRoleRemovedToUser() {
@@ -137,6 +153,7 @@ public class CarolDatabaseGuild {
 
     public void setLogRoleRemovedToUser(boolean logRoleRemovedToUser) {
         this.logRoleRemovedToUser = logRoleRemovedToUser;
+        updateToFirestore();
     }
 
     public int getSpamMaxMessagesPerSecond() {
@@ -145,6 +162,7 @@ public class CarolDatabaseGuild {
 
     public void setSpamMaxMessagesPerSecond(int spamMaxMessagesPerSecond) {
         this.spamMaxMessagesPerSecond = spamMaxMessagesPerSecond;
+        updateToFirestore();
     }
 
     public int getSpamTimeoutTime() {
@@ -153,6 +171,7 @@ public class CarolDatabaseGuild {
 
     public void setSpamTimeoutTime(int spamTimeoutTime) {
         this.spamTimeoutTime = spamTimeoutTime;
+        updateToFirestore();
     }
 
     public int getSpamMaxSecondsToVerify() {
@@ -161,5 +180,6 @@ public class CarolDatabaseGuild {
 
     public void setSpamMaxSecondsToVerify(int spamMaxSecondsToVerify) {
         this.spamMaxSecondsToVerify = spamMaxSecondsToVerify;
+        updateToFirestore();
     }
 }

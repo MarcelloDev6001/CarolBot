@@ -1,5 +1,7 @@
 package com.marc.discordbot.carol.database.entities.user;
 
+import com.marc.discordbot.carol.database.CarolDatabaseManager;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,12 +30,18 @@ public class CarolDatabaseUser {
         return carolDatabaseUser;
     }
 
+    private void updateToFirestore()
+    {
+        CarolDatabaseManager.updateUser(getId(), this);
+    }
+
     public long getId() {
         return id;
     }
 
     public void setId(long id) {
         this.id = id;
+        updateToFirestore();
     }
 
     public int getMoney() {
@@ -42,6 +50,7 @@ public class CarolDatabaseUser {
 
     public void setMoney(int money) {
         this.money = money;
+        updateToFirestore();
     }
 
     public Map<String, Integer> getXpInGuilds() {
@@ -50,11 +59,15 @@ public class CarolDatabaseUser {
 
     public void setXpInGuilds(Map<String, Integer> xpInGuilds) {
         this.xpInGuilds = xpInGuilds;
+        updateToFirestore();
     }
 
     public List<CarolDatabaseUserAchievement> getAchievements() { return achievements; }
 
-    public void setAchievements(List<CarolDatabaseUserAchievement> achievements) { this.achievements = achievements; }
+    public void setAchievements(List<CarolDatabaseUserAchievement> achievements) {
+        this.achievements = achievements;
+        updateToFirestore();
+    }
 
     public String getSpouseID() {
         return spouseID;
@@ -62,6 +75,7 @@ public class CarolDatabaseUser {
 
     public void setSpouseID(String spouseID) {
         this.spouseID = spouseID;
+        updateToFirestore();
     }
 
     public int getAmountOfCommandsUsed() {
@@ -70,5 +84,6 @@ public class CarolDatabaseUser {
 
     public void setAmountOfCommandsUsed(int amountOfCommandsUsed) {
         this.amountOfCommandsUsed = amountOfCommandsUsed;
+        updateToFirestore();
     }
 }
