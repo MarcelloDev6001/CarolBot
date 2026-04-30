@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 public class CarolDatabaseUser {
-    private long id = 0L;
+    private String id = "";
     private int money = 0;
     private Map<String, Integer> xpInGuilds = new HashMap<String, Integer>();
     private List<CarolDatabaseUserAchievement> achievements = new ArrayList<>();
@@ -21,7 +21,7 @@ public class CarolDatabaseUser {
 
     public CarolDatabaseUser() {}
 
-    public static CarolDatabaseUser getDefault(long id)
+    public static CarolDatabaseUser getDefault(String id)
     {
         CarolDatabaseUser carolDatabaseUser = new CarolDatabaseUser();
         carolDatabaseUser.setId(id);
@@ -35,11 +35,11 @@ public class CarolDatabaseUser {
         CarolDatabaseManager.updateUser(getId(), this);
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
         updateToFirestore();
     }
@@ -66,6 +66,12 @@ public class CarolDatabaseUser {
 
     public void setAchievements(List<CarolDatabaseUserAchievement> achievements) {
         this.achievements = achievements;
+        updateToFirestore();
+    }
+
+    public void awardAchievement(CarolDatabaseUserAchievement achievement)
+    {
+        this.achievements.add(achievement);
         updateToFirestore();
     }
 

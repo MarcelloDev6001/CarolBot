@@ -1,14 +1,14 @@
 package com.marc.discordbot.carol.database.entities.guild;
 
 public class CarolDatabaseGuildChannelSettings {
-    private long id = 0L;
+    private String id = "";
     private boolean linksAllowed = false;
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -20,7 +20,7 @@ public class CarolDatabaseGuildChannelSettings {
         this.linksAllowed = linksAllowed;
     }
 
-    public CarolDatabaseGuildChannelSettings(long id)
+    public CarolDatabaseGuildChannelSettings(String id)
     {
         setId(id);
     }

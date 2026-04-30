@@ -19,11 +19,11 @@ public class CarolGuildJoinListener extends ListenerAdapter {
         // why getOrCreateGuild() instead of addGuildToDatabase()?
         // because maybe someone could accidentally remove Carol and added back, and it would try to create a guild, but it would already exist in database.
         // also, this needs to be on the top of the function
-        CarolDatabaseGuild dbGuild = CarolDatabaseManager.getOrCreateGuild(event.getGuild().getIdLong());
+        CarolDatabaseGuild dbGuild = CarolDatabaseManager.getOrCreateGuild(event.getGuild().getId());
 
         for (GuildChannel channel : event.getGuild().getChannels())
         {
-            dbGuild.addSpecificChannelSetting(new CarolDatabaseGuildChannelSettings(channel.getIdLong()));
+            dbGuild.addSpecificChannelSetting(new CarolDatabaseGuildChannelSettings(channel.getId()));
         }
 
         // probably this is a little unnecessary because Carol needs admin permission to be added on a guild

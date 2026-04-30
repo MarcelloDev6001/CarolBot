@@ -10,11 +10,11 @@ import java.util.Map;
 
 public class CarolExperienceManager {
     public static void updateUserXPFromGuild(User user, Guild guild) throws IOException, InterruptedException {
-        CarolDatabaseUser dbUser = CarolDatabaseManager.getOrCreateUser(user.getIdLong());
+        CarolDatabaseUser dbUser = CarolDatabaseManager.getOrCreateUser(user.getId());
 
         if (dbUser == null)
         {
-            dbUser = CarolDatabaseUser.getDefault(user.getIdLong());
+            dbUser = CarolDatabaseUser.getDefault(user.getId());
         }
         Map<String, Integer> guildsXPs = dbUser.getXpInGuilds();
 
@@ -24,13 +24,13 @@ public class CarolExperienceManager {
         guildsXPs.put(guildId, guildsXPs.get(guildId) + 1);
         dbUser.setXpInGuilds(guildsXPs);
 
-        CarolDatabaseManager.updateUser(user.getIdLong(), dbUser);
+        CarolDatabaseManager.updateUser(user.getId(), dbUser);
     }
 
     public static int getUserXPFromGuild(User user, Guild guild)
     {
-        CarolDatabaseUser dbUser = CarolDatabaseManager.getOrCreateUser(user.getIdLong());
-        if (dbUser == null) { dbUser = CarolDatabaseUser.getDefault(user.getIdLong()); }
+        CarolDatabaseUser dbUser = CarolDatabaseManager.getOrCreateUser(user.getId());
+        if (dbUser == null) { dbUser = CarolDatabaseUser.getDefault(user.getId()); }
         Map<String, Integer> guildsXPs = dbUser.getXpInGuilds();
 
         return guildsXPs.getOrDefault(guild.getId(),0);

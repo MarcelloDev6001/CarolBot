@@ -9,7 +9,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 public class CarolGuildChannelCreatedListener extends ListenerAdapter {
     @Override
     public void onChannelCreate(ChannelCreateEvent event) {
-        CarolDatabaseGuild dbGuild = CarolDatabaseManager.getOrCreateGuild(event.getGuild().getIdLong());
-        dbGuild.addSpecificChannelSetting(new CarolDatabaseGuildChannelSettings(event.getChannel().getIdLong()));
+        CarolDatabaseGuild dbGuild = CarolDatabaseManager.getOrCreateGuild(event.getGuild().getId());
+        dbGuild.addSpecificChannelSetting(new CarolDatabaseGuildChannelSettings(event.getChannel().getId()));
     }
 }

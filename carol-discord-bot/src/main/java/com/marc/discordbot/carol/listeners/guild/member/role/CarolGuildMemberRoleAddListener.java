@@ -15,7 +15,7 @@ public class CarolGuildMemberRoleAddListener extends ListenerAdapter {
     @Override
     public void onGuildMemberRoleAdd(GuildMemberRoleAddEvent event)
     {
-        CarolDatabaseGuild dbGuild = CarolDatabaseManager.getOrCreateGuild(event.getGuild().getIdLong());
+        CarolDatabaseGuild dbGuild = CarolDatabaseManager.getOrCreateGuild(event.getGuild().getId());
         if (!dbGuild.getLogChannelId().isEmpty())
         {
             TextChannel logChannel = event.getGuild().getTextChannelById(dbGuild.getLogChannelId());

@@ -18,7 +18,7 @@ public class CarolAchievementsManager {
 
     public static List<CarolAchievementObject> getAchievementsObjectsFromUser(User user)
     {
-        CarolDatabaseUser dbUser = CarolDatabaseManager.getOrCreateUser(user.getIdLong());
+        CarolDatabaseUser dbUser = CarolDatabaseManager.getOrCreateUser(user.getId());
         List<CarolAchievementObject> achList = new ArrayList<>(List.of());
 
         for (CarolAchievementObject achievement : achievementsList)
@@ -34,7 +34,7 @@ public class CarolAchievementsManager {
 
     public static List<Long> getAchievementsIDsFromUser(User user)
     {
-        CarolDatabaseUser dbUser = CarolDatabaseManager.getOrCreateUser(user.getIdLong());
+        CarolDatabaseUser dbUser = CarolDatabaseManager.getOrCreateUser(user.getId());
         List<Long> idsList = new ArrayList<>(List.of());
 
         for (CarolDatabaseUserAchievement achievement : dbUser.getAchievements())
@@ -61,7 +61,7 @@ public class CarolAchievementsManager {
 
     public static boolean userHasAchievement(User user, long achievementID)
     {
-        CarolDatabaseUser dbUser = CarolDatabaseManager.getOrCreateUser(user.getIdLong());
+        CarolDatabaseUser dbUser = CarolDatabaseManager.getOrCreateUser(user.getId());
 
         boolean found = false;
         for (CarolAchievementObject achievement : achievementsList) { // firstly we verify if the achievement exists in achievementsList
@@ -134,13 +134,11 @@ public class CarolAchievementsManager {
 
     private static void awardAchievementToUser(User user, long achievementID)
     {
-        CarolDatabaseUser dbUser = CarolDatabaseManager.getOrCreateUser(user.getIdLong());
+        CarolDatabaseUser dbUser = CarolDatabaseManager.getOrCreateUser(user.getId());
 
         CarolDatabaseUserAchievement newAchievement = new CarolDatabaseUserAchievement();
         newAchievement.setId(achievementID);
         newAchievement.setAwardedDate(Timestamp.now());
-        dbUser.getAchievements().add(newAchievement);
-
-        CarolDatabaseManager.updateUser(user.getIdLong(), dbUser);
+        dbUser.awardAchievement(newAchievement);
     }
 }

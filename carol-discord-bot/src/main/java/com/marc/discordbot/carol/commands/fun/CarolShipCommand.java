@@ -83,10 +83,10 @@ public class CarolShipCommand extends CarolCommand {
 
         String namesCombination = "";
         namesCombination += husband.getName().substring(0, husband.getName().length() / 2);
-        namesCombination += wife.getName().substring(wife.getName().length() / 2, wife.getName().length());
+        namesCombination += wife.getName().substring(wife.getName().length() / 2);
 
-        String husbandSpouseID = CarolDatabaseManager.getOrCreateUser(husband.getIdLong()).getSpouseID();
-        String wifeSpouseID = CarolDatabaseManager.getOrCreateUser(wife.getIdLong()).getSpouseID();
+        String husbandSpouseID = CarolDatabaseManager.getOrCreateUser(husband.getId()).getSpouseID();
+        String wifeSpouseID = CarolDatabaseManager.getOrCreateUser(wife.getId()).getSpouseID();
 
         String shipMessage = "";
         if (wife == interaction.getJDA().getSelfUser()) // shipping yourself with Carol

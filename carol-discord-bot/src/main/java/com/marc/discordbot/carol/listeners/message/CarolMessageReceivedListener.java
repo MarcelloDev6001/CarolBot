@@ -19,7 +19,7 @@ public class CarolMessageReceivedListener extends ListenerAdapter {
         User user = event.getAuthor();
         CarolDatabaseGuild dbGuild = null;
         try {
-            dbGuild = CarolDatabaseManager.getOrCreateGuild(event.getGuild().getIdLong());
+            dbGuild = CarolDatabaseManager.getOrCreateGuild(event.getGuild().getId());
         } catch (IllegalStateException _) { return;} // in most cases, this exception will occur when you send a message to the bot on his DM
 
         if (user.isBot()) { return; }
@@ -42,13 +42,14 @@ public class CarolMessageReceivedListener extends ListenerAdapter {
             }
 
             CarolDatabaseGuildChannelSettings channelSettings = null;
-            try {
-                channelSettings = dbGuild.getSpecificChannelSettingFromId(event.getChannel().getIdLong());
-            } catch (NullPointerException _) {
-                channelSettings = new CarolDatabaseGuildChannelSettings(0);
-            }
 
-            if (CarolModerationAntiLinkManager.messageContainsLink(event.getMessage().getContentRaw()) && !channelSettings.isLinksAllowed())
+            boolean isLinksAllowed = false;
+            try {
+                channelSettings = dbGuild.getSpecificChannelSettingFromId(event.getChannel().getId());
+                isLinksAllowed = channelSettings.isLinksAllowed();
+            } catch (NullPointerException _) {}
+
+            if (CarolModerationAntiLinkManager.messageContainsLink(event.getMessage().getContentRaw()) && !isLinksAllowed)
             {
                 event.getMessage().delete().queue();
                 event.getChannel().sendMessage(user.getAsMention() + " Não é permitido links aqui, bobinho!").queue();

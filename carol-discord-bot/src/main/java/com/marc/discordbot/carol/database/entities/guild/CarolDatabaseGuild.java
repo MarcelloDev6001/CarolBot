@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public class CarolDatabaseGuild {
-    private long id = 0L;
+    private String id = "";
     private List<CarolDatabaseGuildChannelSettings> channelsSettings = List.of();
     private List<CarolDatabaseGuildRoleSettings> rolesSettings = List.of();
     private List<CarolDatabaseGuildCommandSettings> commandsSettings = List.of();
@@ -28,7 +28,7 @@ public class CarolDatabaseGuild {
 
     public CarolDatabaseGuild() {}
 
-    public static CarolDatabaseGuild getDefault(long id)
+    public static CarolDatabaseGuild getDefault(String id)
     {
         CarolDatabaseGuild carolDatabaseGuild = new CarolDatabaseGuild();
         carolDatabaseGuild.setId(id);
@@ -49,11 +49,11 @@ public class CarolDatabaseGuild {
         CarolDatabaseManager.updateGuild(getId(), this);
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -71,11 +71,11 @@ public class CarolDatabaseGuild {
         updateToFirestore();
     }
 
-    public CarolDatabaseGuildChannelSettings getSpecificChannelSettingFromId(long id) throws NullPointerException
+    public CarolDatabaseGuildChannelSettings getSpecificChannelSettingFromId(String id) throws NullPointerException
     {
         for (CarolDatabaseGuildChannelSettings settings : getChannelsSettings())
         {
-            if (settings.getId() == id)
+            if (settings.getId().equals(id))
             {
                 return settings;
             }

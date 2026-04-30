@@ -7,8 +7,7 @@ import net.dv8tion.jda.api.entities.User;
 public class CarolEconomyManager {
     public static int getUserMoney(User user)
     {
-        CarolDatabaseUser dbUser = CarolDatabaseManager.getOrCreateUser(user.getIdLong());
-        if (dbUser == null) { dbUser = CarolDatabaseUser.getDefault(user.getIdLong()); }
+        CarolDatabaseUser dbUser = CarolDatabaseManager.getOrCreateUser(user.getId());
         return dbUser.getMoney();
     }
 }

@@ -35,8 +35,8 @@ public class CarolProfileCommand extends CarolCommand {
 
     public int getGlobalXPOfUser(User user)
     {
-        CarolDatabaseUser dbUser = CarolDatabaseManager.getOrCreateUser(user.getIdLong());
-        if (dbUser == null) { dbUser = CarolDatabaseUser.getDefault(user.getIdLong()); }
+        CarolDatabaseUser dbUser = CarolDatabaseManager.getOrCreateUser(user.getId());
+        if (dbUser == null) { dbUser = CarolDatabaseUser.getDefault(user.getId()); }
         Map<String, Integer> guildsXPs = dbUser.getXpInGuilds();
 
         int globalXP = 0;
@@ -58,7 +58,7 @@ public class CarolProfileCommand extends CarolCommand {
             userAsMemberToSeeProfile = interaction.getOption("pessoa").getAsMember();
         } catch (Exception _) {}
         User.Profile userProfile = userToSeeProfile.retrieveProfile().complete();
-        CarolDatabaseUser dbUser = CarolDatabaseManager.getOrCreateUser(userToSeeProfile.getIdLong());
+        CarolDatabaseUser dbUser = CarolDatabaseManager.getOrCreateUser(userToSeeProfile.getId());
 
         assert userAsMemberToSeeProfile != null;
         EmbedBuilder userProfileEmbed = new EmbedBuilder();

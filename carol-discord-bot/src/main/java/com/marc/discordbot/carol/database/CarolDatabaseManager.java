@@ -79,11 +79,11 @@ public class CarolDatabaseManager {
         return entity;
     }
 
-    private static CarolDatabaseGuild getCachedGuild(long id)
+    private static CarolDatabaseGuild getCachedGuild(String id)
     {
         for (CarolDatabaseGuild dbGuildCached : CarolDatabaseCache.dbGuildsCached)
         {
-            if (dbGuildCached != null && dbGuildCached.getId() == id)
+            if (dbGuildCached != null && dbGuildCached.getId().equals(id))
             {
                 return dbGuildCached;
             }
@@ -92,12 +92,12 @@ public class CarolDatabaseManager {
         return null;
     }
 
-    private static void setCachedGuild(long id, CarolDatabaseGuild guild)
+    private static void setCachedGuild(String id, CarolDatabaseGuild guild)
     {
         CarolDatabaseGuild dbGuildCachedObject = null;
         for (CarolDatabaseGuild dbGuildCached : CarolDatabaseCache.dbGuildsCached)
         {
-            if (dbGuildCached.getId() == id)
+            if (dbGuildCached.getId().equals(id))
             {
                 dbGuildCachedObject = dbGuildCached;
                 break;
@@ -114,11 +114,11 @@ public class CarolDatabaseManager {
         }
     }
 
-    private static CarolDatabaseUser getCachedUser(long id)
+    private static CarolDatabaseUser getCachedUser(String id)
     {
         for (CarolDatabaseUser dbUserCached : CarolDatabaseCache.dbUsersCached)
         {
-            if (dbUserCached != null && dbUserCached.getId() == id)
+            if (dbUserCached != null && dbUserCached.getId().equals(id))
             {
                 return dbUserCached;
             }
@@ -127,12 +127,12 @@ public class CarolDatabaseManager {
         return null;
     }
 
-    private static void setCachedUser(long id, CarolDatabaseUser user)
+    private static void setCachedUser(String id, CarolDatabaseUser user)
     {
         CarolDatabaseUser dbUserCachedObject = null;
         for (CarolDatabaseUser dbUserCached : CarolDatabaseCache.dbUsersCached)
         {
-            if (dbUserCached != null && dbUserCached.getId() == id)
+            if (dbUserCached != null && dbUserCached.getId().equals(id))
             {
                 dbUserCachedObject = dbUserCached;
                 break;
@@ -150,7 +150,7 @@ public class CarolDatabaseManager {
     }
 
     // ---------- User wrappers ----------
-    public static CarolDatabaseUser getUserFromDatabase(long id) {
+    public static CarolDatabaseUser getUserFromDatabase(String id) {
         CarolDatabaseUser cachedUser = getCachedUser(id);
         if (cachedUser != null)
         {
@@ -169,7 +169,7 @@ public class CarolDatabaseManager {
         addOrUpdateEntity(CarolDatabaseTables.USERS_TABLE, String.valueOf(user.getId()), user);
     }
 
-    public static CarolDatabaseUser getOrCreateUser(long id) {
+    public static CarolDatabaseUser getOrCreateUser(String id) {
         CarolDatabaseUser cachedUser = getCachedUser(id);
         if (cachedUser != null)
         {
@@ -179,19 +179,19 @@ public class CarolDatabaseManager {
                 CarolDatabaseUser.getDefault(id));
     }
 
-    public static void updateUser(long id, CarolDatabaseUser user) {
+    public static void updateUser(String id, CarolDatabaseUser user) {
         setCachedUser(id, user);
 
         // addOrUpdateEntity(CarolDatabaseTables.USERS_TABLE, String.valueOf(id), user);
     }
 
-    public static void updateUserOnDatabase(long id, CarolDatabaseUser user)
+    public static void updateUserOnDatabase(String id, CarolDatabaseUser user)
     {
         addOrUpdateEntity(CarolDatabaseTables.USERS_TABLE, String.valueOf(id), user);
     }
 
     // ---------- Guild wrappers ----------
-    public static CarolDatabaseGuild getGuildFromDatabase(long id) {
+    public static CarolDatabaseGuild getGuildFromDatabase(String id) {
         CarolDatabaseGuild cachedGuild = getCachedGuild(id);
         if (cachedGuild != null)
         {
@@ -210,7 +210,7 @@ public class CarolDatabaseManager {
         addOrUpdateEntity(CarolDatabaseTables.GUILDS_TABLE, String.valueOf(guild.getId()), guild);
     }
 
-    public static CarolDatabaseGuild getOrCreateGuild(long id) {
+    public static CarolDatabaseGuild getOrCreateGuild(String id) {
         CarolDatabaseGuild cachedGuild = getCachedGuild(id);
         if (cachedGuild != null)
         {
@@ -220,13 +220,13 @@ public class CarolDatabaseManager {
                 CarolDatabaseGuild.getDefault(id));
     }
 
-    public static void updateGuild(long id, CarolDatabaseGuild guild) {
+    public static void updateGuild(String id, CarolDatabaseGuild guild) {
         setCachedGuild(id, guild);
 
         // addOrUpdateEntity(CarolDatabaseTables.GUILDS_TABLE, String.valueOf(id), guild);
     }
 
-    public static void updateGuildOnDatabase(long id, CarolDatabaseGuild guild)
+    public static void updateGuildOnDatabase(String id, CarolDatabaseGuild guild)
     {
         addOrUpdateEntity(CarolDatabaseTables.GUILDS_TABLE, String.valueOf(id), guild);
     }

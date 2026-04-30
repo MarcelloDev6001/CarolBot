@@ -11,7 +11,7 @@ public class CarolSlashCommandInteractionListener extends ListenerAdapter {
     @Override
     public void onSlashCommandInteraction(SlashCommandInteractionEvent event)
     {
-        CarolDatabaseUser dbUser = CarolDatabaseManager.getOrCreateUser(event.getUser().getIdLong());
+        CarolDatabaseUser dbUser = CarolDatabaseManager.getOrCreateUser(event.getUser().getId());
 
         String subcommandName = event.getSubcommandName();
         if (subcommandName != null)

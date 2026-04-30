@@ -15,7 +15,7 @@ public class CarolGuildMemberRoleRemoveListener extends ListenerAdapter {
     @Override
     public void onGuildMemberRoleRemove(GuildMemberRoleRemoveEvent event)
     {
-        CarolDatabaseGuild dbGuild = CarolDatabaseManager.getOrCreateGuild(event.getGuild().getIdLong());
+        CarolDatabaseGuild dbGuild = CarolDatabaseManager.getOrCreateGuild(event.getGuild().getId());
         if (!dbGuild.getLogChannelId().isEmpty())
         {
             TextChannel logChannel = event.getGuild().getChannelById(TextChannel.class, dbGuild.getLogChannelId());
