@@ -58,6 +58,23 @@ public class CarolDatabaseGuild {
         this.channelsSettings = channelsSettings;
     }
 
+    public void addSpecificChannelSetting(CarolDatabaseGuildChannelSettings settings) {
+        channelsSettings.add(settings);
+    }
+
+    public CarolDatabaseGuildChannelSettings getSpecificChannelSettingFromId(long id) throws NullPointerException
+    {
+        for (CarolDatabaseGuildChannelSettings settings : getChannelsSettings())
+        {
+            if (settings.getId() == id)
+            {
+                return settings;
+            }
+        }
+
+        throw new NullPointerException();
+    }
+
     public List<CarolDatabaseGuildRoleSettings> getRolesSettings() {
         return rolesSettings;
     }

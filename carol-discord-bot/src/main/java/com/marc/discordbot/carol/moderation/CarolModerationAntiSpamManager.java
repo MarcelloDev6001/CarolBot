@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 //  users.messages[users.messages.size() - 1].getTimeCreated().toInstant().toEpochMilli() - users.messages[0].getTimeCreated().toInstant().toEpochMilli()
 // )
 // if greater
-public class CarolAntiSpamSystemManager {
+public class CarolModerationAntiSpamManager {
     public static List<CarolSpamUserEntity> users = new ArrayList<>();
 
     public static void startListenerForMessage(Message message, int maxSecondsToVerify)
